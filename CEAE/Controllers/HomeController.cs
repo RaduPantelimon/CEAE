@@ -26,5 +26,12 @@ namespace CEAE.Controllers
 
             return View();
         }
+
+        public ActionResult AccessDenied()
+        {
+            ViewBag.Message = "Your are not allowed to view this page.";
+
+            return View();
+        }
     }
 }

@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+@using CEAE.Utils;
+
+@if (Convert.ToBoolean( Session[CONST.SESSION_VARS.USER_ISAUTHENTICATED] ))
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
@@ -7,10 +9,13 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Hello, " + Session[CONST.SESSION_VARS.USER_ACCOUNT] + "!", "ManageAccount", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        <li>
+            @Html.ActionLink("Log off", "LogOut", "Account", routeValues: null, htmlAttributes: new { id = "logoffLink" })
+        </li>
+            <!--<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>-->
+</ul>
     }
 }
 else

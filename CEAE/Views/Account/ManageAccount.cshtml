@@ -1,0 +1,25 @@
+﻿@using CEAE.Utils;
+@{
+    ViewBag.Title = "ManageAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ManageAccount</h2>
+
+<table>
+    <tr>
+        <td>Edit Account properties</td>
+        <td> 
+            @Html.ActionLink("Edit", "Edit", "Users",
+            routeValues: new { id = Session[CONST.SESSION_VARS.USER_ID] != null ? Session[CONST.SESSION_VARS.USER_ID].ToString() : "" }, 
+            htmlAttributes: new { id = "logoffLink" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+           @Html.ActionLink("Change Password", "Edit", "Users", 
+           routeValues: new { id = Session[CONST.SESSION_VARS.USER_ID] != null ? Session[CONST.SESSION_VARS.USER_ID].ToString() : "" }, 
+           htmlAttributes: new { id = "logoffLink" })
+        </td>
+    </tr>
+</table>
