@@ -34,7 +34,11 @@ namespace CEAE.Controllers
                 return HttpNotFound();
             }
 
-            List<Answer> answers = db.Answers.ToList();
+            List<Answer> answers = db.Answers/*.Select(x => (x.AnswersQuestions = null))*/.ToList();
+            for(int i=0; i<answers.Count;i++)
+            {
+                answers[i].AnswersQuestions = null;
+            }
             ViewBag.possibleAnswers = answers;
             ViewBag.serializedAnswers = JsonConvert.SerializeObject(answers);
 

@@ -1,4 +1,5 @@
 ﻿@model CEAE.Models.Question
+@using Newtonsoft.Json;
 
 @{
     ViewBag.Title = "Details";
@@ -6,8 +7,11 @@
 }
 
 <h2>Details</h2>
+@* @Html.Raw(Json.Encode(ViewBag.possibleAnswers));*@
 <script>
-    var possibleAnswers = @Html.Raw(Json.Encode(ViewBag.possibleAnswers));
+    var possibleAnswers = @Html.Raw(ViewBag.serializedAnswers);
+    var QuestionID = @Html.Raw(Model.QuestionID);
+    
 </script>
 <style>
 

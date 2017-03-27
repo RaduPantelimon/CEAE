@@ -13,6 +13,11 @@ namespace CEAE
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+            config.Routes.MapHttpRoute(
+                name: "RestApiRoot",
+                routeTemplate: "api/Rest/{action}/{id}",
+                defaults: new { controller = "Rest", action = "GetAnswersQuestions", id = RouteParameter.Optional }
+            );
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
