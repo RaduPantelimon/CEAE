@@ -29,5 +29,8 @@ namespace CEAE.Utils
             public static string User = "User";
             public static string Administrator = "Administrator";
         }
+
+        public static readonly string [] ANSWER_STATUSES = {"Corect","Gresit"};
+
     }
 }

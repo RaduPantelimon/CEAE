@@ -12,7 +12,7 @@ using CEAE.Models;
 using CEAE.Utils;
 namespace CEAE.Controllers
 {
-    [Authorize]
+
     public class AccountController : Controller
     {
         private CEAEDBEntities db = new CEAEDBEntities();
@@ -83,8 +83,26 @@ namespace CEAE.Controllers
             return RedirectToAction("Create", "Users");
         }
 
+        [AllowAnonymous]
+        public ActionResult ResetPassword(LoginViewModel model)
+        {
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword([Bind(Include = "QuestionID,Title,Text")] User question)
+        {
+            if (ModelState.IsValid)
+            {
+                //db.Questions.Add(question);
+                //db.SaveChanges();
+                return RedirectToAction("Index","Home");
+            }
 
-     
+            return View(question);
+        }
+
 
         #region Helpers
         // Used for XSRF protection when adding external logins

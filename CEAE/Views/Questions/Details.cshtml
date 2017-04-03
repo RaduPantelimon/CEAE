@@ -1,6 +1,6 @@
 ﻿@model CEAE.Models.Question
 @using Newtonsoft.Json;
-
+@using CEAE.Utils;
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,12 +11,13 @@
 <script>
     var possibleAnswers = @Html.Raw(ViewBag.serializedAnswers);
     var QuestionID = @Html.Raw(Model.QuestionID);
-    
+    var answerStatuses = @Html.Raw(Json.Encode(CONST.ANSWER_STATUSES));
 </script>
 <style>
 
 </style>
 <script src="~/Scripts/QuestionScripts/question_viewDetails.js"></script>
+<link href="~/Content/Questions/questions_viewDetails_style.css" rel="stylesheet">
 <div>
     <h4>Question</h4>
     <hr />
@@ -41,6 +42,10 @@
 </div>
 <div id="answers-container">
     <div id="added-answers">
+    </div>
+    <div class="text-danger answers-validation">
+        <span class="answers-validation-message">
+        </span>
     </div>
     <button id="new-answer" class="btn btn-link" >Add new Answer</button>
 </div>
