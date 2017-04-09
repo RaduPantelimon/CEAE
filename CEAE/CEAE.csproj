@@ -251,6 +251,9 @@
     <Compile Include="Models\Question.cs">
       <DependentUpon>CEAEModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SecondaryModels\Answer.cs" />
+    <Compile Include="Models\SecondaryModels\AnswersQuestion.cs" />
+    <Compile Include="Models\SecondaryModels\Question.cs" />
     <Compile Include="Models\TestResult.cs">
       <DependentUpon>CEAEModel.tt</DependentUpon>
     </Compile>
