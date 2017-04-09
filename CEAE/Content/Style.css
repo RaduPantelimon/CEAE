@@ -1,0 +1,14 @@
+﻿.carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      height: 300px;
+
+  }
+
+@media (max-width: 600px) {
+    .carousel-caption {
+        display: none;
+    }
+}
+
+
