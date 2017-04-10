@@ -2,6 +2,8 @@
 <head>
     <link href="@Url.Content("~/Content/Style.css")"
           rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")"
+          rel="stylesheet" type="text/css" />
     <link href="~/Content/Index_style.css" rel="stylesheet" />
     <link href='//fonts.googleapis.com/css?family=Luckiest Guy' rel='stylesheet'>
 </head>
@@ -37,6 +39,6 @@
 
 <div class="text-center" width:100%">
     <h1> AFLA CUM GANDESTI</h1>
-        <button type="button" class="btn btn-start btn-lg" style="border:5px double"> Incepe testul</button>
-
+        <!--<button type="button" class="btn btn-start btn-lg" style="border:5px double"> Incepe testul</button>-->
+        @Html.ActionLink("Take Test", "TakeTest", "Home",null, new { @class = "btn btn-start btn-lg custom-standard-button" })
 </div>

@@ -63,7 +63,8 @@ function SetAnswers(question) {
 function StartTest() {
     NextQuestion();
     $("#start-questionaire").hide();
-    $("#prev-button").show();
+    $("#subm-button").click(SendAnswers);
+    $("#prev-button").hide();
     $("#next-button").show();
 
 }
@@ -81,20 +82,9 @@ function NextQuestion() {
 
         //     for (var i = 0; questions[currentquestion].AnswersQuestions.length ; i++)
         //         $('#answer-' + questions[currentquestion].AnswersQuestions[i].Answer.Text).show();
-
-
-      
-
-
     }
-    if (currentquestion == questions.length-1) {
-        $("#subm-button").show();
-        $("#prev-button").hide();
-        $("#next-button").hide();
-        $("#subm-button").click(SendAnswers);
+    ResolveButtonState();
 
-
-    }
 
 }
 function PrevQuestion() {
@@ -109,9 +99,27 @@ function PrevQuestion() {
         $('#question-' + questions[currentquestion].QuestionID).show();
 
     }
+    ResolveButtonState();
 }
 
+function ResolveButtonState() {
 
+    if (currentquestion == questions.length - 1) {
+        $("#subm-button").show();
+        $("#prev-button").show();
+        $("#next-button").hide();
+    }
+    else if (currentquestion == 0) {
+        $("#subm-button").hide();
+        $("#prev-button").hide();
+        $("#next-button").show();
+    }
+    else {
+        $("#subm-button").hide();
+        $("#prev-button").show();
+        $("#next-button").show();
+    }
+}
 
 function SendAnswers() {
     if (questions.length)
