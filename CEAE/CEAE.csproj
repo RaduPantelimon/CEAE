@@ -305,6 +305,7 @@
     <Content Include="Models\CEAEModel.edmx.diagram">
       <DependentUpon>CEAEModel.edmx</DependentUpon>
     </Content>
+    <Content Include="fonts\LuckiestGuy.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Home\home_questionaire.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
