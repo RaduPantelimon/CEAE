@@ -1,10 +1,20 @@
-﻿
+﻿<head>
+    <link href="@Url.Content("~/Content/Site.css")"
+          rel="stylesheet" type="text/css" />
+</head>
+
+
 @{
     ViewBag.Title = "TakeTest";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1> AFLA CUM GANDESTI</h1>
+<hr />
+<div class="question-container">
+    
+
+</div>
 
 <button id="next-button" type="button" class="btn btn-info" style="border:5px double; display:none;">Next Question</button>
 <button id="prev-button" type="button" class="btn btn-info" style="border:5px double; display:none;">Previous Question</button>
@@ -12,9 +22,10 @@
 <button id="start-questionaire" type="button" class="btn btn-info" style="border:5px double"> Begin Test</button>
 </div>
 
-<div class="question-container">
 
-</div>
 
+<input type="hidden" name="email" id="email-input"/>
+<span class="danger" id="email-validation"></span>
+<button id="subm-email-button" type="button" class="btn btn-info" style="border:5px double; display:none;">Submit Email</button>
 
 <script src="~/Scripts/Home/home_questionaire.js"></script>

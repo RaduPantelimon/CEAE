@@ -22,3 +22,42 @@ select,
 textarea {
     max-width: 280px;
 }
+
+body {
+    background-color: lightgray;
+}
+
+li{
+   list-style-type:none; 
+}
+
+.answer{
+
+  
+    padding : 2px;
+    margin : 2px;
+    font-size : 25px;
+
+
+}
+
+
+.question{
+  
+  
+    padding : 10px;
+    margin : 10px;
+    font-size : 30px;
+}
+
+.question-container{
+  
+    margin-left: 100px;
+    background-color:burlywood;
+}
+
+.radiobutt{
+    margin: 10px;
+    padding : 10px;
+}
+

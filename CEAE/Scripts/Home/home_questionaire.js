@@ -50,7 +50,7 @@ function SetQuestions(data) {
 function SetAnswers(question) {
     //question-container
     //console.log(data);
- 
+
     $('#question-' + question.QuestionID).append("<ul class='list' ></ul>");
     var answersCntainer = $('#question-' + question.QuestionID + " ul");
     for (var i = 0; i < question.AnswersQuestions.length; i++) {
@@ -63,8 +63,8 @@ function SetAnswers(question) {
 function StartTest() {
     NextQuestion();
     $("#start-questionaire").hide();
-    $("#next-button").show();
     $("#prev-button").show();
+    $("#next-button").show();
 
 }
 
@@ -89,7 +89,11 @@ function NextQuestion() {
     }
     if (currentquestion == questions.length-1) {
         $("#subm-button").show();
+        $("#prev-button").hide();
+        $("#next-button").hide();
         $("#subm-button").click(SendAnswers);
+
+
     }
 
 }
@@ -144,7 +148,9 @@ function SendAnswers() {
             success: function (result) {
                 if (!result.error) {
                     //the item was just added // modified
+                    console.log(result.raspusuriCorecte);
                     console.log(result);
+                    
                 }
             },
             error: function (jqXHR, exception) {

@@ -67,6 +67,8 @@ namespace CEAE.Controllers
                     }
 
                     jsonResponseText = "{\"status\":1,\"raspusuriCorecte\":\"" + raspunsuriCorecte + "\",\"message\":\"Model is not valid\"}";
+                    
+
                 }
                 else
                 {
