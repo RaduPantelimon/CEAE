@@ -2,7 +2,6 @@
 
 //possibleAnswers
 function InitializePage() {
-    console.log("jeg");
     $("#new-answer").click(addNewAnswer);
     getExistingAnswers();
 }

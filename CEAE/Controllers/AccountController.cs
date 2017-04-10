@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CEAE.Models;
 using CEAE.Utils;
+using System.Data.Entity;
+
 namespace CEAE.Controllers
 {
 
@@ -84,23 +86,53 @@ namespace CEAE.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult ResetPassword(LoginViewModel model)
+        public ActionResult ResetPassword()
         {
-            return View();
+            if (Session[CONST.SESSION_VARS.USER_ISAUTHENTICATED] != null &&
+                Convert.ToBoolean(Session[CONST.SESSION_VARS.USER_ISAUTHENTICATED]) == true)
+            {
+                return View();
+            }
+
+            return View("AccessDenied", "Home");
         }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ResetPassword([Bind(Include = "QuestionID,Title,Text")] User question)
+        public ActionResult ResetPassword([Bind(Include = "OldPassword,Password,ConfirmPassword")] ResetPasswordViewModel passmodel)
         {
-            if (ModelState.IsValid)
+            if (Session[CONST.SESSION_VARS.USER_ACCOUNT] != null &&
+                Session[CONST.SESSION_VARS.USER_ISAUTHENTICATED] != null &&
+                Convert.ToBoolean(Session[CONST.SESSION_VARS.USER_ISAUTHENTICATED]) == true)
             {
-                //db.Questions.Add(question);
-                //db.SaveChanges();
-                return RedirectToAction("Index","Home");
+                if (ModelState.IsValid)
+                {
+
+                    string account = Session[CONST.SESSION_VARS.USER_ACCOUNT].ToString();
+                    User currentUser = db.Users.Where(x => x.Account == account && x.Password == passmodel.OldPassword).FirstOrDefault();
+                    if (currentUser == null)
+                    {
+                        ModelState.AddModelError("", "Either the 2 passwords do not match or the old password is not valid");
+                        ViewBag.error = "Either the 2 passwords do not match or the old password is not valid";
+                        return View(passmodel);
+                    }
+                    if(passmodel.Password == passmodel.ConfirmPassword)
+                    {
+                        currentUser.Password = passmodel.Password;
+                        db.Entry(currentUser).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+
+                ModelState.AddModelError("", "Either the 2 passwords do not match or the old password is not valid");
+                ViewBag.error = "Either the 2 passwords do not match or the old password is not valid";
+                return View(passmodel);
             }
 
-            return View(question);
+            return View("AccessDenied", "Home");
         }
 
 
