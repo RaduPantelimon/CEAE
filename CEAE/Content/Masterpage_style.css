@@ -5,10 +5,66 @@
   border-color: #130269;
   padding-bottom:21px;
   padding-top:20px;
-  margin-right:300px;
+  margin-right:200px;
 
 }
+footer{
+    text-align:center;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color:#222222;
+    color:white;
+    font-weight:bold;
+    padding:5px;
+}
+div.fb-like.fb_iframe_widget{
+    width:145px;
+}
 /*********************************************************************************************************************/
+.btn-ttest {
+  color: #ffffff;
+  background-color: #5D39ED;
+  border-color: #5D39ED;
+
+}
+
+.btn-ttest:hover,
+.btn-ttest:focus,
+.btn-ttest:active,
+.btn-ttest.active,
+.open .dropdown-toggle.btn-ttest {
+  color: #ffffff;
+  background-color: #0D8CBA;
+  border-color: #0D8CBA;
+}
+
+.btn-ttest:active,
+.btn-ttest.active,
+.open .dropdown-toggle.btn-ttest {
+  background-image: none;
+}
+
+.btn-ttest.disabled,
+.btn-ttest[disabled],
+fieldset[disabled] .btn-ttest,
+.btn-ttest.disabled:hover,
+.btn-ttest[disabled]:hover,
+fieldset[disabled] .btn-ttest:hover,
+.btn-ttest.disabled:focus,
+.btn-ttest[disabled]:focus,
+fieldset[disabled] .btn-ttest:focus,
+.btn-ttest.disabled:active,
+.btn-ttest[disabled]:active,
+fieldset[disabled] .btn-ttest:active,
+.btn-ttest.disabled.active,
+.btn-ttest[disabled].active,
+fieldset[disabled] .btn-ttest.active {
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+
 
 .btn-warning {
   color: #ffffff;
@@ -56,7 +112,7 @@ fieldset[disabled] .btn-warning.active {
 .btn-danger {
   color: #ffffff;
   background-color: #d9534f;
-  border-color: #d43f3a;
+  border-color: #d9534f;
 }
 
 .btn-danger:hover,
@@ -66,7 +122,7 @@ fieldset[disabled] .btn-warning.active {
 .open .dropdown-toggle.btn-danger {
   color: #ffffff;
   background-color: #d2322d;
-  border-color: #ac2925;
+  border-color: #d2322d;
 }
 
 .btn-danger:active,

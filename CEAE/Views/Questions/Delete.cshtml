@@ -4,7 +4,7 @@
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/Details_edit_style.css" rel="stylesheet" />
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -34,8 +34,9 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Index", null , new { @class = "btn btn-default"} )
+            <input type="submit" value="Delete" class="btn btn-danger" />
+
         </div>
     }
 </div>
