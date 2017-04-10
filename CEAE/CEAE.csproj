@@ -212,6 +212,7 @@
     <Compile Include="Controllers\CausesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QuestionnaireController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\RestController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -251,6 +252,8 @@
     <Compile Include="Models\Question.cs">
       <DependentUpon>CEAEModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SecondaryModels\Questionnaire.cs" />
+    <Compile Include="Models\SecondaryModels\QuestionnaireAnswer.cs" />
     <Compile Include="Models\TestResult.cs">
       <DependentUpon>CEAEModel.tt</DependentUpon>
     </Compile>
@@ -260,6 +263,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Constants.cs" />
+    <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -293,6 +297,7 @@
       <DependentUpon>CEAEModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Home\home_questionaire.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -361,9 +366,11 @@
     <Content Include="Views\Questions\Details.cshtml" />
     <Content Include="Views\Questions\Edit.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
+    <Content Include="Views\Home\TakeTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Questionnaire\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

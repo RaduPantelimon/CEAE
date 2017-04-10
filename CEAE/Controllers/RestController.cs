@@ -12,6 +12,8 @@ using CEAE.Models;
 using System.Text;
 using Newtonsoft.Json;
 
+using CEAE.Utils;
+
 namespace CEAE.Controllers
 {
     public class RestController : ApiController
@@ -117,6 +119,7 @@ namespace CEAE.Controllers
                 {
                     jsonResponseText = JsonConvert.SerializeObject(answersAdded);
                 }
+                
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
@@ -217,6 +220,109 @@ namespace CEAE.Controllers
             }
         }
 
+        #region Questionnaire
+
+        public HttpResponseMessage GetQuestions()
+        {
+            string jsonResponseText = "";
+            List<Question> questions = db.Questions.ToList();
+            if (questions != null)
+            {
+
+                jsonResponseText = JsonConvert.SerializeObject(questions);
+
+            }
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        //save the tasks added by the user
+        [System.Web.Http.AcceptVerbs("POST")]
+        [System.Web.Http.HttpPost]
+        public HttpResponseMessage SetAnswers([FromBody] List<QuestionnaireAnswer> answerquestion)
+        {
+            string jsonResponseText = "";
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    int raspunsuriCorecte = 0;
+                    foreach (QuestionnaireAnswer a in answerquestion)
+                    {
+                        AnswersQuestion ans = db.AnswersQuestions.Where(x => x.AnswerID == a.AnswerID && x.QuestionID == a.QuestionID).FirstOrDefault();
+                        if(ans!= null &&
+                            ans.Status == CONST.ANSWER_RESPONSES.Corect )
+                        {
+                            raspunsuriCorecte++;
+                        }
+                    }
+
+                    jsonResponseText = "{\"status\":1,\"raspusuriCorecte\":\""+ raspunsuriCorecte + "\",\"message\":\"Model is not valid\"}";
+                }
+                else
+                {
+                    jsonResponseText = "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
+
+                }
+                var response = Request.CreateResponse(HttpStatusCode.OK);
+                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
+                return response;
+
+
+            }
+            catch (Exception ex)
+            {
+                jsonResponseText = "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" + ex.Message + "\"}";
+                var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
+                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
+                return response;
+            }
+        }
+        //save the tasks added by the user
+        [System.Web.Http.AcceptVerbs("POST")]
+        [System.Web.Http.HttpPost]
+        public HttpResponseMessage SetEmail([FromBody] string emailAddress)
+        {
+            string jsonResponseText = "";
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    bool isValid = Utils.Utils.IsValidEmail(emailAddress);
+                    if (isValid)
+                    {
+                       // var session = HttpConte
+                        jsonResponseText = "{\"status\":1,\"message\":\"Email address saved successfully\"}";
+                    }
+                    else
+                    {
+                        jsonResponseText = "{\"status\":0,\"message\":\"Email Address is not valid\"}";
+
+                    }
+
+                }
+                else
+                {
+                    jsonResponseText = "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
+
+                }
+                var response = Request.CreateResponse(HttpStatusCode.OK);
+                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
+                return response;
+
+
+            }
+            catch (Exception ex)
+            {
+                jsonResponseText = "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" + ex.Message + "\"}";
+                var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
+                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
+                return response;
+            }
+        }
+
+        #endregion
         protected override void Dispose(bool disposing)
         {
             if (disposing)

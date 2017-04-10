@@ -16,6 +16,8 @@ namespace CEAE.Utils
         //session variable names used by the app
         public partial class SESSION_VARS
         {
+            public static readonly string DID_RECEIVED_EMAIL = "DID_RECEIVED_EMAIL";
+            public static readonly string REGISTRED_EMAIL = "REGISTERED_EMAIL";
             public static readonly string USER_ID = "USER_ID";
             public static readonly string USER_ACCOUNT = "USER_ACCOUNT";
             public static readonly string USER_ISAUTHENTICATED = "USER_ISAUTHENTICATED";
@@ -30,6 +32,11 @@ namespace CEAE.Utils
             public static string Administrator = "Administrator";
         }
 
+        public partial class ANSWER_RESPONSES
+        {
+            public static readonly string Corect = "Corect";
+            public static readonly string Gresit = "Gresit";
+        }
         public static readonly string [] ANSWER_STATUSES = {"Corect","Gresit"};
 
     }

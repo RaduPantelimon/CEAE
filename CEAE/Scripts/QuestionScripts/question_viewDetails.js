@@ -9,7 +9,7 @@ function InitializePage() {
 
 function getExistingAnswers() {
     $.ajax({
-        url: "/api/Rest/GetAnswersQuestions/1",
+        url: "/api/Rest/GetAnswersQuestions/" + QuestionID,
         contentType: "application/json; charset=utf-8",
         type: 'GET',
         dataType: "json",
