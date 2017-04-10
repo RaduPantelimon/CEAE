@@ -21,34 +21,33 @@
 <div>
     <h4>Question</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>@Html.DisplayNameFor(model => model.Text)</th>
 
-        <dd>
+            </tr>
+        </thead>
+        <tr>
+        <td>
             @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Text)
-        </dt>
-
-        <dd>
+        </td>
+        <td>
             @Html.DisplayFor(model => model.Text)
-        </dd>
-
-    </dl>
+        </td>
+        </tr>
+    </table>
 </div>
-<div id="answers-container">
-    <div id="added-answers">
+<form id="answers-container" class="form-inline">
+    <div id="added-answers" class="form-group">
     </div>
     <div class="text-danger answers-validation">
         <span class="answers-validation-message">
         </span>
     </div>
     <button id="new-answer" class="btn btn-link" >Add new Answer</button>
-</div>
+</form>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionID }) |
     @Html.ActionLink("Back to List", "Index")

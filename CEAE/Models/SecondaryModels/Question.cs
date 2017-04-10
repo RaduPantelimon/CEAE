@@ -15,7 +15,5 @@ namespace CEAE.Models
 
     public class QuestionMD
     {
-        [JsonIgnore]
-        public virtual ICollection<AnswersQuestion> AnswersQuestions { get; set; }
     }
 }

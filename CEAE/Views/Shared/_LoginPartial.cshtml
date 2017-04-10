@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @using CEAE.Utils;
-
+<link href="~/Content/Masterpage_style.css" rel="stylesheet" />
 @if (Convert.ToBoolean( Session[CONST.SESSION_VARS.USER_ISAUTHENTICATED] ))
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -21,7 +21,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li class="btn btn-info">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li class="btn btn-sample">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

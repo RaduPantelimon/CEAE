@@ -252,6 +252,9 @@
     <Compile Include="Models\Question.cs">
       <DependentUpon>CEAEModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SecondaryModels\Answer.cs" />
+    <Compile Include="Models\SecondaryModels\AnswersQuestion.cs" />
+    <Compile Include="Models\SecondaryModels\Question.cs" />
     <Compile Include="Models\SecondaryModels\Questionnaire.cs" />
     <Compile Include="Models\SecondaryModels\QuestionnaireAnswer.cs" />
     <Compile Include="Models\TestResult.cs">
@@ -268,7 +271,10 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Details_Style.css" />
     <Content Include="Content\Images\ajax-loader.gif" />
+    <Content Include="Content\Index_style.css" />
+    <Content Include="Content\Masterpage_style.css" />
     <Content Include="Content\Questions\questions_viewDetails_style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
