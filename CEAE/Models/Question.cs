@@ -25,6 +25,7 @@ namespace CEAE.Models
         public string Title { get; set; }
         public string Text { get; set; }
     
+        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AnswersQuestion> AnswersQuestions { get; set; }
     }

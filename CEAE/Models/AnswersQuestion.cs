@@ -21,6 +21,7 @@ namespace CEAE.Models
         public string Status { get; set; }
     
         public virtual Answer Answer { get; set; }
+        [JsonIgnore]
         public virtual Question Question { get; set; }
     }
 }

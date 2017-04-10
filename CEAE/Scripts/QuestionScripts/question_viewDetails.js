@@ -69,8 +69,8 @@ function addSecondaryElements(newContainer, options) {
     $(newContainer).append("<select name='Status' class='Status' val=''></select>");
 
 
-    $(newContainer).append("<button class='saveAnswer'>Save changes</button>");
-    $(newContainer).append("<button class='deleteAnswer'>Delete Answer!</button>");
+    $(newContainer).append("<button class='saveAnswer'  type='button' >Save changes</button>");
+    $(newContainer).append("<button class='deleteAnswer'  type='button' >Delete Answer!</button>");
 
 
     var statusSelect = $(newContainer).find(".Status");
