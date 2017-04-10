@@ -271,12 +271,15 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Details_edit_style.css" />
+    <Content Include="Content\Details_index_style.css" />
     <Content Include="Content\Details_Style.css" />
     <Content Include="Content\Images\40.jpg" />
     <Content Include="Content\Images\ajax-loader.gif" />
     <Content Include="Content\Index_style.css" />
     <Content Include="Content\Masterpage_style.css" />
     <Content Include="Content\Questions\questions_viewDetails_style.css" />
+    <Content Include="Content\Simple_edit_for_body.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -303,6 +306,7 @@
     <Content Include="Models\CEAEModel.edmx.diagram">
       <DependentUpon>CEAEModel.edmx</DependentUpon>
     </Content>
+    <Content Include="fonts\LuckiestGuy.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Home\home_questionaire.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

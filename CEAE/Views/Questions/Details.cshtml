@@ -5,7 +5,7 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/Details_Style.css" rel="stylesheet" />
 <h2>Details</h2>
 @* @Html.Raw(Json.Encode(ViewBag.possibleAnswers));*@
 <script>
@@ -30,12 +30,12 @@
             </tr>
         </thead>
         <tr>
-        <td>
-            @Html.DisplayFor(model => model.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(model => model.Text)
-        </td>
+            <td>
+                @Html.DisplayFor(model => model.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Text)
+            </td>
         </tr>
     </table>
 </div>
@@ -46,10 +46,11 @@
         <span class="answers-validation-message">
         </span>
     </div>
-    <button id="new-answer" class="btn btn-link" type="button" >Add new Answer</button>
-
+    <p>
+    <button id="new-answer" class="btn btn-default" type="button">Add new Answer</button>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionID }, new { @class = "btn btn-default" })
+    </p>
 </form>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-default" })
 </p>

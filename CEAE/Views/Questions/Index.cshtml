@@ -4,11 +4,12 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <link href="~/Content/Details_index_style.css" rel="stylesheet" />
 
-<h2>Index</h2>
-
+<h2>Questions</h2>
+</hr>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create" , null , new {@class ="btn btn-ssuccess" })
 </p>
 <table class="table">
     <tr>
@@ -30,9 +31,9 @@
             @Html.DisplayFor(modelItem => item.Text)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.QuestionID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.QuestionID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.QuestionID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.QuestionID }, new {@class="btn btn-default"}) 
+            @Html.ActionLink("Details", "Details", new { id = item.QuestionID } , new { @class = "btn btn-default" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.QuestionID }, new { @class = "btn btn-default" })
         </td>
     </tr>
 }

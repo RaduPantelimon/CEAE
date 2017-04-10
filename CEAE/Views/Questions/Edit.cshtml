@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/Details_edit_style.css" rel="stylesheet" />
 <h2>Edit</h2>
 
 @using (Html.BeginForm())
@@ -42,5 +42,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null , new {@class = "btn btn-default " })
 </div>

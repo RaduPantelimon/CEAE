@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/Simple_edit_for_body.css" rel="stylesheet" />
 <h2>Index</h2>
 
 <p>
@@ -72,9 +72,9 @@
             @Html.DisplayFor(modelItem => item.ImgPath)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserID } , new {@class = "btn btn-default" }) 
+            @Html.ActionLink("Details", "Details", new { id=item.UserID } , new { @class = "btn btn-default" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.UserID } , new { @class = "btn btn-default" })
         </td>
     </tr>
 }
