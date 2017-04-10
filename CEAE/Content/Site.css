@@ -53,7 +53,9 @@ li{
 .question-container{
   
     margin-left: 100px;
-    background-color:burlywood;
+    border:10px ;
+    height:300px;
+
 }
 
 .radiobutt{
@@ -63,4 +65,42 @@ li{
 
 .custom-standard-button{
     border:5px double;
+}
+.question input[type='radio']{
+    margin-right:5px;
+}
+
+
+.sec-title-huge{
+    font-size: 30px;
+    font-weight: 500;
+    color: #333333;
+}
+.sec-title-large{
+    font-size: 24px;
+    font-weight: 500;
+    color: #555555;
+}
+.sec-title-medium{
+    font-size: 18px;
+    color: #555555;
+    margin-left: 5px;
+}
+.sec-title-small{
+    font-size: 16px;
+    color: #7e858c;
+    margin-left: 10px;
+}
+.sec-title-italic{
+    font-style:italic;
+}
+.sec-hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.quiz-status img{
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
 }

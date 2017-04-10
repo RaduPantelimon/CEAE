@@ -2,6 +2,7 @@
 
 var questions = [];
 var currentquestion;
+var rezultat;
 
 function InitializePage() {
 
@@ -39,7 +40,7 @@ function SetQuestions(data) {
     questions = data;
     for(var i=0;i<data.length;i++)
     {
-        $(".question-container").append("<div id='question-"+ data[i].QuestionID + "' style='display:none;' class='question'>" + data[i].Title + "</div>");
+        $(".question-container").append("<div id='question-" + data[i].QuestionID + "' style='display:none;' class='question'><h2 class='sec-title-large'>" + data[i].Title + "</h2><hr class='sec-hr' /></div>");
        SetAnswers(data[i]);
     }
     
@@ -51,11 +52,11 @@ function SetAnswers(question) {
     //question-container
     //console.log(data);
 
-    $('#question-' + question.QuestionID).append("<ul class='list' ></ul>");
+    $('#question-' + question.QuestionID).append("<ul class='list row' ></ul>");
     var answersCntainer = $('#question-' + question.QuestionID + " ul");
     for (var i = 0; i < question.AnswersQuestions.length; i++) {
-        answersCntainer.append("<li  id='answer-" + question.AnswersQuestions[i].Answer.AnswerID + "' class='answer'>" +
-            "<input  data-AnswerID='" + question.AnswersQuestions[i].Answer.AnswerID + "'  name='answer-" + question.QuestionID + "' type='radio'>" + question.AnswersQuestions[i].Answer.Text + "</li>");
+        answersCntainer.append("<li  id='answer-" + question.AnswersQuestions[i].Answer.AnswerID + "' class='answer sec-title-large col-lg-5 col-md-5 col-sm-12 col-xs-12'>" +
+            "<input class=''  data-AnswerID='" + question.AnswersQuestions[i].Answer.AnswerID + "'  name='answer-" + question.QuestionID + "' type='radio'>" + question.AnswersQuestions[i].Answer.Text + "</li>");
     }
 }
 
@@ -155,10 +156,23 @@ function SendAnswers() {
             data: jsonString,
             success: function (result) {
                 if (!result.error) {
-                    //the item was just added // modified
+                    //the item was just added // modified\
+                   
                     console.log(result.raspusuriCorecte);
                     console.log(result);
-                    
+                 
+                    if (result.raspusuriCorecte > 0) {
+                        
+                        $('.quiz-status').html("Felicitari, ai avut " + result.raspusuriCorecte + " raspunsuri corecte!");
+                    }
+                    $('.question-container').hide();
+                    $('.quiz-status').append("</br><img src='/Content/Images/40.jpg' " + " style='height='600' width='600' />");
+                    $('.quiz-status').append("<br> <p> Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!</p>");
+                  
+                    $('.quiz-status').parent().show();
+              
+
+
                 }
             },
             error: function (jqXHR, exception) {
@@ -166,5 +180,8 @@ function SendAnswers() {
                 OnFail(jqXHR, exception);
             }
         });
+
+    
+        
     }
 }
