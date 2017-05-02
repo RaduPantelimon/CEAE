@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CEAE.Managers;
 using CEAE.Models;
 using CEAE.Utils;
 using Microsoft.AspNet.Identity.Owin;

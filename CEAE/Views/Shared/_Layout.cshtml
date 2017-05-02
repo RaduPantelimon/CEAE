@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using AuthenticationManager = CEAE.Managers.AuthenticationManager
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -9,6 +10,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", false)
+    <meta name="description" content="CEAE - best thing ever" />
 </head>
 <body>
 <div id="fb-root"></div>
@@ -39,10 +41,15 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("Questions", "Index", "Questions")</li>
-                <li>@Html.ActionLink("Answers", "Index", "Answers")</li>
                 <li>@Html.ActionLink("Take Test", "TakeTest", "Home")</li>
             </ul>
+            @if (AuthenticationManager.IsUserAdministrator(Session))
+            {
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Questions", "Index", "Questions")</li>
+                    <li>@Html.ActionLink("Answers", "Index", "Answers")</li>
+                </ul>
+            }
             @Html.Partial("_LoginPartial")
         </div>
     </div>

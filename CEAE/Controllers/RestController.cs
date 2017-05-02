@@ -16,19 +16,19 @@ namespace CEAE.Controllers
 {
     public class RestController : ApiController
     {
-        private readonly CEAEDBEntities db = new CEAEDBEntities();
+        private readonly CEAEDBEntities _db = new CEAEDBEntities();
 
         // GET: api/Rest
         public IQueryable<Answer> GetAnswers()
         {
-            return db.Answers;
+            return _db.Answers;
         }
 
         // GET: api/Rest/5
         [ResponseType(typeof(Answer))]
         public IHttpActionResult GetAnswer(int id)
         {
-            var answer = db.Answers.Find(id);
+            var answer = _db.Answers.Find(id);
             if (answer == null)
                 return NotFound();
 
@@ -45,11 +45,11 @@ namespace CEAE.Controllers
             if (id != answer.AnswerID)
                 return BadRequest();
 
-            db.Entry(answer).State = EntityState.Modified;
+            _db.Entry(answer).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -69,8 +69,8 @@ namespace CEAE.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            db.Answers.Add(answer);
-            db.SaveChanges();
+            _db.Answers.Add(answer);
+            _db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new {id = answer.AnswerID}, answer);
         }
@@ -79,12 +79,12 @@ namespace CEAE.Controllers
         [ResponseType(typeof(Answer))]
         public IHttpActionResult DeleteAnswer(int id)
         {
-            var answer = db.Answers.Find(id);
+            var answer = _db.Answers.Find(id);
             if (answer == null)
                 return NotFound();
 
-            db.Answers.Remove(answer);
-            db.SaveChanges();
+            _db.Answers.Remove(answer);
+            _db.SaveChanges();
 
             return Ok(answer);
         }
@@ -94,12 +94,11 @@ namespace CEAE.Controllers
         public HttpResponseMessage GetAnswersQuestions(int id)
         {
             var jsonResponseText = "";
-            var queston = db.Questions.Where(x => x.QuestionID == id).FirstOrDefault();
+            var queston = _db.Questions.FirstOrDefault(x => x.QuestionID == id);
             if (queston != null)
             {
-                var answersAdded = db.AnswersQuestions.Where(x => x.QuestionID == queston.QuestionID).ToList();
-                if (answersAdded != null)
-                    jsonResponseText = JsonConvert.SerializeObject(answersAdded);
+                var answersAdded = _db.AnswersQuestions.Where(x => x.QuestionID == queston.QuestionID).ToList();
+                jsonResponseText = JsonConvert.SerializeObject(answersAdded);
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
@@ -116,14 +115,14 @@ namespace CEAE.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var existingItem = db.AnswersQuestions.Where(x => x.QuestionID == answerquestion.QuestionID &&
-                                                                      x.AnswerID == answerquestion.AnswerID)
-                        .FirstOrDefault();
+                    var existingItem = _db.AnswersQuestions
+                        .FirstOrDefault(x => x.QuestionID == answerquestion.QuestionID &&
+                                                                      x.AnswerID == answerquestion.AnswerID);
 
                     if (existingItem != null)
                     {
-                        db.AnswersQuestions.Remove(existingItem);
-                        db.SaveChanges();
+                        _db.AnswersQuestions.Remove(existingItem);
+                        _db.SaveChanges();
                         jsonResponseText = "{\"status\":1,\"message\":\"Item deleted successfully\"}";
                     }
                 }
@@ -152,29 +151,29 @@ namespace CEAE.Controllers
         [HttpGet]
         public HttpResponseMessage PostAnswerQuestion([FromBody] AnswersQuestion answerquestion)
         {
-            var jsonResponseText = "";
+            string jsonResponseText;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var existingItem = db.AnswersQuestions.Where(x => x.QuestionID == answerquestion.QuestionID &&
-                                                                      x.AnswerID == answerquestion.AnswerID)
-                        .FirstOrDefault();
+                    var existingItem = _db.AnswersQuestions
+                        .FirstOrDefault(x => x.QuestionID == answerquestion.QuestionID &&
+                                                                      x.AnswerID == answerquestion.AnswerID);
 
                     if (existingItem != null)
                     {
                         //item already exists we will simply update it
                         existingItem.Value = answerquestion.Value;
                         existingItem.Status = answerquestion.Status;
-                        db.Entry(existingItem).State = EntityState.Modified;
-                        db.SaveChanges();
+                        _db.Entry(existingItem).State = EntityState.Modified;
+                        _db.SaveChanges();
                         jsonResponseText = JsonConvert.SerializeObject(existingItem);
                     }
                     else
                     {
                         //new choice
-                        db.AnswersQuestions.Add(answerquestion);
-                        db.SaveChanges();
+                        _db.AnswersQuestions.Add(answerquestion);
+                        _db.SaveChanges();
                         jsonResponseText = JsonConvert.SerializeObject(answerquestion);
                     }
                 }
@@ -201,23 +200,22 @@ namespace CEAE.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-                db.Dispose();
+                _db.Dispose();
             base.Dispose(disposing);
         }
 
         private bool AnswerExists(int id)
         {
-            return db.Answers.Count(e => e.AnswerID == id) > 0;
+            return _db.Answers.Count(e => e.AnswerID == id) > 0;
         }
 
         #region Questionnaire
 
         public HttpResponseMessage GetQuestions()
         {
-            var jsonResponseText = "";
-            var questions = db.Questions.ToList();
-            if (questions != null)
-                jsonResponseText = JsonConvert.SerializeObject(questions);
+            string jsonResponseText;
+            var questions = _db.Questions.ToList();
+            jsonResponseText = JsonConvert.SerializeObject(questions);
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
             return response;
@@ -228,7 +226,7 @@ namespace CEAE.Controllers
         [HttpPost]
         public HttpResponseMessage SetAnswers([FromBody] List<QuestionnaireAnswer> answerquestion)
         {
-            var jsonResponseText = "";
+            string jsonResponseText;
             try
             {
                 if (ModelState.IsValid)
@@ -236,7 +234,7 @@ namespace CEAE.Controllers
                     var raspunsuriCorecte = 0;
                     foreach (var a in answerquestion)
                     {
-                        var ans = db.AnswersQuestions.FirstOrDefault(x => x.AnswerID == a.AnswerID && x.QuestionID == a.QuestionID);
+                        var ans = _db.AnswersQuestions.FirstOrDefault(x => x.AnswerID == a.AnswerID && x.QuestionID == a.QuestionID);
                         if (ans != null &&
                             ans.Status == Constants.AnswerResponses.Corect)
                             raspunsuriCorecte++;
@@ -270,16 +268,15 @@ namespace CEAE.Controllers
         [HttpPost]
         public HttpResponseMessage SetEmail([FromBody] string emailAddress)
         {
-            var jsonResponseText = "";
+            string jsonResponseText;
             try
             {
                 if (ModelState.IsValid)
                 {
                     var isValid = Utils.Utils.IsValidEmail(emailAddress);
-                    if (isValid)
-                        jsonResponseText = "{\"status\":1,\"message\":\"Email address saved successfully\"}";
-                    else
-                        jsonResponseText = "{\"status\":0,\"message\":\"Email Address is not valid\"}";
+                    jsonResponseText = isValid ? 
+                        "{\"status\":1,\"message\":\"Email address saved successfully\"}" : 
+                        "{\"status\":0,\"message\":\"Email Address is not valid\"}";
                 }
                 else
                 {

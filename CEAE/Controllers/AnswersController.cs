@@ -3,17 +3,19 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using CEAE.Models;
+using CEAE.Utils;
 
 namespace CEAE.Controllers
 {
+    [UserPermissionExact(Constants.Permissions.Administrator)]
     public class AnswersController : Controller
     {
-        private readonly CEAEDBEntities db = new CEAEDBEntities();
+        private readonly CEAEDBEntities _db = new CEAEDBEntities();
 
         // GET: Answers
         public ActionResult Index()
         {
-            return View(db.Answers.ToList());
+            return View(_db.Answers.ToList());
         }
 
         // GET: Answers/Details/5
@@ -21,7 +23,7 @@ namespace CEAE.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var answer = db.Answers.Find(id);
+            var answer = _db.Answers.Find(id);
             if (answer == null)
                 return HttpNotFound();
             return View(answer);
@@ -40,14 +42,13 @@ namespace CEAE.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "AnswerID,Title,Text")] Answer answer)
         {
-            if (ModelState.IsValid)
-            {
-                db.Answers.Add(answer);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid)
+                return View(answer);
 
-            return View(answer);
+            _db.Answers.Add(answer);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Answers/Edit/5
@@ -55,7 +56,7 @@ namespace CEAE.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var answer = db.Answers.Find(id);
+            var answer = _db.Answers.Find(id);
             if (answer == null)
                 return HttpNotFound();
             return View(answer);
@@ -68,13 +69,13 @@ namespace CEAE.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "AnswerID,Title,Text")] Answer answer)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(answer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(answer);
+            if (!ModelState.IsValid)
+                return View(answer);
+
+            _db.Entry(answer).State = EntityState.Modified;
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Answers/Delete/5
@@ -82,7 +83,7 @@ namespace CEAE.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var answer = db.Answers.Find(id);
+            var answer = _db.Answers.Find(id);
             if (answer == null)
                 return HttpNotFound();
             return View(answer);
@@ -94,16 +95,21 @@ namespace CEAE.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var answer = db.Answers.Find(id);
-            db.Answers.Remove(answer);
-            db.SaveChanges();
+            var answer = _db.Answers.Find(id);
+
+            if (answer == null)
+                return RedirectToAction("Index");
+
+            _db.Answers.Remove(answer);
+            _db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-                db.Dispose();
+                _db.Dispose();
             base.Dispose(disposing);
         }
     }

@@ -2,9 +2,10 @@ using System;
 using System.Web;
 using CEAE.Models;
 using CEAE.Utils;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity.Owin;
 
-namespace CEAE.Controllers
+namespace CEAE.Managers
 {
     public static class AuthenticationManager
     {
@@ -68,5 +69,42 @@ namespace CEAE.Controllers
         }
 
 
+        public static bool IsUserAdministrator(HttpSessionStateBase session)
+        {
+            return IsUserAuthorized(session, Constants.Permissions.Administrator);
+        }
+
+        public static bool IsUserAuthorized(HttpSessionStateBase session, string matchingSecurity)
+        {
+            return IsUserAuthenticated(session) && matchingSecurity.Equals(CurrentSecurity(session));
+        }
+
+        public static bool IsUserAuthorizedGreaterOrEqual(HttpSessionStateBase session, string matchingSecurity)
+        {
+            if (!IsUserAuthenticated(session))
+                return false;
+
+            var currentIndex = Array.IndexOf(Constants.Permissions.Order, CurrentSecurity(session));
+            var matchingIndex = Array.IndexOf(Constants.Permissions.Order, matchingSecurity);
+
+            return matchingIndex != -1 && currentIndex >= matchingIndex;
+        }
+
+        private static string CurrentSecurity(HttpSessionStateBase session)
+        {
+            return session[Constants.Session.UserAccessLevel].ToString();
+        }
+
+        public static int UserId(HttpSessionStateBase session)
+        {
+            if (session[Constants.Session.UserId] is int)
+                return (int)session[Constants.Session.UserId];
+            return -1;
+        }
+
+        public static string UserAccessLevel(HttpSessionStateBase session)
+        {
+            return session[Constants.Session.UserAccessLevel]?.ToString() ?? "";
+        }
     }
 }

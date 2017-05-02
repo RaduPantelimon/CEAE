@@ -5,41 +5,31 @@ using System.Net;
 using System.Web.Mvc;
 using CEAE.Models;
 using CEAE.Utils;
+using AuthenticationManager = CEAE.Managers.AuthenticationManager;
 
 namespace CEAE.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly CEAEDBEntities db = new CEAEDBEntities();
+        private readonly CEAEDBEntities _db = new CEAEDBEntities();
 
+        [UserPermissionExact(Constants.Permissions.Administrator)]
         // GET: Users
         public ActionResult Index()
         {
-            var userPermissions = Session[Constants.Session.UserAccessLevel] != null
-                ? Session[Constants.Session.UserAccessLevel].ToString()
-                : "";
-            if (userPermissions != Constants.Permissions.Administrator)
-                return RedirectToAction("AccessDenied", "Home");
-            return View(db.Users.ToList());
+            return View(_db.Users.ToList());
         }
 
+        [UserPermissionExact(Constants.Permissions.Administrator)]
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var user = db.Users.Find(id);
+            var user = _db.Users.Find(id);
             if (user == null)
                 return HttpNotFound();
-
-            //checking if the user has the necessary permissions
-            var userPermissions = Session[Constants.Session.UserAccessLevel] != null
-                ? Session[Constants.Session.UserAccessLevel].ToString()
-                : "";
-            var userID = Convert.ToInt32(Session[Constants.Session.UserId].ToString());
-            if (userID != id.Value && userPermissions != Constants.Permissions.Administrator)
-                return RedirectToAction("AccessDenied", "Home");
 
             return View(user);
         }
@@ -59,32 +49,27 @@ namespace CEAE.Controllers
             [Bind(Include = "UserID,Account,Password,FirstName,LastName,Title,Email,PhoneNumber,Administrator,ImgPath")]
             User user)
         {
-            if (ModelState.IsValid)
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Home");
-            }
-
-            return View(user);
+            if (!ModelState.IsValid)
+                return View(user);
+            _db.Users.Add(user);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
+
 
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var user = db.Users.Find(id);
+            var user = _db.Users.Find(id);
             if (user == null)
                 return HttpNotFound();
-
-            //checking if the user has the necessary permissions
-            var userPermissions = Session[Constants.Session.UserAccessLevel].ToString();
-            var userID = Convert.ToInt32(Session[Constants.Session.UserId].ToString());
-            if (userID != id.Value && userPermissions != Constants.Permissions.Administrator)
+            
+            if (!CanUseAction(id.Value))
                 return RedirectToAction("AccessDenied", "Home");
 
-            ViewBag.permissions = userPermissions;
+            ViewBag.permissions = AuthenticationManager.UserAccessLevel(Session);
 
             return View(user);
         }
@@ -98,23 +83,26 @@ namespace CEAE.Controllers
             [Bind(Include = "UserID,Account,Password,FirstName,LastName,Title,Email,PhoneNumber,Administrator,ImgPath")]
             User user)
         {
-            if (ModelState.IsValid)
-            {
-                //checking if the user has the necessary permissions
-                var userPermissions = Session[Constants.Session.UserAccessLevel].ToString();
-                var userID = Convert.ToInt32(Session[Constants.Session.UserId].ToString());
-                if (user.UserID != userID && userPermissions != Constants.Permissions.Administrator)
-                    return RedirectToAction("AccessDenied", "Home");
+            if (!ModelState.IsValid)
+                return View(user);
 
-                ViewBag.permissions = userPermissions;
+            if (!CanUseAction(user.UserID))
+                return RedirectToAction("AccessDenied", "Home");
 
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index", "Home");
-            }
+            ViewBag.permissions = AuthenticationManager.UserAccessLevel(Session);
 
+            _db.Entry(user).State = EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
 
-            return View(user);
+        private bool CanUseAction(int userId)
+        {
+            var sameUser = AuthenticationManager.IsUserAuthenticated(Session) &&
+                           AuthenticationManager.UserId(Session) == userId;
+            var isUserAdministrator = AuthenticationManager.IsUserAdministrator(Session);
+
+            return sameUser || isUserAdministrator;
         }
 
         // GET: Users/Delete/5
@@ -122,15 +110,16 @@ namespace CEAE.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var user = db.Users.Find(id);
+
+            var user = _db.Users.Find(id);
+
             if (user == null)
                 return HttpNotFound();
-            var userPermissions = Session[Constants.Session.UserAccessLevel].ToString();
-            var userID = Convert.ToInt32(Session[Constants.Session.UserId].ToString());
-            if (user.UserID != userID && userPermissions != Constants.Permissions.Administrator)
+
+            if (!CanUseAction(id.Value))
                 return RedirectToAction("AccessDenied", "Home");
 
-            ViewBag.permissions = userPermissions;
+            ViewBag.permissions = AuthenticationManager.UserAccessLevel(Session);
 
             return View(user);
         }
@@ -141,26 +130,24 @@ namespace CEAE.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var user = db.Users.Find(id);
+            var user = _db.Users.Find(id);
             if (user != null)
             {
-                var userPermissions = Session[Constants.Session.UserAccessLevel].ToString();
-                var userID = Convert.ToInt32(Session[Constants.Session.UserId].ToString());
-                if (user.UserID != userID && userPermissions != Constants.Permissions.Administrator)
+                if (!CanUseAction(id))
                     return RedirectToAction("AccessDenied", "Home");
-                ViewBag.permissions = userPermissions;
+
+                ViewBag.permissions = AuthenticationManager.UserAccessLevel(Session);
+                _db.Users.Remove(user);
+                _db.SaveChanges();
             }
 
-
-            db.Users.Remove(user);
-            db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-                db.Dispose();
+                _db.Dispose();
             base.Dispose(disposing);
         }
     }
