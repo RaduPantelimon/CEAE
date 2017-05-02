@@ -26,7 +26,7 @@ namespace CEAE
                 "~/Content/bootstrap.css",
                 "~/Content/Site.css"));
 
-            BundleTable.EnableOptimizations = true;
+//            BundleTable.EnableOptimizations = true;
         }
     }
 }

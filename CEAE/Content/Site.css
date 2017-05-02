@@ -102,16 +102,6 @@ li { list-style-type: none; }
     color: #fff;
 }
 
-.btn-primary {
-    background-color: #037DFF;
-    border-color: #130269;
-    color: #ffffff;
-    margin-right: 200px;
-    padding-bottom: 21px;
-    padding-top: 20px;
-    position: relative;
-}
-
 footer {
     background-color: #222222;
     bottom: 0;

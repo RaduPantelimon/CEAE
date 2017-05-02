@@ -7,7 +7,7 @@
             @Html.ActionLink("Hello, " + AuthenticationManager.UserAccount(Session) + "!", "ManageAccount", "Account", null, new {title = "Manage"})
         </li>
         <li>
-            @Html.ActionLink("Log off", "LogOut", "Account", null, new {id = "logoffLink"})
+            @Html.ActionLink("Log off", "LogOut", "Account", null)
         </li>
     </ul>
 }
