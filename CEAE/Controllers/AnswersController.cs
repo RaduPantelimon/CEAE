@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using CEAE.Models;
 
@@ -12,7 +8,7 @@ namespace CEAE.Controllers
 {
     public class AnswersController : Controller
     {
-        private CEAEDBEntities db = new CEAEDBEntities();
+        private readonly CEAEDBEntities db = new CEAEDBEntities();
 
         // GET: Answers
         public ActionResult Index()
@@ -24,14 +20,10 @@ namespace CEAE.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Answer answer = db.Answers.Find(id);
+            var answer = db.Answers.Find(id);
             if (answer == null)
-            {
                 return HttpNotFound();
-            }
             return View(answer);
         }
 
@@ -62,14 +54,10 @@ namespace CEAE.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Answer answer = db.Answers.Find(id);
+            var answer = db.Answers.Find(id);
             if (answer == null)
-            {
                 return HttpNotFound();
-            }
             return View(answer);
         }
 
@@ -93,23 +81,20 @@ namespace CEAE.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Answer answer = db.Answers.Find(id);
+            var answer = db.Answers.Find(id);
             if (answer == null)
-            {
                 return HttpNotFound();
-            }
             return View(answer);
         }
 
         // POST: Answers/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Answer answer = db.Answers.Find(id);
+            var answer = db.Answers.Find(id);
             db.Answers.Remove(answer);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -118,9 +103,7 @@ namespace CEAE.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 db.Dispose();
-            }
             base.Dispose(disposing);
         }
     }

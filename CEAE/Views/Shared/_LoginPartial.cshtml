@@ -1,27 +1,28 @@
-﻿@using Microsoft.AspNet.Identity
-@using CEAE.Utils;
-<link href="~/Content/Masterpage_style.css" rel="stylesheet" />
-@if (Convert.ToBoolean( Session[CONST.SESSION_VARS.USER_ISAUTHENTICATED] ))
+﻿@using CEAE.Utils
+<link href="~/Content/Masterpage_style.css" rel="stylesheet"/>
+@if (Convert.ToBoolean(Session[Constants.Session.UserIsAuthenticated]))
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm", @class = "navbar-right"}))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello, " + Session[CONST.SESSION_VARS.USER_ACCOUNT] + "!", "ManageAccount", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li>
-            @Html.ActionLink("Log off", "LogOut", "Account", routeValues: null, htmlAttributes: new { id = "logoffLink" })
-        </li>
-            <!--<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>-->
-</ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello, " + Session[Constants.Session.UserAccount] + "!", "ManageAccount", "Account", null, new {title = "Manage"})
+            </li>
+            <li>
+                @Html.ActionLink("Log off", "LogOut", "Account", null, new {id = "logoffLink"})
+            </li>
+            <!--<li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+            </li>-->
+        </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li class="btn btn-info">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li class="btn btn-sample">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li class="btn btn-info">@Html.ActionLink("Register", "Register", "Account", null, new {id = "registerLink"})</li>
+        <li class="btn btn-sample">@Html.ActionLink("Log in", "Login", "Account", null, new {id = "loginLink"})</li>
     </ul>
 }

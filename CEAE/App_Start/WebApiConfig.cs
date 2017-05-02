@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace CEAE
 {
@@ -14,15 +11,15 @@ namespace CEAE
             // Web API routes
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
-                name: "RestApiRoot",
-                routeTemplate: "api/Rest/{action}/{id}",
-                defaults: new { controller = "Rest", action = "GetAnswersQuestions", id = RouteParameter.Optional }
+                "RestApiRoot",
+                "api/Rest/{action}/{id}",
+                new {controller = "Rest", action = "GetAnswersQuestions", id = RouteParameter.Optional}
             );
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                "DefaultApi",
+                "api/{controller}/{id}",
+                new {id = RouteParameter.Optional}
             );
         }
     }

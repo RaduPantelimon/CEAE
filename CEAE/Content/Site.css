@@ -1,9 +1,10 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
+    padding-top: 50px;
 }
 
 /* Set padding to keep content from hitting the edges */
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -12,95 +13,86 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
-    white-space: normal;
-}
+
+.dl-horizontal dt { white-space: normal; }
 
 /* Set width on the form input elements since they're 100% wide by default */
+
 input,
 select,
-textarea {
-    max-width: 280px;
-}
+textarea { max-width: 280px; }
 
-body {
-    background-color: lightgray;
-}
+body { background-color: lightgray; }
 
-li{
-   list-style-type:none; 
-}
+li { list-style-type: none; }
 
-.answer{
+.answer {
 
   
-    padding : 2px;
-    margin : 2px;
-    font-size : 25px;
-
-
+    font-size: 25px;
+    margin: 2px;
+    padding: 2px;
 }
 
 
-.question{
+.question {
   
   
-    padding : 10px;
-    margin : 10px;
-    font-size : 30px;
-}
-
-.question-container{
-  
-    margin-left: 100px;
-    border:10px ;
-    height:300px;
-
-}
-
-.radiobutt{
+    font-size: 30px;
     margin: 10px;
-    padding : 10px;
+    padding: 10px;
 }
 
-.custom-standard-button{
-    border:5px double;
-}
-.question input[type='radio']{
-    margin-right:5px;
+.question-container {
+  
+    border: 10px;
+    height: 300px;
+    margin-left: 100px;
 }
 
+.radiobutt {
+    margin: 10px;
+    padding: 10px;
+}
 
-.sec-title-huge{
+.custom-standard-button { border: 5px double; }
+
+.question input[type='radio'] { margin-right: 5px; }
+
+
+.sec-title-huge {
+    color: #333333;
     font-size: 30px;
     font-weight: 500;
-    color: #333333;
-}
-.sec-title-large{
-    font-size: 24px;
-    font-weight: 500;
-    color: #555555;
-}
-.sec-title-medium{
-    font-size: 18px;
-    color: #555555;
-    margin-left: 5px;
-}
-.sec-title-small{
-    font-size: 16px;
-    color: #7e858c;
-    margin-left: 10px;
-}
-.sec-title-italic{
-    font-style:italic;
-}
-.sec-hr {
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
-.quiz-status img{
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
+.sec-title-large {
+    color: #555555;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.sec-title-medium {
+    color: #555555;
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.sec-title-small {
+    color: #7e858c;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.sec-title-italic { font-style: italic; }
+
+.sec-hr {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.quiz-status img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

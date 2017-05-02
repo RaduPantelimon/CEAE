@@ -1,43 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CEAE.Utils
+﻿namespace CEAE.Utils
 {
-    public class CONST
+    public static class Constants
     {
-        //names of cokies used by the app
-        public partial class COOKIES
-        {
-            const string AUTH_COOKIE = "AUTH_COOKIE";
-        }
+        public static string[] AnswerOptions { get; } = {"Corect", "Gresit"};
 
         //session variable names used by the app
-        public partial class SESSION_VARS
+        public static class Session
         {
-            public static readonly string DID_RECEIVED_EMAIL = "DID_RECEIVED_EMAIL";
-            public static readonly string REGISTRED_EMAIL = "REGISTERED_EMAIL";
-            public static readonly string USER_ID = "USER_ID";
-            public static readonly string USER_ACCOUNT = "USER_ACCOUNT";
-            public static readonly string USER_ISAUTHENTICATED = "USER_ISAUTHENTICATED";
-            public static readonly string USER_ACCESS_LEVEL = "USER_ACCESS_LEVEL";
+            public static string UserId { get; } = "USER_ID";
+            public static string UserAccount { get; } = "USER_ACCOUNT";
+            public static string UserIsAuthenticated { get; } = "USER_ISAUTHENTICATED";
+            public static string UserAccessLevel { get; } = "USER_ACCESS_LEVEL";
         }
 
         //
-        public partial class USER_PERMISSIONS
+        public static class Permissions
         {
-            public static string Member = "Member";
-            public static string User = "User";
-            public static string Administrator = "Administrator";
+            public static string Administrator { get; } = "Administrator";
         }
 
-        public partial class ANSWER_RESPONSES
+        public static class AnswerResponses
         {
-            public static readonly string Corect = "Corect";
-            public static readonly string Gresit = "Gresit";
+            public static string Corect { get; } = "Corect";
+            public static string Gresit { get; } = "Gresit";
         }
-        public static readonly string [] ANSWER_STATUSES = {"Corect","Gresit"};
-
     }
 }

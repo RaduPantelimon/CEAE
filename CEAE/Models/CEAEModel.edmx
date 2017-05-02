@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CEAEDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CEAEDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self"
+              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="AnswerID" />
@@ -148,10 +152,14 @@
             <End Role="TestResults" EntitySet="TestResults" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CEAEDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="CEAEDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Answer">
           <Key>
             <PropertyRef Name="AnswerID" />
@@ -159,7 +167,8 @@
           <Property Name="AnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="AnswersQuestions" Relationship="Self.FK_AnswerID" FromRole="Answers" ToRole="AnswersQuestions" />
+          <NavigationProperty Name="AnswersQuestions" Relationship="Self.FK_AnswerID" FromRole="Answers"
+                              ToRole="AnswersQuestions" />
         </EntityType>
         <EntityType Name="AnswersQuestion">
           <Key>
@@ -170,8 +179,10 @@
           <Property Name="QuestionID" Type="Int32" Nullable="false" />
           <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Answer" Relationship="Self.FK_AnswerID" FromRole="AnswersQuestions" ToRole="Answers" />
-          <NavigationProperty Name="Question" Relationship="Self.FK_QuestionID" FromRole="AnswersQuestions" ToRole="Questions" />
+          <NavigationProperty Name="Answer" Relationship="Self.FK_AnswerID" FromRole="AnswersQuestions"
+                              ToRole="Answers" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_QuestionID" FromRole="AnswersQuestions"
+                              ToRole="Questions" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -180,7 +191,8 @@
           <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SignInDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="TestResults" Relationship="Self.FK_ContactID" FromRole="Contacts" ToRole="TestResults" />
+          <NavigationProperty Name="TestResults" Relationship="Self.FK_ContactID" FromRole="Contacts"
+                              ToRole="TestResults" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -189,7 +201,8 @@
           <Property Name="QuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="AnswersQuestions" Relationship="Self.FK_QuestionID" FromRole="Questions" ToRole="AnswersQuestions" />
+          <NavigationProperty Name="AnswersQuestions" Relationship="Self.FK_QuestionID" FromRole="Questions"
+                              ToRole="AnswersQuestions" />
         </EntityType>
         <EntityType Name="TestResult">
           <Key>
@@ -215,7 +228,8 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Administrator" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Administrator" Type="String" MaxLength="50" FixedLength="false" Unicode="false"
+                    Nullable="false" />
           <NavigationProperty Name="TestResults" Relationship="Self.FK_UserID" FromRole="Users" ToRole="TestResults" />
           <Property Name="ImgPath" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>

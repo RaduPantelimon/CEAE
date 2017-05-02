@@ -1,33 +1,34 @@
-﻿@model CEAE.Models.Question
-@using Newtonsoft.Json;
-@using CEAE.Utils;
+﻿@using CEAE.Utils
+@model CEAE.Models.Question
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Content/Details_Style.css" rel="stylesheet" />
+<link href="~/Content/Details_Style.css" rel="stylesheet"/>
 <h2>Details</h2>
 @* @Html.Raw(Json.Encode(ViewBag.possibleAnswers));*@
 <script>
     var possibleAnswers = @Html.Raw(ViewBag.serializedAnswers);
     var QuestionID = @Html.Raw(Model.QuestionID);
-    var answerStatuses = @Html.Raw(Json.Encode(CONST.ANSWER_STATUSES));
+    var answerStatuses = @Html.Raw(Json.Encode(Constants.AnswerOptions));
 </script>
 <style>
 
+    
+    
 </style>
 <script src="~/Scripts/QuestionScripts/question_viewDetails.js"></script>
 <link href="~/Content/Questions/questions_viewDetails_style.css" rel="stylesheet">
 <div>
     <h4>Question</h4>
-    <hr />
+    <hr/>
     <table class="table table-hover">
         <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Title)</th>
-                <th>@Html.DisplayNameFor(model => model.Text)</th>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Title)</th>
+            <th>@Html.DisplayNameFor(model => model.Text)</th>
 
-            </tr>
+        </tr>
         </thead>
         <tr>
             <td>
@@ -47,10 +48,10 @@
         </span>
     </div>
     <p>
-    <button id="new-answer" class="btn btn-default" type="button">Add new Answer</button>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionID }, new { @class = "btn btn-default" })
+        <button id="new-answer" class="btn btn-default" type="button">Add new Answer</button>
+        @Html.ActionLink("Edit", "Edit", new {id = Model.QuestionID}, new {@class = "btn btn-default"})
     </p>
 </form>
 <p>
-    @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-default"})
 </p>

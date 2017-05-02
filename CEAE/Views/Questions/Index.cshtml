@@ -4,12 +4,12 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <link href="~/Content/Details_index_style.css" rel="stylesheet" />
+<link href="~/Content/Details_index_style.css" rel="stylesheet"/>
 
 <h2>Questions</h2>
-</hr>
+<hr>
 <p>
-    @Html.ActionLink("Create New", "Create" , null , new {@class ="btn btn-ssuccess" })
+    @Html.ActionLink("Create New", "Create", null, new {@class = "btn btn-ssuccess"})
 </p>
 <table class="table">
     <tr>
@@ -22,20 +22,21 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Text)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.QuestionID }, new {@class="btn btn-default"}) 
-            @Html.ActionLink("Details", "Details", new { id = item.QuestionID } , new { @class = "btn btn-default" }) 
-            @Html.ActionLink("Delete", "Delete", new { id=item.QuestionID }, new { @class = "btn btn-default" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.QuestionID}, new {@class = "btn btn-default"})
+                @Html.ActionLink("Details", "Details", new {id = item.QuestionID}, new {@class = "btn btn-default"})
+                @Html.ActionLink("Delete", "Delete", new {id = item.QuestionID}, new {@class = "btn btn-default"})
+            </td>
+        </tr>
+    }
 
 </table>

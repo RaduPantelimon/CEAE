@@ -1,7 +1,9 @@
-﻿using Microsoft.Owin;
+﻿using CEAE;
+using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(CEAE.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
+
 namespace CEAE
 {
     public partial class Startup

@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CEAE.Models;
-using System.Text;
-using Newtonsoft.Json;
-
 using CEAE.Utils;
+using Newtonsoft.Json;
 
 namespace CEAE.Controllers
 {
     public class RestController : ApiController
     {
-        private CEAEDBEntities db = new CEAEDBEntities();
+        private readonly CEAEDBEntities db = new CEAEDBEntities();
 
         // GET: api/Rest
         public IQueryable<Answer> GetAnswers()
@@ -30,11 +28,9 @@ namespace CEAE.Controllers
         [ResponseType(typeof(Answer))]
         public IHttpActionResult GetAnswer(int id)
         {
-            Answer answer = db.Answers.Find(id);
+            var answer = db.Answers.Find(id);
             if (answer == null)
-            {
                 return NotFound();
-            }
 
             return Ok(answer);
         }
@@ -44,14 +40,10 @@ namespace CEAE.Controllers
         public IHttpActionResult PutAnswer(int id, Answer answer)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             if (id != answer.AnswerID)
-            {
                 return BadRequest();
-            }
 
             db.Entry(answer).State = EntityState.Modified;
 
@@ -62,13 +54,8 @@ namespace CEAE.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!AnswerExists(id))
-                {
                     return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -80,25 +67,21 @@ namespace CEAE.Controllers
         public IHttpActionResult PostAnswer(Answer answer)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             db.Answers.Add(answer);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = answer.AnswerID }, answer);
+            return CreatedAtRoute("DefaultApi", new {id = answer.AnswerID}, answer);
         }
 
         // DELETE: api/Rest/5
         [ResponseType(typeof(Answer))]
         public IHttpActionResult DeleteAnswer(int id)
         {
-            Answer answer = db.Answers.Find(id);
+            var answer = db.Answers.Find(id);
             if (answer == null)
-            {
                 return NotFound();
-            }
 
             db.Answers.Remove(answer);
             db.SaveChanges();
@@ -110,16 +93,13 @@ namespace CEAE.Controllers
         //[System.Web.Http.HttpGet]
         public HttpResponseMessage GetAnswersQuestions(int id)
         {
-            string jsonResponseText = "";
-            Question queston = db.Questions.Where(x => x.QuestionID == id).FirstOrDefault();
+            var jsonResponseText = "";
+            var queston = db.Questions.Where(x => x.QuestionID == id).FirstOrDefault();
             if (queston != null)
             {
-                List<AnswersQuestion> answersAdded = db.AnswersQuestions.Where(x => x.QuestionID == queston.QuestionID).ToList();
+                var answersAdded = db.AnswersQuestions.Where(x => x.QuestionID == queston.QuestionID).ToList();
                 if (answersAdded != null)
-                {
                     jsonResponseText = JsonConvert.SerializeObject(answersAdded);
-                }
-                
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
@@ -127,17 +107,18 @@ namespace CEAE.Controllers
         }
 
         //save the tasks added by the user
-        [System.Web.Http.AcceptVerbs("POST")]
-        [System.Web.Http.HttpGet]
+        [AcceptVerbs("POST")]
+        [HttpGet]
         public HttpResponseMessage DeleteAnswerQuestion([FromBody] AnswersQuestion answerquestion)
         {
-            string jsonResponseText = "";
+            var jsonResponseText = "";
             try
             {
                 if (ModelState.IsValid)
                 {
-                    AnswersQuestion existingItem = db.AnswersQuestions.Where(x => (x.QuestionID == answerquestion.QuestionID &&
-                    x.AnswerID == answerquestion.AnswerID)).FirstOrDefault();
+                    var existingItem = db.AnswersQuestions.Where(x => x.QuestionID == answerquestion.QuestionID &&
+                                                                      x.AnswerID == answerquestion.AnswerID)
+                        .FirstOrDefault();
 
                     if (existingItem != null)
                     {
@@ -148,18 +129,18 @@ namespace CEAE.Controllers
                 }
                 else
                 {
-                    jsonResponseText = "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
-
+                    jsonResponseText =
+                        "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
                 }
                 var response = Request.CreateResponse(HttpStatusCode.OK);
                 response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
                 return response;
-
-
             }
             catch (Exception ex)
             {
-                jsonResponseText = "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" + ex.Message + "\"}";
+                jsonResponseText =
+                    "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" +
+                    ex.Message + "\"}";
                 var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
                 response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
                 return response;
@@ -167,19 +148,20 @@ namespace CEAE.Controllers
         }
 
         //save the tasks added by the user
-        [System.Web.Http.AcceptVerbs("POST")]
-        [System.Web.Http.HttpGet]
+        [AcceptVerbs("POST")]
+        [HttpGet]
         public HttpResponseMessage PostAnswerQuestion([FromBody] AnswersQuestion answerquestion)
         {
-            string jsonResponseText = "";
+            var jsonResponseText = "";
             try
             {
                 if (ModelState.IsValid)
                 {
-                    AnswersQuestion existingItem = db.AnswersQuestions.Where(x => (x.QuestionID == answerquestion.QuestionID &&
-                    x.AnswerID == answerquestion.AnswerID)).FirstOrDefault();
+                    var existingItem = db.AnswersQuestions.Where(x => x.QuestionID == answerquestion.QuestionID &&
+                                                                      x.AnswerID == answerquestion.AnswerID)
+                        .FirstOrDefault();
 
-                    if(existingItem != null)
+                    if (existingItem != null)
                     {
                         //item already exists we will simply update it
                         existingItem.Value = answerquestion.Value;
@@ -195,140 +177,31 @@ namespace CEAE.Controllers
                         db.SaveChanges();
                         jsonResponseText = JsonConvert.SerializeObject(answerquestion);
                     }
-
-
-
-
                 }
                 else
                 {
-                    jsonResponseText = "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
-
+                    jsonResponseText =
+                        "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
                 }
                 var response = Request.CreateResponse(HttpStatusCode.OK);
                 response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
                 return response;
-
-
             }
             catch (Exception ex)
             {
-                jsonResponseText = "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" + ex.Message + "\"}";
+                jsonResponseText =
+                    "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" +
+                    ex.Message + "\"}";
                 var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
                 response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
                 return response;
             }
         }
 
-        #region Questionnaire
-
-        public HttpResponseMessage GetQuestions()
-        {
-            string jsonResponseText = "";
-            List<Question> questions = db.Questions.ToList();
-            if (questions != null)
-            {
-
-                jsonResponseText = JsonConvert.SerializeObject(questions);
-
-            }
-            var response = Request.CreateResponse(HttpStatusCode.OK);
-            response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
-            return response;
-        }
-
-        //save the tasks added by the user
-        [System.Web.Http.AcceptVerbs("POST")]
-        [System.Web.Http.HttpPost]
-        public HttpResponseMessage SetAnswers([FromBody] List<QuestionnaireAnswer> answerquestion)
-        {
-            string jsonResponseText = "";
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    int raspunsuriCorecte = 0;
-                    foreach (QuestionnaireAnswer a in answerquestion)
-                    {
-                        AnswersQuestion ans = db.AnswersQuestions.Where(x => x.AnswerID == a.AnswerID && x.QuestionID == a.QuestionID).FirstOrDefault();
-                        if(ans!= null &&
-                            ans.Status == CONST.ANSWER_RESPONSES.Corect )
-                        {
-                            raspunsuriCorecte++;
-                        }
-                    }
-
-                    jsonResponseText = "{\"status\":1,\"raspusuriCorecte\":\""+ raspunsuriCorecte + "\",\"message\":\"Model is not valid\"}";
-                }
-                else
-                {
-                    jsonResponseText = "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
-
-                }
-                var response = Request.CreateResponse(HttpStatusCode.OK);
-                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
-                return response;
-
-
-            }
-            catch (Exception ex)
-            {
-                jsonResponseText = "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" + ex.Message + "\"}";
-                var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
-                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
-                return response;
-            }
-        }
-        //save the tasks added by the user
-        [System.Web.Http.AcceptVerbs("POST")]
-        [System.Web.Http.HttpPost]
-        public HttpResponseMessage SetEmail([FromBody] string emailAddress)
-        {
-            string jsonResponseText = "";
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    bool isValid = Utils.Utils.IsValidEmail(emailAddress);
-                    if (isValid)
-                    {
-                       // var session = HttpConte
-                        jsonResponseText = "{\"status\":1,\"message\":\"Email address saved successfully\"}";
-                    }
-                    else
-                    {
-                        jsonResponseText = "{\"status\":0,\"message\":\"Email Address is not valid\"}";
-
-                    }
-
-                }
-                else
-                {
-                    jsonResponseText = "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
-
-                }
-                var response = Request.CreateResponse(HttpStatusCode.OK);
-                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
-                return response;
-
-
-            }
-            catch (Exception ex)
-            {
-                jsonResponseText = "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" + ex.Message + "\"}";
-                var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
-                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
-                return response;
-            }
-        }
-
-        #endregion
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 db.Dispose();
-            }
             base.Dispose(disposing);
         }
 
@@ -336,5 +209,98 @@ namespace CEAE.Controllers
         {
             return db.Answers.Count(e => e.AnswerID == id) > 0;
         }
+
+        #region Questionnaire
+
+        public HttpResponseMessage GetQuestions()
+        {
+            var jsonResponseText = "";
+            var questions = db.Questions.ToList();
+            if (questions != null)
+                jsonResponseText = JsonConvert.SerializeObject(questions);
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        //save the tasks added by the user
+        [AcceptVerbs("POST")]
+        [HttpPost]
+        public HttpResponseMessage SetAnswers([FromBody] List<QuestionnaireAnswer> answerquestion)
+        {
+            var jsonResponseText = "";
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var raspunsuriCorecte = 0;
+                    foreach (var a in answerquestion)
+                    {
+                        var ans = db.AnswersQuestions.FirstOrDefault(x => x.AnswerID == a.AnswerID && x.QuestionID == a.QuestionID);
+                        if (ans != null &&
+                            ans.Status == Constants.AnswerResponses.Corect)
+                            raspunsuriCorecte++;
+                    }
+
+                    jsonResponseText = "{\"status\":1,\"raspusuriCorecte\":\"" + raspunsuriCorecte +
+                                       "\",\"message\":\"Model is not valid\"}";
+                }
+                else
+                {
+                    jsonResponseText =
+                        "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
+                }
+                var response = Request.CreateResponse(HttpStatusCode.OK);
+                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
+                return response;
+            }
+            catch (Exception ex)
+            {
+                jsonResponseText =
+                    "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" +
+                    ex.Message + "\"}";
+                var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
+                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
+                return response;
+            }
+        }
+
+        //save the tasks added by the user
+        [AcceptVerbs("POST")]
+        [HttpPost]
+        public HttpResponseMessage SetEmail([FromBody] string emailAddress)
+        {
+            var jsonResponseText = "";
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var isValid = Utils.Utils.IsValidEmail(emailAddress);
+                    if (isValid)
+                        jsonResponseText = "{\"status\":1,\"message\":\"Email address saved successfully\"}";
+                    else
+                        jsonResponseText = "{\"status\":0,\"message\":\"Email Address is not valid\"}";
+                }
+                else
+                {
+                    jsonResponseText =
+                        "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
+                }
+                var response = Request.CreateResponse(HttpStatusCode.OK);
+                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
+                return response;
+            }
+            catch (Exception ex)
+            {
+                jsonResponseText =
+                    "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" +
+                    ex.Message + "\"}";
+                var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
+                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
+                return response;
+            }
+        }
+
+        #endregion
     }
 }

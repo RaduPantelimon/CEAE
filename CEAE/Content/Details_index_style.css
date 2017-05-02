@@ -1,23 +1,23 @@
-﻿body {
-    margin-left:20px;
-}
+﻿body { margin-left: 20px; }
 
 h2 {
-    margin-top:20px;
-    margin-bottom:60px;
+    margin-bottom: 60px;
+    margin-top: 20px;
 }
+
 .btn-ssuccess {
-    margin-bottom:20px;
-    color: #333333;
     background-color: #ffffff;
     border-color: #cccccc;
+    color: #333333;
+    margin-bottom: 20px;
 }
+
 .btn-ssuccess:hover,
 .btn-ssuccess:focus,
 .btn-ssuccess:active,
 .btn-ssuccess.active,
 .open .dropdown-toggle.btn-ssuccess {
-    color: #ffffff;
     background-color: #47a447;
     border-color: #398439;
+    color: #ffffff;
 }

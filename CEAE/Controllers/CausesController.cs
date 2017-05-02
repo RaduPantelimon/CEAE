@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using CEAE.Models;
 
@@ -12,7 +8,7 @@ namespace CEAE.Controllers
 {
     public class CausesController : Controller
     {
-        private CEAEDBEntities db = new CEAEDBEntities();
+        private readonly CEAEDBEntities db = new CEAEDBEntities();
 
         // GET: Causes
         public ActionResult Index()
@@ -24,14 +20,10 @@ namespace CEAE.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Causes causes = db.Causes.Find(id);
+            var causes = db.Causes.Find(id);
             if (causes == null)
-            {
                 return HttpNotFound();
-            }
             return View(causes);
         }
 
@@ -62,14 +54,10 @@ namespace CEAE.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Causes causes = db.Causes.Find(id);
+            var causes = db.Causes.Find(id);
             if (causes == null)
-            {
                 return HttpNotFound();
-            }
             return View(causes);
         }
 
@@ -93,23 +81,20 @@ namespace CEAE.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Causes causes = db.Causes.Find(id);
+            var causes = db.Causes.Find(id);
             if (causes == null)
-            {
                 return HttpNotFound();
-            }
             return View(causes);
         }
 
         // POST: Causes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Causes causes = db.Causes.Find(id);
+            var causes = db.Causes.Find(id);
             db.Causes.Remove(causes);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -118,9 +103,7 @@ namespace CEAE.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 db.Dispose();
-            }
             base.Dispose(disposing);
         }
     }
