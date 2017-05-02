@@ -286,10 +286,14 @@
     <Content Include="Content\Details_Style.css" />
     <Content Include="Content\Images\40.jpg" />
     <Content Include="Content\Images\ajax-loader.gif" />
+    <Content Include="Content\Images\back.jpg" />
+    <Content Include="Content\Images\back2.jpg" />
+    <Content Include="Content\Images\ma.jpg" />
+    <Content Include="Content\Images\ms.jpg" />
     <Content Include="Content\Index_style.css" />
-    <Content Include="Content\Masterpage_style.css" />
     <Content Include="Content\Questions\questions_viewDetails_style.css" />
     <Content Include="Content\Simple_edit_for_body.css" />
+    <Content Include="Content\Style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

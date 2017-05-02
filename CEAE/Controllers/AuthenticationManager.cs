@@ -10,8 +10,8 @@ namespace CEAE.Controllers
     {
         public static bool IsAuthenticated(HttpSessionStateBase session)
         {
-            return session[Constants.Session.UserIsAuthenticated] != null &&
-                   Convert.ToBoolean(session[Constants.Session.UserIsAuthenticated]);
+            var sessionVariable = session[Constants.Session.UserIsAuthenticated];
+            return sessionVariable is bool && (bool) sessionVariable;
         }
         public static bool IsUserAuthenticated(HttpSessionStateBase session)
         {
@@ -52,6 +52,7 @@ namespace CEAE.Controllers
         public static void ResetPassword(User user, string password)
         {
             user.Password = PasswordEncrypt(password);
+
         }
 
         private static bool PasswordsMatch(string encryptedPassword, string decryptedPassword)

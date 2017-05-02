@@ -103,7 +103,6 @@ namespace CEAE.Controllers
                 if (resetPasswordViewModel.Password == resetPasswordViewModel.ConfirmPassword)
                 {
                     AuthenticationManager.ResetPassword(currentUser, resetPasswordViewModel.Password);
-                    
                     _db.Entry(currentUser).State = EntityState.Modified;
                     _db.SaveChanges();
 
@@ -122,12 +121,10 @@ namespace CEAE.Controllers
         private SignInStatus PerformAuthentification(LoginViewModel model)
         {
             //validating the credentials
-            var user = _db.Users
-                .FirstOrDefault(x => x.Account == model.Email ||
-                                     x.Email == model.Email);
+            var user = _db.Users.FirstOrDefault(x => x.Account == model.Email || x.Email == model.Email);
             return AuthenticationManager.Authenticate(user, model.Password, Session);
         }
-
+        
         
         private ActionResult RedirectToLocal(string returnUrl)
         {
