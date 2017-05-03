@@ -1,10 +1,8 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using CEAE.Managers;
 using CEAE.Models;
-using CEAE.Utils;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace CEAE.Controllers
@@ -58,7 +56,7 @@ namespace CEAE.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", Translations.InvalidLogin);
                     return View(model);
             }
         }

@@ -408,7 +408,6 @@
     <Content Include="Views\Questions\Edit.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
     <Content Include="Views\Home\TakeTest.cshtml" />
-    <Content Include="Views\Questionnaire\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

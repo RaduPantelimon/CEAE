@@ -41,7 +41,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("Take Test", "TakeTest", "Home")</li>
+                <li>@Html.ActionLink(@Translations.TakeTest, "TakeTest", "Home")</li>
             </ul>
             @if (AuthenticationManager.IsUserAdministrator(Session))
             {

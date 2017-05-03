@@ -13,14 +13,6 @@ namespace CEAE.Controllers
 
         private readonly CEAEDBEntities _db = new CEAEDBEntities();
 
-        // GET: Questionnaire
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        #region Questionnaire
-
         public ActionResult GetQuestions()
         {
             var questions = _db.Questions.ToList();
@@ -121,7 +113,5 @@ namespace CEAE.Controllers
                 return Content(jsonResponseText, "application/json");
             }
         }
-
-        #endregion
     }
 }

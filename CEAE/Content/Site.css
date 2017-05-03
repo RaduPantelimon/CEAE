@@ -102,6 +102,10 @@ body { background-color: lightgray; }
     color: #fff;
 }
 
+body > .container {
+    margin-bottom: 100px;
+}
+
 footer {
     background-color: #222222;
     bottom: 0;

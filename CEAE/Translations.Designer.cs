@@ -196,6 +196,15 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid login attempt..
+        /// </summary>
+        public static string InvalidLogin {
+            get {
+                return ResourceManager.GetString("InvalidLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Name.
         /// </summary>
         public static string LastName {
@@ -327,6 +336,15 @@ namespace CEAE {
         public static string RememberMe {
             get {
                 return ResourceManager.GetString("RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find Out How You Think.
+        /// </summary>
+        public static string TakeTest {
+            get {
+                return ResourceManager.GetString("TakeTest", resourceCulture);
             }
         }
         
