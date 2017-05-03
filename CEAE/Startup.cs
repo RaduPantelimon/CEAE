@@ -1,4 +1,5 @@
-﻿using CEAE;
+﻿using System.Diagnostics;
+using CEAE;
 using Microsoft.Owin;
 using Owin;
 
@@ -11,6 +12,7 @@ namespace CEAE
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            MapperConfig.Initialize();
         }
     }
 }

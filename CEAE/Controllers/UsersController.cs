@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using AutoMapper;
 using CEAE.Models;
 using CEAE.Utils;
 using Microsoft.AspNet.Identity.Owin;
@@ -47,30 +48,21 @@ namespace CEAE.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(
-            [Bind(Include = "UserID,Account,Password,FirstName,LastName,Title,Email,PhoneNumber,ImgPath")]
-            User user)
+        public ActionResult Create([Bind(Exclude = "")] Models.DTO.User user)
         {
-            // always default to a simple user.
-            user.Administrator = Constants.Permissions.User;
-            ModelState["Administrator"] = new ModelState
-            {
-                Value = new ValueProviderResult(
-                    Constants.Permissions.User,
-                    Constants.Permissions.User,
-                    CultureInfo.CurrentCulture)
-            };
-
             if (!ModelState.IsValid)
                 return View(user);
 
-            
-            _db.Users.Add(user);
+            // always default to a simple user.
+            var newUser = Mapper.Map<User>(user);
+
+
+            _db.Users.Add(newUser);
             _db.SaveChanges();
 
             
 
-            return AuthenticationManager.Authenticate(user, user.Password, Session) == SignInStatus.Success ? 
+            return AuthenticationManager.Authenticate(newUser, user.Password, Session) == SignInStatus.Success ? 
                 (ActionResult) RedirectToAction("Index", "Home") :
                 View(user);
         }
