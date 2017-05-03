@@ -313,7 +313,7 @@ namespace CEAE {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Register as a new user.
+        ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string Register {
             get {
