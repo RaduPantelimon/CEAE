@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using CEAE.Models;
 using CEAE.Utils;
+using Microsoft.AspNet.Identity.Owin;
 using AuthenticationManager = CEAE.Managers.AuthenticationManager;
 
 namespace CEAE.Controllers
@@ -46,14 +48,31 @@ namespace CEAE.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(
-            [Bind(Include = "UserID,Account,Password,FirstName,LastName,Title,Email,PhoneNumber,Administrator,ImgPath")]
+            [Bind(Include = "UserID,Account,Password,FirstName,LastName,Title,Email,PhoneNumber,ImgPath")]
             User user)
         {
+            // always default to a simple user.
+            user.Administrator = Constants.Permissions.User;
+            ModelState["Administrator"] = new ModelState
+            {
+                Value = new ValueProviderResult(
+                    Constants.Permissions.User,
+                    Constants.Permissions.User,
+                    CultureInfo.CurrentCulture)
+            };
+
             if (!ModelState.IsValid)
                 return View(user);
+
+            
             _db.Users.Add(user);
             _db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+
+            
+
+            return AuthenticationManager.Authenticate(user, user.Password, Session) == SignInStatus.Success ? 
+                (ActionResult) RedirectToAction("Index", "Home") :
+                View(user);
         }
 
 

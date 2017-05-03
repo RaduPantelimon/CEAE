@@ -267,6 +267,7 @@
     <Compile Include="Models\SecondaryModels\Question.cs" />
     <Compile Include="Models\SecondaryModels\Questionnaire.cs" />
     <Compile Include="Models\SecondaryModels\QuestionnaireAnswer.cs" />
+    <Compile Include="Models\UserMetaData.cs" />
     <Compile Include="Models\TestResult.cs">
       <DependentUpon>CEAEModel.tt</DependentUpon>
     </Compile>
@@ -281,6 +282,8 @@
       <DependentUpon>Translations.resx</DependentUpon>
     </Compile>
     <Compile Include="Utils\Constants.cs" />
+    <Compile Include="Utils\DisplayNameTAttribute.cs" />
+    <Compile Include="Utils\RequiredTAttribute.cs" />
     <Compile Include="Utils\UserPermissionsExtensions.cs" />
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
@@ -301,7 +304,7 @@
     <Content Include="Content\Simple_edit_for_body.css" />
     <Content Include="Content\Style.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Models\CEAEModel.Context.tt">
@@ -326,10 +329,10 @@
     <Content Include="Models\CEAEModel.edmx.diagram">
       <DependentUpon>CEAEModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\fonts\LuckiestGuy.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\LuckiestGuy.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Home\home_questionaire.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -414,6 +417,7 @@
     <EmbeddedResource Include="Translations.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Translations.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using CEAE.Utils;
 
 namespace CEAE.Models
 {
@@ -50,34 +51,34 @@ namespace CEAE.Models
 
     public class LoginViewModel
     {
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Translations), ErrorMessageResourceName = "EmailRequired")]
-        [Display(ResourceType = typeof(Translations), Name = "Email")]
+        [RequiredT]
+        [DisplayNameT]
         public string Email { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Translations), ErrorMessageResourceName = "PasswordRequired")]
+        [RequiredT]
+        [DisplayNameT]
         [DataType(DataType.Password)]
-        [Display(ResourceType = typeof(Translations), Name = "Password")]
         public string Password { get; set; }
 
-        [Display(ResourceType = typeof(Translations), Name = "RememberMe")]
+        [DisplayNameT]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Translations), ErrorMessageResourceName = "EmailRequired")]
-        [Display(ResourceType = typeof(Translations), Name = "Email")]
+        [RequiredT]
+        [DisplayNameT]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Translations), ErrorMessageResourceName = "PasswordRequired")]
+        [RequiredT]
+        [DisplayNameT]
         [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Translations), ErrorMessageResourceName = "PasswordLengthRequired")]
-        [Display(ResourceType = typeof(Translations), Name = "Password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Translations), ErrorMessageResourceName = "ConfirmPasswordRequired")]
-        [Display(ResourceType = typeof(Translations), Name = "ConfirmPassword")]
+        [RequiredT]
+        [DisplayNameT]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessageResourceType = typeof(Translations), ErrorMessageResourceName = "PasswordMismatch")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }

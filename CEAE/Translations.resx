@@ -117,11 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="AccountNamePossible" xml:space="preserve">
+    <value>Use your username instead by registering!</value>
+  </data>
+  <data name="AccountRequired" xml:space="preserve">
+    <value>Account is required!</value>
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value>User Role</value>
+  </data>
+  <data name="AdministratorRequired" xml:space="preserve">
+    <value>User Role required!</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
   <data name="ConfirmPasswordRequired" xml:space="preserve">
     <value>Confirmation Password is required!</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="CreateUser" xml:space="preserve">
+    <value>Create user</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -129,8 +150,38 @@
   <data name="EmailRequired" xml:space="preserve">
     <value>Email address is required!</value>
   </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>First Name is required!</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="ImgPath" xml:space="preserve">
+    <value>Avatar URL</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>Last Name is required!</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Log in</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="Mr" xml:space="preserve">
+    <value>Mr.</value>
+  </data>
+  <data name="Mrs" xml:space="preserve">
+    <value>Mrs.</value>
+  </data>
+  <data name="Ms" xml:space="preserve">
+    <value>Ms.</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
@@ -145,10 +196,19 @@
   <data name="PasswordRequired" xml:space="preserve">
     <value>Password is required!</value>
   </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone #</value>
+  </data>
+  <data name="PhoneNumberRequired" xml:space="preserve">
+    <value>Phone Number is required!</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Register as a new user</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember Me?</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
   </data>
 </root>
