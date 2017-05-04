@@ -25,6 +25,9 @@ textarea { max-width: 280px; }
 body { background-color: lightgray; }
 
 /*li { list-style-type: none; }*/
+.btn.btn-hide {
+    display: none;
+}
 
 .answer {
 
@@ -56,7 +59,11 @@ body { background-color: lightgray; }
 }
 
 .custom-standard-button { border: 5px double; }
-
+.answerContainer { 
+    padding: 5px 10px;
+    padding-left: 20px;
+    text-align: center;
+}
 .question input[type='radio'] { margin-right: 5px; }
 
 

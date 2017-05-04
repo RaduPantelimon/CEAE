@@ -126,11 +126,23 @@
   <data name="AccountRequired" xml:space="preserve">
     <value>Account is required!</value>
   </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="AddNewAnswer" xml:space="preserve">
+    <value>Add New Answer</value>
+  </data>
   <data name="Administrator" xml:space="preserve">
     <value>User Role</value>
   </data>
   <data name="AdministratorRequired" xml:space="preserve">
     <value>User Role required!</value>
+  </data>
+  <data name="AreYouSureYouWantToDeleteThis" xml:space="preserve">
+    <value>Are you sure you want to delete this?</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Back to List</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
@@ -143,6 +155,15 @@
   </data>
   <data name="CreateUser" xml:space="preserve">
     <value>Create user</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -186,6 +207,9 @@
   <data name="Ms" xml:space="preserve">
     <value>Ms.</value>
   </data>
+  <data name="NextQuestion" xml:space="preserve">
+    <value>Next Question</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
@@ -205,16 +229,46 @@
   <data name="PhoneNumberRequired" xml:space="preserve">
     <value>Phone Number is required!</value>
   </data>
+  <data name="PreviousQuestion" xml:space="preserve">
+    <value>Previous Question</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="QuestionIDRequired" xml:space="preserve">
+    <value>Question ID is required!</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember Me?</value>
   </data>
+  <data name="StartTest" xml:space="preserve">
+    <value>Start Test</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="SubmitEmail" xml:space="preserve">
+    <value>Submit Email</value>
+  </data>
   <data name="TakeTest" xml:space="preserve">
     <value>Find Out How You Think</value>
   </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="TextRequired" xml:space="preserve">
+    <value>Text is required!</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="TitleRequired" xml:space="preserve">
+    <value>Title is required!</value>
+  </data>
+  <data name="UserIDRequired" xml:space="preserve">
+    <value>User ID is required!</value>
   </data>
 </root>

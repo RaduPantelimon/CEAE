@@ -1,57 +1,51 @@
 ﻿@using CEAE.Utils
-@model CEAE.Models.Question
+@model CEAE.Models.DTO.Question
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Translations.Details;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Content/Details_Style.css" rel="stylesheet"/>
-<h2>Details</h2>
-@* @Html.Raw(Json.Encode(ViewBag.possibleAnswers));*@
-<script>
-    var possibleAnswers = @Html.Raw(ViewBag.serializedAnswers);
-    var QuestionID = @Html.Raw(Model.QuestionID);
-    var answerStatuses = @Html.Raw(Json.Encode(Constants.AnswerOptions));
-</script>
-<style>
+<div class="container">
+    <h2>@Translations.Details</h2>
 
-    
-    
-</style>
-<script src="~/Scripts/QuestionScripts/question_viewDetails.js"></script>
-<link href="~/Content/Questions/questions_viewDetails_style.css" rel="stylesheet">
-<div>
-    <h4>Question</h4>
-    <hr/>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Title)</th>
-            <th>@Html.DisplayNameFor(model => model.Text)</th>
+    <div>
+        <h4>@Translations.Question</h4>
+        <hr />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Title)</th>
+                    <th>@Html.DisplayNameFor(model => model.Text)</th>
 
-        </tr>
-        </thead>
-        <tr>
-            <td>
-                @Html.DisplayFor(model => model.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Text)
-            </td>
-        </tr>
-    </table>
+                </tr>
+            </thead>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Text)
+                </td>
+            </tr>
+        </table>
+    </div>
+    <form id="answers-container" class="form-horizontal">
+        <div id="added-answers" class="form-group">
+        </div>
+        <div class="text-danger answers-validation alert alert-danger" style="display: none;">
+            <span class="answers-validation-message"></span>
+        </div>
+        <p class="btn-group">
+            <button id="new-answer" class="btn btn-primary" type="button">@Translations.AddNewAnswer</button>
+        @Html.ActionLink(Translations.Edit, "Edit", new { id = Model.QuestionID }, new { @class = "btn btn-default" })
+        @Html.ActionLink(Translations.BackToList, "Index", null, new { @class = "btn btn-default" })
+        </p>
+    </form>
 </div>
-<form id="answers-container" class="form-inline">
-    <div id="added-answers" class="form-group">
-    </div>
-    <div class="text-danger answers-validation">
-        <span class="answers-validation-message">
-        </span>
-    </div>
-    <p>
-        <button id="new-answer" class="btn btn-default" type="button">Add new Answer</button>
-        @Html.ActionLink("Edit", "Edit", new {id = Model.QuestionID}, new {@class = "btn btn-default"})
-    </p>
-</form>
-<p>
-    @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-default"})
-</p>
+@section Scripts {
+    <script>
+        var possibleAnswers = @Html.Raw(ViewBag.serializedAnswers);
+        var QuestionID = @Html.Raw(Model.QuestionID);
+        var answerStatuses = @Html.Raw(Json.Encode(Constants.AnswerOptions));
+    </script>
+    <script src="~/Scripts/QuestionScripts/question_viewDetails.js"></script>
+}

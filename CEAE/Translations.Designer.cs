@@ -88,6 +88,24 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        public static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Answer.
+        /// </summary>
+        public static string AddNewAnswer {
+            get {
+                return ResourceManager.GetString("AddNewAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Role.
         /// </summary>
         public static string Administrator {
@@ -102,6 +120,24 @@ namespace CEAE {
         public static string AdministratorRequired {
             get {
                 return ResourceManager.GetString("AdministratorRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this?.
+        /// </summary>
+        public static string AreYouSureYouWantToDeleteThis {
+            get {
+                return ResourceManager.GetString("AreYouSureYouWantToDeleteThis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to List.
+        /// </summary>
+        public static string BackToList {
+            get {
+                return ResourceManager.GetString("BackToList", resourceCulture);
             }
         }
         
@@ -138,6 +174,33 @@ namespace CEAE {
         public static string CreateUser {
             get {
                 return ResourceManager.GetString("CreateUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string Details {
+            get {
+                return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -268,6 +331,15 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next Question.
+        /// </summary>
+        public static string NextQuestion {
+            get {
+                return ResourceManager.GetString("NextQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -322,6 +394,33 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Previous Question.
+        /// </summary>
+        public static string PreviousQuestion {
+            get {
+                return ResourceManager.GetString("PreviousQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Question.
+        /// </summary>
+        public static string Question {
+            get {
+                return ResourceManager.GetString("Question", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Question ID is required!.
+        /// </summary>
+        public static string QuestionIDRequired {
+            get {
+                return ResourceManager.GetString("QuestionIDRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string Register {
@@ -340,6 +439,33 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start Test.
+        /// </summary>
+        public static string StartTest {
+            get {
+                return ResourceManager.GetString("StartTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit.
+        /// </summary>
+        public static string Submit {
+            get {
+                return ResourceManager.GetString("Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit Email.
+        /// </summary>
+        public static string SubmitEmail {
+            get {
+                return ResourceManager.GetString("SubmitEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Find Out How You Think.
         /// </summary>
         public static string TakeTest {
@@ -349,11 +475,47 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string Text {
+            get {
+                return ResourceManager.GetString("Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text is required!.
+        /// </summary>
+        public static string TextRequired {
+            get {
+                return ResourceManager.GetString("TextRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title is required!.
+        /// </summary>
+        public static string TitleRequired {
+            get {
+                return ResourceManager.GetString("TitleRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User ID is required!.
+        /// </summary>
+        public static string UserIDRequired {
+            get {
+                return ResourceManager.GetString("UserIDRequired", resourceCulture);
             }
         }
     }

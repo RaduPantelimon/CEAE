@@ -1,4 +1,4 @@
-﻿@model CEAE.Models.Question
+﻿@model CEAE.Models.DTO.Question
 
 @{
     ViewBag.Title = "Create";
@@ -33,12 +33,15 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"/>
+                <div class="btn-group">
+                    <input type="submit" value="Create" class="btn btn-primary"/>
+                    @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-default"})
+                </div>
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    
 </div>

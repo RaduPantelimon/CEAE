@@ -33,6 +33,6 @@
 
 
 <div class="container text-center">
-    <h1> AFLA CUM GANDESTI</h1>
-    @Html.ActionLink("Incepe Testul", "TakeTest", "Home", null, new {@class = "btn btn-start btn-lg custom-standard-button"})
+    <h1> @Translations.TakeTest</h1>
+    @Html.ActionLink(Translations.StartTest, "TakeTest", "Home", null, new {@class = "btn btn-start btn-lg custom-standard-button"})
 </div>

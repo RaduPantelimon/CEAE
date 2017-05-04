@@ -48,7 +48,7 @@ function addNewAnswer(totheUI) {
         var possibleAnswer = possibleAnswers[i];
         options += "<option value='" + possibleAnswer.AnswerID + "'>" + possibleAnswer.Text + "</option>";
     }
-    $("#added-answers").append("<div class='answerContainer'></div>");
+    $("#added-answers").append("<div class='row answerContainer'></div>");
 
     //once the container was added, we add the remaining inputs
     addSecondaryElements($("#added-answers .answerContainer").last(), options);
@@ -56,19 +56,23 @@ function addNewAnswer(totheUI) {
 }
 
 function addSecondaryElements(newContainer, options) {
-    $(newContainer).append("<img class='LoaderImage' src='/Content/Images/ajax-loader.gif' " +
-        " style='display:none;' height='20' width='20' />");
-    $(newContainer).append("<select name='AnswerID' class='AnswerID' id='answer-select'></select>");
+    $(newContainer).append("");
+    $(newContainer).append("<div class='col-sm-3'><select name='AnswerID' class='AnswerID form-control' id='answer-select'></select></div>");
     var answersSelect = $(newContainer).find("select#answer-select").first();
     answersSelect.append(options);
-    $(newContainer).append("<input name='Value'  class='Value' val='' />");
+    $(newContainer).append("<div class='col-sm-3'><input name='Value'  class='Value form-control' val='' /></div>");
     //$(newContainer).append("<input name='Status' class='Status' val='' />");
-    $(newContainer).append("<select name='Status' class='Status' val=''></select>");
+    $(newContainer).append("<div class='col-sm-3'><select name='Status' class='Status form-control' val=''></select></div>");
 
 
-    $(newContainer).append("<button class='saveAnswer'  type='button' >Save changes</button>");
-    $(newContainer).append("<button class='deleteAnswer'  type='button' >Delete Answer!</button>");
-
+    $(newContainer).append(
+        "<div class='col-sm-3 text-left'>" +
+            "<div class='btn-group'>" +
+            "<button class='saveAnswer btn btn-primary' type='button'>Save</button>" +
+            "<button class='deleteAnswer btn btn-danger' type='button'>Delete</button>" +
+            "</div>" +
+            "<img class='LoaderImage' src='/Content/Images/ajax-loader.gif' style='display:none;float:right;' height='20' width='20' />" +
+        "</div>");
 
     var statusSelect = $(newContainer).find(".Status");
     if (answerStatuses && answerStatuses.length > 0) {
@@ -101,6 +105,7 @@ function saveAnswer(newContainer) {
     data.QuestionID = QuestionID;
 
     //we clear previous error, if existing
+    $(".answers-validation").hide();
     $(".answers-validation-message").html("");
 
     //checking if there are any duplicate answers
@@ -113,6 +118,7 @@ function saveAnswer(newContainer) {
     });
     if (timesPresent > 1) {
         //the user is trying to add the same answer twice; stop him + error message
+        $(".answers-validation").show();
         $(".answers-validation-message")
             .html("NU este posibila adaugarea de mai multe ori a aceluiasi raspuns la o singura intrebare");
         return;
@@ -120,7 +126,6 @@ function saveAnswer(newContainer) {
 
     //we initialize the Javascript Loader
     $(newContainer).find("img.LoaderImage").show();
-    $(newContainer).css("padding-left", "0px");
 
     var jsonString = JSON.stringify(data);
 
@@ -138,7 +143,6 @@ function saveAnswer(newContainer) {
 
                 //we deinitialize the Javascript Loader
                 $(newContainer).find("img.LoaderImage").hide();
-                $(newContainer).css("padding-left", "20px");
             }
         },
         error: function(jqXHR, exception) {
@@ -158,7 +162,6 @@ function DeleteAnswerQuestion(newContainer) {
 
     //we initialize the Javascript Loader
     $(newContainer).find("img.LoaderImage").show();
-    $(newContainer).css("padding-left", "0px");
 
     var jsonString = JSON.stringify(data);
 
@@ -171,7 +174,6 @@ function DeleteAnswerQuestion(newContainer) {
         success: function(result) {
             if (!result.error) {
                 $(newContainer).find("img.LoaderImage").hide();
-                $(newContainer).css("padding-left", "20px");
                 $(newContainer).remove();
             }
         },

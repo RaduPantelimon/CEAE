@@ -263,6 +263,7 @@
     <Compile Include="Models\Contact.cs">
       <DependentUpon>CEAEModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTO\Question.cs" />
     <Compile Include="Models\DTO\User.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -271,7 +272,6 @@
     </Compile>
     <Compile Include="Models\SecondaryModels\Answer.cs" />
     <Compile Include="Models\SecondaryModels\AnswersQuestion.cs" />
-    <Compile Include="Models\SecondaryModels\Question.cs" />
     <Compile Include="Models\SecondaryModels\Questionnaire.cs" />
     <Compile Include="Models\SecondaryModels\QuestionnaireAnswer.cs" />
     <Compile Include="Models\TestResult.cs">
@@ -296,9 +296,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Details_edit_style.css" />
-    <Content Include="Content\Details_index_style.css" />
-    <Content Include="Content\Details_Style.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\40.jpg" />
     <Content Include="Content\Images\ajax-loader.gif" />
     <Content Include="Content\Images\back.jpg" />
@@ -306,10 +305,10 @@
     <Content Include="Content\Images\ma.jpg" />
     <Content Include="Content\Images\ms.jpg" />
     <Content Include="Content\Index_style.css" />
-    <Content Include="Content\Questions\questions_viewDetails_style.css" />
     <Content Include="Content\Simple_edit_for_body.css" />
     <Content Include="Content\Style.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -339,6 +338,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Home\home_questionaire.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

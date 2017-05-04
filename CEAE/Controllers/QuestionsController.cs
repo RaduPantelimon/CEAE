@@ -1,7 +1,9 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using AutoMapper;
 using CEAE.Models;
 using CEAE.Utils;
 using Newtonsoft.Json;
@@ -16,7 +18,8 @@ namespace CEAE.Controllers
         // GET: Questions
         public ActionResult Index()
         {
-            return View(_db.Questions.ToList());
+            var questions = Mapper.Map<List<Models.DTO.Question>>(_db.Questions);
+            return View(questions);
         }
 
         // GET: Questions/Details/5
@@ -28,13 +31,17 @@ namespace CEAE.Controllers
             if (question == null)
                 return HttpNotFound();
 
-            var answers = _db.Answers /*.Select(x => (x.AnswersQuestions = null))*/.ToList();
+            var model = Mapper.Map<Models.DTO.Question>(question);
+
+            var answers = _db.Answers.ToList();
+
             foreach (var t in answers)
                 t.AnswersQuestions = null;
+            
             ViewBag.possibleAnswers = answers;
             ViewBag.serializedAnswers = JsonConvert.SerializeObject(answers);
 
-            return View(question);
+            return View(model);
         }
 
         // GET: Questions/Create
@@ -48,13 +55,16 @@ namespace CEAE.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "QuestionID,Title,Text")] Question question)
+        public ActionResult Create([Bind(Include = "Title,Text")] Models.DTO.Question question)
         {
             if (!ModelState.IsValid)
                 return View(question);
-            _db.Questions.Add(question);
+
+            var realQuestion = Mapper.Map<Question>(question);
+
+            _db.Questions.Add(realQuestion);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new {id = realQuestion.QuestionID});
         }
 
         // GET: Questions/Edit/5
@@ -62,10 +72,15 @@ namespace CEAE.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             var question = _db.Questions.Find(id);
+
             if (question == null)
                 return HttpNotFound();
-            return View(question);
+
+            var model = Mapper.Map<Models.DTO.Question>(question);
+
+            return View(model);
         }
 
         // POST: Questions/Edit/5
@@ -73,12 +88,14 @@ namespace CEAE.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "QuestionID,Title,Text")] Question question)
+        public ActionResult Edit([Bind(Include = "QuestionID,Title,Text")] Models.DTO.Question question)
         {
             if (!ModelState.IsValid)
                 return View(question);
 
-            _db.Entry(question).State = EntityState.Modified;
+            var realQuestion = Mapper.Map<Question>(question);
+
+            _db.Entry(realQuestion).State = EntityState.Modified;
             _db.SaveChanges();
 
             return RedirectToAction("Index");
@@ -89,10 +106,15 @@ namespace CEAE.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             var question = _db.Questions.Find(id);
+
             if (question == null)
                 return HttpNotFound();
-            return View(question);
+
+            var model = Mapper.Map<Models.DTO.Question>(question);
+
+            return View(model);
         }
 
         // POST: Questions/Delete/5
@@ -108,6 +130,7 @@ namespace CEAE.Controllers
 
             _db.Questions.Remove(question);
             _db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

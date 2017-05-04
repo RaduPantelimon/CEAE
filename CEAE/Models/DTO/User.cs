@@ -1,10 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using CEAE.Utils;
 
 namespace CEAE.Models.DTO
 {
     public class User
     {
+        [RequiredT]
+        [HiddenInput]
+        public int UserID { get; set; }
+
         [RequiredT]
         [DisplayNameT]
         [DataType(DataType.Text)]
