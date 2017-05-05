@@ -2,7 +2,6 @@ using System;
 using System.Web;
 using CEAE.Models;
 using CEAE.Utils;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace CEAE.Managers
@@ -47,6 +46,7 @@ namespace CEAE.Managers
             session[Constants.Session.UserAccount] = loggedInUser.Account;
             session[Constants.Session.UserIsAuthenticated] = true;
             session[Constants.Session.UserAccessLevel] = loggedInUser.Administrator;
+            session[Constants.Session.RegisteredEmail] = loggedInUser.Email;
             return SignInStatus.Success;
         }
 
