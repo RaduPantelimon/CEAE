@@ -1,7 +1,9 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using AutoMapper;
 using CEAE.Models;
 using CEAE.Utils;
 
@@ -15,7 +17,8 @@ namespace CEAE.Controllers
         // GET: Answers
         public ActionResult Index()
         {
-            return View(_db.Answers.ToList());
+            var models = Mapper.Map<List<Models.DTO.Answer>>(_db.Answers.ToList());
+            return View(models);
         }
 
         // GET: Answers/Details/5
@@ -26,7 +29,10 @@ namespace CEAE.Controllers
             var answer = _db.Answers.Find(id);
             if (answer == null)
                 return HttpNotFound();
-            return View(answer);
+
+            var model = Mapper.Map<Models.DTO.Answer>(answer);
+
+            return View(model);
         }
 
         // GET: Answers/Create
@@ -40,12 +46,14 @@ namespace CEAE.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AnswerID,Title,Text")] Answer answer)
+        public ActionResult Create([Bind(Include = "Title,Text")] Models.DTO.Answer answer)
         {
             if (!ModelState.IsValid)
                 return View(answer);
 
-            _db.Answers.Add(answer);
+            var realAnswer = Mapper.Map<Answer>(answer);
+
+            _db.Answers.Add(realAnswer);
             _db.SaveChanges();
 
             return RedirectToAction("Index");
@@ -59,7 +67,10 @@ namespace CEAE.Controllers
             var answer = _db.Answers.Find(id);
             if (answer == null)
                 return HttpNotFound();
-            return View(answer);
+
+            var model = Mapper.Map<Models.DTO.Answer>(answer);
+
+            return View(model);
         }
 
         // POST: Answers/Edit/5
@@ -67,12 +78,14 @@ namespace CEAE.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AnswerID,Title,Text")] Answer answer)
+        public ActionResult Edit([Bind(Include = "AnswerID,Title,Text")] Models.DTO.Answer answer)
         {
             if (!ModelState.IsValid)
                 return View(answer);
 
-            _db.Entry(answer).State = EntityState.Modified;
+            var realAnswer = Mapper.Map<Answer>(answer);
+
+            _db.Entry(realAnswer).State = EntityState.Modified;
             _db.SaveChanges();
 
             return RedirectToAction("Index");
@@ -86,7 +99,10 @@ namespace CEAE.Controllers
             var answer = _db.Answers.Find(id);
             if (answer == null)
                 return HttpNotFound();
-            return View(answer);
+
+            var model = Mapper.Map<Models.DTO.Answer>(answer);
+
+            return View(model);
         }
 
         // POST: Answers/Delete/5

@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<CEAE.Models.DTO.Question>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Translations.Questions;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
-    <h2>Questions</h2>
+    <h2>@Translations.Questions</h2>
     <hr>
     <p>
-        @Html.ActionLink("Create New", "Create", null, new {@class = "btn btn-success"})
+        @Html.ActionLink(Translations.Create, "Create", null, new {@class = "btn btn-success"})
     </p>
     <table class="table">
         <thead>
@@ -34,8 +34,8 @@
                     </td>
                     <td>
                         <div class="btn-group">
-                            @Html.ActionLink("Details", "Details", new { id = item.QuestionID }, new { @class = "btn btn-primary" })
-                            @Html.ActionLink("Edit", "Edit", new { id = item.QuestionID }, new { @class = "btn btn-default" })
+                            @Html.ActionLink(Translations.Details, "Details", new { id = item.QuestionID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink(Translations.Edit, "Edit", new { id = item.QuestionID }, new { @class = "btn btn-default" })
                             <a href="@Url.Action("Delete", new {id = item.QuestionID})" class="btn btn-danger">
                                 <i class="fa fa-trash"></i>
                             </a>

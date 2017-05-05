@@ -7,35 +7,33 @@
 <div class="container">
     <h2>@Translations.Delete</h2>
     <h3>@Translations.AreYouSureYouWantToDeleteThis</h3>
-    <div>
-        <h4>@Translations.Question</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Title)
-            </dt>
+    <h4>@Translations.Question</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Title)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Text)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Text)
-            </dd>
-        </dl>
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+    </dl>
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-            <div class="btn-group">
-                @Html.ActionLink(Translations.BackToList, "Index", null, new { @class = "btn btn-default" })
-                <button type="submit" class="btn btn-danger">@Translations.Delete</button>
-            </div>
-        }
-    </div>
+        <div class="btn-group">
+            @Html.ActionLink(Translations.No, "Index", null, new { @class = "btn btn-default" })
+            <button type="submit" class="btn btn-danger">@Translations.Yes</button>
+        </div>
+    }
 </div>
