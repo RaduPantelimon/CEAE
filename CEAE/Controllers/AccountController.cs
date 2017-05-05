@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using CEAE.Managers;
 using CEAE.Models;
+using CEAE.Utils;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace CEAE.Controllers
@@ -30,7 +31,7 @@ namespace CEAE.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [AllowAnonymous]
+        [UserPermissionGreaterOrEqual(Constants.Permissions.User)]
         public ActionResult ManageAccount()
         {
             return View();

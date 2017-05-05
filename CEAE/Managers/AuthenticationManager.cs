@@ -106,5 +106,11 @@ namespace CEAE.Managers
         {
             return session[Constants.Session.UserAccessLevel]?.ToString() ?? "";
         }
+
+        public static string UserEmail(HttpSessionStateBase session)
+        {
+            // we can skip "is string" as string isn't a primitive.
+            return session[Constants.Session.RegisteredEmail] as string;
+        }
     }
 }

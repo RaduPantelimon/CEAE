@@ -180,6 +180,9 @@
   <data name="EmailRequired" xml:space="preserve">
     <value>Email address is required!</value>
   </data>
+  <data name="EmailUndefined" xml:space="preserve">
+    <value>Email not set!</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>First Name</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="Logout" xml:space="preserve">
     <value>Log out</value>
+  </data>
+  <data name="ManageAccount" xml:space="preserve">
+    <value>Manage Account</value>
   </data>
   <data name="Mr" xml:space="preserve">
     <value>Mr.</value>
@@ -244,6 +250,9 @@
   <data name="PreviousQuestion" xml:space="preserve">
     <value>Previous Question</value>
   </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
   <data name="Question" xml:space="preserve">
     <value>Question</value>
   </data>
@@ -258,6 +267,9 @@
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember Me?</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Reset Password</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>

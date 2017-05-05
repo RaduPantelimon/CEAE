@@ -1,25 +1,38 @@
 ﻿@using CEAE.Utils
+@using AuthenticationManager = CEAE.Managers.AuthenticationManager
 @{
-    ViewBag.Title = "ManageAccount";
+    ViewBag.Title = Translations.ManageAccount;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ManageAccount</h2>
+<div class="container">
+    <h2>@Translations.ManageAccount</h2>
 
-<table>
-    <tr>
-        <td>Edit Account properties</td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", "Users",
-                new {id = Session[Constants.Session.UserId] != null ? Session[Constants.Session.UserId].ToString() : ""},
-                new {id = "logoffLink"})
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.ActionLink("Change Password", "ResetPassword", "Account",
-                null,
-                new {id = "logoffLink"})
-        </td>
-    </tr>
-</table>
+    <h3>@Translations.Details</h3>
+    <hr />
+    
+    <dl class="dl-horizontal">
+        <dt>@Translations.Account</dt>
+        <dd>@(AuthenticationManager.UserAccount(Session) ?? "")</dd>
+        <dt>@Translations.Email</dt>
+        @if (AuthenticationManager.UserEmail(Session) == null)
+        {
+            <dd>
+                @Translations.EmailUndefined -
+                @Html.ActionLink(Translations.Edit, "Edit", "Users", new { id = Session[Constants.Session.UserId]?.ToString() ?? "" }, null)
+            </dd>
+        }
+        else
+        {
+            <dd>@AuthenticationManager.UserEmail(Session)</dd>
+        }
+    </dl>
+
+    <h3>@Translations.Properties</h3>
+    <hr />
+    <div class="btn-group">
+        @Html.ActionLink(Translations.Edit, "Edit", "Users", new { id = Session[Constants.Session.UserId]?.ToString() ?? "" }, new { @class = "btn btn-primary" })
+        @Html.ActionLink(Translations.ResetPassword, "ResetPassword", "Account", null, new { @class = "btn btn-default" })
+    </div>
+
+</div>
