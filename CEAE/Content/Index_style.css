@@ -1,54 +1,57 @@
-﻿
-/* Carousel base class */
+﻿/* Carousel base class */
 .carousel {
-  height: 500px;
-  margin-bottom: 60px;
-}
-/* Since positioning the image, we need to help out the caption */
-.carousel-caption {
-  z-index: 10;
+    height: 500px;
+    margin-bottom: 60px;
 }
 
+/* Since positioning the image, we need to help out the caption */
+
+.carousel-caption { z-index: 10; }
+
 /* Declare heights because of positioning of img element */
+
 .carousel .item {
-  height: 500px;
-  background-color: #777;
+    background-color: #777;
+    height: 500px;
 }
 
 .carousel-inner > .item > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  max-width: 100%;
-  height: 500px;
+    height: 500px;
+    left: 0;
+    max-width: 100%;
+    position: absolute;
+    top: 0;
 }
 
 img {
     height: 500px;
-    width: 1920px;
     /*object-fit: contain;*/
     object-fit: cover;
+    width: 1920px;
 }
+
 /************************************************************************/
-h1{
-    margin-top:30px;
-    font-family: 'Luckiest Guy';
+
+h1 {
     color: steelblue;
+    font-family: 'Luckiest Guy';
+    margin-top: 30px;
 }
 
 /************************************************************************/
-.btn-start {
-  font-size:40px;
-  font-family:'Luckiest Guy';
-    color: #ffffff;
-  background-color: #1F9437;
-  border-color: #46b8da;
-  margin-top:50px;
 
-  padding-top:20px;
-  padding-bottom:20px;
-  padding-left:50px;
-  padding-right:50px;
+.btn-start {
+    background-color: #1F9437;
+    border-color: #46b8da;
+    color: #ffffff;
+    font-family: 'Luckiest Guy';
+    font-size: 40px;
+    margin-top: 50px;
+
+    padding-bottom: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
 }
 
 .btn-start:hover,
@@ -56,16 +59,14 @@ h1{
 .btn-start:active,
 .btn-start.active,
 .open .dropdown-toggle.btn-start {
-  color: #ffffff;
-  background-color: steelblue;
-  border-color: #269abc;
+    background-color: steelblue;
+    border-color: #269abc;
+    color: #ffffff;
 }
 
 .btn-start:active,
 .btn-start.active,
-.open .dropdown-toggle.btn-start {
-  background-image: none;
-}
+.open .dropdown-toggle.btn-start { background-image: none; }
 
 .btn-start.disabled,
 .btn-start[disabled],
@@ -82,6 +83,6 @@ fieldset[disabled] .btn-start:active,
 .btn-start.disabled.active,
 .btn-start[disabled].active,
 fieldset[disabled] .btn-start.active {
-  background-color: #5bc0de;
-  border-color: #46b8da;
+    background-color: #5bc0de;
+    border-color: #46b8da;
 }

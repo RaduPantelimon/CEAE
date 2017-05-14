@@ -1,61 +1,63 @@
-﻿<!DOCTYPE html>
+﻿@using AuthenticationManager = CEAE.Managers.AuthenticationManager
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title | CEAE</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-    <link href="~/Content/Masterpage_style.css" rel="stylesheet"/>
+    @RenderSection("scripts", false)
+    <meta name="description" content="CEAE - best thing ever" />
 </head>
 <body>
-    <div id="fb-root"></div>
-    <script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/ro_RO/sdk.js#xfbml=1&version=v2.8&appId=1141193912593710";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+<div id="fb-root"></div>
+<script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/ro_RO/sdk.js#xfbml=1&version=v2.8&appId=1141193912593710";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("CEAE Quiz", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
-
+                @Html.ActionLink("CEAE Quiz", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink(@Translations.TakeTest, "TakeTest", "Home")</li>
+            </ul>
+            @if (AuthenticationManager.IsUserAdministrator(Session))
+            {
                 <ul class="nav navbar-nav">
-                    <li class="btn btn-warning">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="btn btn-danger">@Html.ActionLink("Questions", "Index", "Questions")</li>
-                    <li class="btn btn-success">@Html.ActionLink("Answers", "Index", "Answers")</li>
-                    <li class="btn btn-ttest">@Html.ActionLink("Take Test", "TakeTest", "Home")</li>
+                    <li>@Html.ActionLink("Questions", "Index", "Questions")</li>
+                    <li>@Html.ActionLink("Answers", "Index", "Answers")</li>
                 </ul>
-
-                @Html.Partial("_LoginPartial")
-
-            </div>
-
+            }
+            @Html.Partial("_LoginPartial")
         </div>
     </div>
-   
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - CEAE Foundation </p>
-            <div class="fb-like" data-href="https://www.facebook.com/CeaeRomania/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
-        </footer>
-    
-
-
+</div>
+@RenderBody()
+<footer>
+    <p>&copy; @DateTime.Now.Year - CEAE Foundation </p>
+    <div class="fb-like" data-href="https://www.facebook.com/CeaeRomania/" data-colorscheme="dark" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+</footer>
 </body>
 </html>
