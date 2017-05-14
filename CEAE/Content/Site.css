@@ -22,7 +22,7 @@ input,
 select,
 textarea { max-width: 280px; }
 
-body { background-color: lightgray; }
+body { background-color: #f5f8fa; }
 
 /*li { list-style-type: none; }*/
 .btn.btn-hide {
