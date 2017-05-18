@@ -77,12 +77,26 @@ function SetAnswers(question) {
 function StartTest() {
     NextQuestion();
     $("#start-questionaire").hide();
-    $("#subm-button").click(SendAnswers);
+    $("#subm-button").click(CheckUserStatus);
     $("#prev-button").hide();
     $("#next-button").show();
 
 }
+function CheckUserStatus()
+{
+    if (isLoggedIn == "True" || registeredEmail == "True")
+    {
+        SendAnswers();
+    }
+    else {
+        $(".question-section").hide();
+        $(".email-container").show();
 
+
+        $(".email-button").click(SubmitEmail);
+    }
+   
+}
 function NextQuestion() {
     if (!currentquestion && currentquestion !== 0) {
         currentquestion = 0;
@@ -100,7 +114,44 @@ function NextQuestion() {
 
 
 }
+function SubmitEmail() {
+    
+    var emailAddress = $(".email-input").val();
+    var dataToSend = {};
+    dataToSend.emailAddress = emailAddress;
+    var jsonString = JSON.stringify(dataToSend);
 
+    //to do add validare regex pentru adresa de email
+    if (!emailAddress)
+    {
+        //to do add mesaj de eroare
+        return;
+    }
+
+    $.ajax({
+        url: "/Questionnaire/SetEmail",
+        contentType: "application/json; charset=utf-8",
+        type: "POST",
+        dataType: "json",
+        data: jsonString,
+        success: function (result) {
+            if (result.status == 1) {
+                //the item was just added // modified\
+                $(".question-section").show();
+                $(".email-container").hide();
+                registeredEmail = "True";
+                SendAnswers();
+            }
+            else {
+                //to do mesaj de eroare
+            }
+        },
+        error: function (jqXHR, exception) {
+
+            OnFail(jqXHR, exception);
+        }
+    });
+}
 function PrevQuestion() {
     if (!currentquestion && currentquestion !== 0) {
         currentquestion = 0;
@@ -110,7 +161,6 @@ function PrevQuestion() {
     if (questions.length && currentquestion >= 0) {
         $(".question").hide();
         $("#question-" + questions[currentquestion].QuestionID).show();
-
     }
     ResolveButtonState();
 }

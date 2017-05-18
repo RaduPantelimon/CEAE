@@ -334,3 +334,12 @@ fieldset[disabled] .btn-sample.active {
     background-color: #ffffff;
     color: #037DFF;
 }
+
+
+.email-input{
+    display:inline-block
+}
+.email-input-section{
+    display:block;
+    margin:5px;
+}
