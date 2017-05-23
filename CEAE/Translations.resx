@@ -144,6 +144,9 @@
   <data name="Answer" xml:space="preserve">
     <value>Answer</value>
   </data>
+  <data name="AnswerHasQuestionAssociatedCannotContinueRemoveAssociationAndRetry" xml:space="preserve">
+    <value>Answer has a question associated. Cannot Continue. Remove association and retry.</value>
+  </data>
   <data name="AnswerIDRequired" xml:space="preserve">
     <value>Answer ID is required!</value>
   </data>

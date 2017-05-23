@@ -10,6 +10,12 @@
     <h3>@Translations.AreYouSureYouWantToDeleteThis</h3>
     <h4>@Translations.Question</h4>
     <hr/>
+    @if (ViewData.ContainsKey("exists"))
+    {
+        <div class="alert alert-danger">
+            <p>@Translations.AnswerHasQuestionAssociatedCannotContinueRemoveAssociationAndRetry</p>
+        </div>
+    }
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Title)

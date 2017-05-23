@@ -142,6 +142,15 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Answer has a question associated. Cannot Continue. Remove association and retry..
+        /// </summary>
+        public static string AnswerHasQuestionAssociatedCannotContinueRemoveAssociationAndRetry {
+            get {
+                return ResourceManager.GetString("AnswerHasQuestionAssociatedCannotContinueRemoveAssociationAndRetry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Answer ID is required!.
         /// </summary>
         public static string AnswerIDRequired {

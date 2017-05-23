@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -116,8 +117,16 @@ namespace CEAE.Controllers
             if (answer == null)
                 return RedirectToAction("Index");
 
-            _db.Answers.Remove(answer);
-            _db.SaveChanges();
+            try
+            {
+                _db.Answers.Remove(answer);
+                _db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                ViewBag.exists = true;
+                return View(Mapper.Map<Models.DTO.Answer>(answer));
+            }
 
             return RedirectToAction("Index");
         }
