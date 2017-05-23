@@ -50,13 +50,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList(Translations.Title, new List<SelectListItem>
-                {
-                    new SelectListItem(),
-                    new SelectListItem {Text = Translations.Mr, Value = "Mr"},
-                    new SelectListItem {Text = Translations.Ms, Value = "Ms"},
-                    new SelectListItem {Text = Translations.Mrs, Value = "Mrs"}
-                }, new { @class = "form-control" })
+                @Html.DropDownList(Translations.Title, new List<SelectListItem> {
+                    new SelectListItem {Selected = false},
+                    new SelectListItem {Text = Translations.Mr, Value = "Mr", Selected = "Mr" == Model.Title},
+                    new SelectListItem {Text = Translations.Ms, Value = "Ms", Selected = "Ms" == Model.Title},
+                    new SelectListItem {Text = Translations.Mrs, Value = "Mrs", Selected = "Mrs" == Model.Title}
+                }, new { @class = "form-control", value = Model.Title })
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -97,4 +96,10 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            var val = $("#Title").attr('value');
+            $("#Title").val(val);
+        });
+    </script>
 }
