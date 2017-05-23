@@ -1,98 +1,99 @@
 ﻿@model CEAE.Models.User
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = Translations.Delete;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Content/Simple_edit_for_body.css" rel="stylesheet"/>
-<h2>Delete</h2>
+<div class="container">
+    <h2>@Translations.Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>User</h4>
-    <hr/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Account)
-        </dt>
+    <h3>@Translations.AreYouSureYouWantToDeleteThis</h3>
+    <div>
+        <h4>@Translations.Users</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Account)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Account)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Account)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Administrator)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Administrator)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Administrator)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Administrator)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImgPath)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ImgPath)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ImgPath)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ImgPath)
+            </dd>
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger"/> |
-            @Html.ActionLink("Back to Home", "Index", "Home", null, new {@class = "btn btn-default"})
-        </div>
-    }
+            <div class="btn-group">
+                <button type="submit" class="btn btn-danger">@Translations.Delete</button>
+                @Html.ActionLink(Translations.BackToList, "Index", "Home", null, new { @class = "btn btn-default" })
+            </div>
+        }
+    </div>
 </div>

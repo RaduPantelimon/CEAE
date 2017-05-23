@@ -7,6 +7,7 @@ using CEAE.Models;
 using CEAE.Utils;
 using Microsoft.AspNet.Identity.Owin;
 using AuthenticationManager = CEAE.Managers.AuthenticationManager;
+using User = CEAE.Models.DTO.User;
 
 namespace CEAE.Controllers
 {
@@ -46,27 +47,27 @@ namespace CEAE.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Exclude = "")] Models.DTO.User user)
+        public ActionResult Create([Bind(Exclude = "")] User user)
         {
             if (!ModelState.IsValid)
                 return View(user);
 
             // always default to a simple user.
-            var newUser = Mapper.Map<User>(user);
+            var newUser = Mapper.Map<Models.User>(user);
 
 
             _db.Users.Add(newUser);
             _db.SaveChanges();
 
-            
 
-            return AuthenticationManager.Authenticate(newUser, user.Password, Session) == SignInStatus.Success ? 
-                (ActionResult) RedirectToAction("Index", "Home") :
-                View(user);
+            return AuthenticationManager.Authenticate(newUser, user.Password, Session) == SignInStatus.Success
+                ? (ActionResult) RedirectToAction("Index", "Home")
+                : View(user);
         }
 
 
         // GET: Users/Edit/5
+        [UserPermissionGreaterOrEqual(Constants.Permissions.User)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -74,13 +75,13 @@ namespace CEAE.Controllers
             var user = _db.Users.Find(id);
             if (user == null)
                 return HttpNotFound();
-            
+
             if (!CanUseAction(id.Value))
                 return RedirectToAction("AccessDenied", "Home");
 
             ViewBag.permissions = AuthenticationManager.UserAccessLevel(Session);
 
-            return View(user);
+            return View(Mapper.Map<User>(user));
         }
 
         // POST: Users/Edit/5
@@ -88,19 +89,32 @@ namespace CEAE.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(
-            [Bind(Include = "UserID,Account,Password,FirstName,LastName,Title,Email,PhoneNumber,Administrator,ImgPath")]
-            User user)
+        [UserPermissionGreaterOrEqual(Constants.Permissions.User)]
+        public ActionResult Edit([Bind(Exclude = "Account,Password")] User user)
         {
+            ModelState.Remove("Account");
+            ModelState.Remove("Password");
             if (!ModelState.IsValid)
                 return View(user);
 
             if (!CanUseAction(user.UserID))
                 return RedirectToAction("AccessDenied", "Home");
-
             ViewBag.permissions = AuthenticationManager.UserAccessLevel(Session);
 
-            _db.Entry(user).State = EntityState.Modified;
+            var existingUser = _db.Users.Find(user.UserID);
+
+            if (existingUser == null)
+                return RedirectToAction("AccessDenied", "Home");
+
+
+            // update existing user (by first remapping excluded properties)
+            user.Account = existingUser.Account;
+            user.Password = existingUser.Password;
+            Mapper.Map(user, existingUser);
+            // update session
+            AuthenticationManager.Reauthenticate(existingUser, Session);
+
+            _db.Entry(existingUser).State = EntityState.Modified;
             _db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
@@ -115,6 +129,7 @@ namespace CEAE.Controllers
         }
 
         // GET: Users/Delete/5
+        [UserPermissionGreaterOrEqual(Constants.Permissions.User)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -137,6 +152,7 @@ namespace CEAE.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [UserPermissionGreaterOrEqual(Constants.Permissions.User)]
         public ActionResult DeleteConfirmed(int id)
         {
             var user = _db.Users.Find(id);

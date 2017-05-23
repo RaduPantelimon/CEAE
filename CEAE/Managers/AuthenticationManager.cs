@@ -42,11 +42,7 @@ namespace CEAE.Managers
             if (!ValidateUserLogin(loggedInUser, password))
                 return SignInStatus.Failure;
 
-            session[Constants.Session.UserId] = loggedInUser.UserID;
-            session[Constants.Session.UserAccount] = loggedInUser.Account;
-            session[Constants.Session.UserIsAuthenticated] = true;
-            session[Constants.Session.UserAccessLevel] = loggedInUser.Administrator;
-            session[Constants.Session.RegisteredEmail] = loggedInUser.Email;
+            Reauthenticate(loggedInUser, session);
             return SignInStatus.Success;
         }
 
@@ -111,6 +107,15 @@ namespace CEAE.Managers
         {
             // we can skip "is string" as string isn't a primitive.
             return session[Constants.Session.RegisteredEmail] as string;
+        }
+
+        public static void Reauthenticate(User existingUser, HttpSessionStateBase session)
+        {
+            session[Constants.Session.UserId] = existingUser.UserID;
+            session[Constants.Session.UserAccount] = existingUser.Account;
+            session[Constants.Session.UserIsAuthenticated] = true;
+            session[Constants.Session.UserAccessLevel] = existingUser.Administrator;
+            session[Constants.Session.RegisteredEmail] = existingUser.Email;
         }
     }
 }

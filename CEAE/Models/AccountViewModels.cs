@@ -7,8 +7,8 @@ namespace CEAE.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [RequiredT]
+        [DisplayNameT]
         public string Email { get; set; }
     }
 
@@ -42,13 +42,6 @@ namespace CEAE.Models
         public bool RememberMe { get; set; }
     }
 
-    public class ForgotViewModel
-    {
-        [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-    }
-
     public class LoginViewModel
     {
         [RequiredT]
@@ -73,44 +66,46 @@ namespace CEAE.Models
 
         [RequiredT]
         [DisplayNameT]
-        [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Translations), ErrorMessageResourceName = "PasswordLengthRequired")]
+        [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Translations),
+            ErrorMessageResourceName = "PasswordLengthRequired")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [RequiredT]
         [DisplayNameT]
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessageResourceType = typeof(Translations), ErrorMessageResourceName = "PasswordMismatch")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessageResourceType = typeof(Translations),
+            ErrorMessageResourceName = "PasswordMismatch")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
     }
 
     public class ResetPasswordViewModel
     {
-        [Required]
+        [RequiredT]
+        [DisplayNameT]
         [DataType(DataType.Password)]
-        [Display(Name = "Old Password")]
         public string OldPassword { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [RequiredT]
+        [DisplayNameT]
+        [StringLength(100, ErrorMessageResourceType = typeof(Translations),
+            ErrorMessageResourceName = "PasswordLengthRequired", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [RequiredT]
+        [DisplayNameT]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage =
-            "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessageResourceType = typeof(Translations),
+            ErrorMessageResourceName = "PasswordMismatch")]
         public string ConfirmPassword { get; set; }
-
-        public string Code { get; set; }
     }
 
     public class ForgotPasswordViewModel
     {
-        [Required]
+        [RequiredT]
+        [DisplayNameT]
         [EmailAddress]
-        [Display(Name = "Email")]
         public string Email { get; set; }
     }
 }

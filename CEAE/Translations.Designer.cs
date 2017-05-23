@@ -61,6 +61,15 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Access Denied.
+        /// </summary>
+        public static string AccessDenied {
+            get {
+                return ResourceManager.GetString("AccessDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account.
         /// </summary>
         public static string Account {
@@ -394,6 +403,33 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Old Password.
+        /// </summary>
+        public static string OldPassword {
+            get {
+                return ResourceManager.GetString("OldPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old Password is required!.
+        /// </summary>
+        public static string OldPasswordRequired {
+            get {
+                return ResourceManager.GetString("OldPasswordRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Or Old Password is not correct!.
+        /// </summary>
+        public static string OrOldPasswordError {
+            get {
+                return ResourceManager.GetString("OrOldPasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -606,6 +642,15 @@ namespace CEAE {
         public static string UserIDRequired {
             get {
                 return ResourceManager.GetString("UserIDRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        public static string Users {
+            get {
+                return ResourceManager.GetString("Users", resourceCulture);
             }
         }
         

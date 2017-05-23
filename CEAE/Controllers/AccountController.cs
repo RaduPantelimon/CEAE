@@ -71,22 +71,19 @@ namespace CEAE.Controllers
         }
 
         [AllowAnonymous]
+        [UserPermissionGreaterOrEqual(Constants.Permissions.User)]
         public ActionResult ResetPassword()
         {
-            if (AuthenticationManager.IsAuthenticated(Session))
-                return View();
-
-            return RedirectToAction("AccessDenied", "Home");
+            return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ResetPassword(
-            [Bind(Include = "OldPassword,Password,ConfirmPassword")] ResetPasswordViewModel resetPasswordViewModel)
+        [UserPermissionGreaterOrEqual(Constants.Permissions.User)]
+        public ActionResult ResetPassword([Bind(Exclude = "")] ResetPasswordViewModel resetPasswordViewModel)
         {
-            if (!AuthenticationManager.IsUserAuthenticated(Session))
-                return RedirectToAction("AccessDenied", "Home");
+            var errorMessage = Translations.PasswordMismatch + @" " + Translations.OrOldPasswordError;
 
             if (ModelState.IsValid)
             {
@@ -94,9 +91,9 @@ namespace CEAE.Controllers
                 var currentUser = _db.Users.FirstOrDefault(x => x.Account == account);
                 if (!AuthenticationManager.ValidateUserLogin(currentUser, resetPasswordViewModel.OldPassword))
                 {
-                    ModelState.AddModelError("",
-                        "Either the 2 passwords do not match or the old password is not valid");
-                    ViewBag.error = "Either the 2 passwords do not match or the old password is not valid";
+                    ModelState.AddModelError("", errorMessage);
+                    ViewBag.error = errorMessage;
+
                     return View(resetPasswordViewModel);
                 }
 
@@ -106,12 +103,14 @@ namespace CEAE.Controllers
                     _db.Entry(currentUser).State = EntityState.Modified;
                     _db.SaveChanges();
 
+                    AuthenticationManager.Reauthenticate(currentUser, Session);
+
                     return RedirectToAction("Index", "Home");
                 }
             }
 
-            ModelState.AddModelError("", "Either the 2 passwords do not match or the old password is not valid");
-            ViewBag.error = "Either the 2 passwords do not match or the old password is not valid";
+            ModelState.AddModelError("", errorMessage);
+            ViewBag.error = errorMessage;
             return View(resetPasswordViewModel);
         }
 
@@ -124,8 +123,8 @@ namespace CEAE.Controllers
             var user = _db.Users.FirstOrDefault(x => x.Account == model.Email || x.Email == model.Email);
             return AuthenticationManager.Authenticate(user, model.Password, Session);
         }
-        
-        
+
+
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
