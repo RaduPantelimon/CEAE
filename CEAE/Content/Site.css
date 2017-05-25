@@ -343,3 +343,23 @@ fieldset[disabled] .btn-sample.active {
     display:block;
     margin:5px;
 }
+.navbar-inverse .navbar-brand{
+    font-size: 20px;
+}
+ul.nav.navbar-nav li {
+    font-size: 20px;
+}
+ul, menu, dir {
+    list-style:none;
+}
+/*
+.buttons {
+    display: block;
+}
+    .btn.btn-hide {
+    opacity: 0.65;
+    cursor: not-allowed;    
+
+}
+    */
+        
