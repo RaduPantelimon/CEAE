@@ -1,8 +1,10 @@
 ﻿@{
-    ViewBag.Title = "AccessDenied";
+    ViewBag.Title = Translations.AccessDenied;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>AccessDenied</h2>
-
-<p> @ViewBag.Message</p>
+    <div class="jumbotron text-center">
+        <div class="container">
+            <h1>@Translations.AccessDenied</h1>
+            <h2>@ViewBag.Message</h2>
+        </div>
+    </div>

@@ -1,48 +1,63 @@
-﻿<head>
-    <link href="@Url.Content("~/Content/Site.css")"
-          rel="stylesheet" type="text/css" />
-</head>
+﻿@using CEAE.Utils;
 
 
 @{
-    ViewBag.Title = "TakeTest";
+    ViewBag.Title = Translations.TakeTest;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1> AFLA CUM GANDESTI</h1>
-<hr />
-<div class="question-container">
+<script>
+
+    var registeredEmail = "@Session[Constants.Session.DidRegisterEmail]";
+    var isLoggedIn = "@Session[Constants.Session.UserIsAuthenticated]";
     
+</script>
+<div class="container">
+    <h1>@Translations.TakeTest</h1>
+    <hr/>
 
+
+    <div class="email-container" style="display:none">
+        <span class="email-label"> Please provide us with a valid email adress</span>
+        <div class="email-input-section">
+            <input class="form-control email-input" value="" />
+
+            <button type="button" class="btn btn-info custom-standard-button email-button"> Submit Email</button>
+        </div>
+    </div>
+
+    <div class="question-section">
+        <div class="question-container">
+
+
+        </div>
+        <div style="display: none;">
+            <h2 class="quiz-status"></h2>
+
+        </div>
+
+
+        <div style="display: none;">
+            <h4 class="mesaj-st"></h4>
+
+        </div>
+
+
+        <div>
+            <button id="prev-button" type="button" class="btn btn-info custom-standard-button btn-hide">@Translations.PreviousQuestion</button>
+            <button id="next-button" type="button" class="btn btn-info custom-standard-button btn-hide">@Translations.NextQuestion</button>
+
+            <button id="subm-button" type="button" class="btn btn-info custom-standard-button btn-hide">@Translations.Submit</button>
+            <button id="start-questionaire" type="button" class="btn btn-info custom-standard-button">@Translations.StartTest</button>
+        </div>
+    </div>
+
+    <input type="hidden" name="email" id="email-input"/>
+    <span class="danger" id="email-validation"></span>
+    <button id="subm-email-button" type="button" class="btn btn-info custom-standard-button btn-hide">@Translations.SubmitEmail</button>
 </div>
 
-<div style="display:none;">
-    <h2 class="quiz-status"></h2>
-   
-</div>
-
-
-<div style="display:none;">
-    <h4 class="mesaj-st"></h4>
-    
-</div>
-
-
-
-<div>
-<button id="prev-button" type="button" class="btn btn-info" style="border:5px double; display:none;">Previous Question</button>
-<button id="next-button" type="button" class="btn btn-info" style="border:5px double; display:none;">Next Question</button>
-
-<button id="subm-button" type="button" class="btn btn-info" style="border:5px double; display:none;">Submit</button>
-<button id="start-questionaire" type="button" class="btn btn-info" style="border:5px double"> Begin Test</button>
-</div>
-
-
-
-<input type="hidden" name="email" id="email-input"/>
-<span class="danger" id="email-validation"></span>
-<button id="subm-email-button" type="button" class="btn btn-info" style="border:5px double; display:none;">Submit Email</button>
-
-
-
-<script src="~/Scripts/Home/home_questionaire.js"></script>
+@section Scripts
+{
+    <script src="~/Scripts/Home/home_questionaire.js"></script>
+}

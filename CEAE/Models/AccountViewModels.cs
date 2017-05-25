@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using CEAE.Utils;
 
 namespace CEAE.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [RequiredT]
+        [DisplayNameT]
         public string Email { get; set; }
     }
 
@@ -18,7 +20,7 @@ namespace CEAE.Models
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+        public ICollection<SelectListItem> Providers { get; set; }
         public string ReturnUrl { get; set; }
         public bool RememberMe { get; set; }
     }
@@ -31,6 +33,7 @@ namespace CEAE.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -39,73 +42,70 @@ namespace CEAE.Models
         public bool RememberMe { get; set; }
     }
 
-    public class ForgotViewModel
-    {
-        [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-    }
-
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [RequiredT]
+        [DisplayNameT]
         public string Email { get; set; }
 
-        [Required]
+        [RequiredT]
+        [DisplayNameT]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [DisplayNameT]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
-        [Required]
+        [RequiredT]
+        [DisplayNameT]
         [EmailAddress]
-        [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [RequiredT]
+        [DisplayNameT]
+        [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Translations),
+            ErrorMessageResourceName = "PasswordLengthRequired")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [RequiredT]
+        [DisplayNameT]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessageResourceType = typeof(Translations),
+            ErrorMessageResourceName = "PasswordMismatch")]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class ResetPasswordViewModel
     {
-        [Required]
+        [RequiredT]
+        [DisplayNameT]
         [DataType(DataType.Password)]
-        [Display(Name = "Old Password")]
         public string OldPassword { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [RequiredT]
+        [DisplayNameT]
+        [StringLength(100, ErrorMessageResourceType = typeof(Translations),
+            ErrorMessageResourceName = "PasswordLengthRequired", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [RequiredT]
+        [DisplayNameT]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessageResourceType = typeof(Translations),
+            ErrorMessageResourceName = "PasswordMismatch")]
         public string ConfirmPassword { get; set; }
-
-        public string Code { get; set; }
     }
 
     public class ForgotPasswordViewModel
     {
-        [Required]
+        [RequiredT]
+        [DisplayNameT]
         [EmailAddress]
-        [Display(Name = "Email")]
         public string Email { get; set; }
     }
 }

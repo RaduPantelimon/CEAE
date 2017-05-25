@@ -1,43 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CEAE.Utils
+﻿namespace CEAE.Utils
 {
-    public class CONST
+    public static class Constants
     {
-        //names of cokies used by the app
-        public partial class COOKIES
-        {
-            const string AUTH_COOKIE = "AUTH_COOKIE";
-        }
+        public static readonly string[] AnswerOptions = {"Corect", "Gresit"};
+        
 
         //session variable names used by the app
-        public partial class SESSION_VARS
+        public static class Session
         {
-            public static readonly string DID_RECEIVED_EMAIL = "DID_RECEIVED_EMAIL";
-            public static readonly string REGISTRED_EMAIL = "REGISTERED_EMAIL";
-            public static readonly string USER_ID = "USER_ID";
-            public static readonly string USER_ACCOUNT = "USER_ACCOUNT";
-            public static readonly string USER_ISAUTHENTICATED = "USER_ISAUTHENTICATED";
-            public static readonly string USER_ACCESS_LEVEL = "USER_ACCESS_LEVEL";
+            public const string UserId = "USER_ID";
+            public const string UserAccount = "USER_ACCOUNT";
+            public const string UserIsAuthenticated = "USER_ISAUTHENTICATED";
+            public const string UserAccessLevel = "USER_ACCESS_LEVEL";
+            public const string DidRegisterEmail = "DID_REGISTER_EMAIL";
+            public const string RegisteredEmail = "REGISTERED_EMAIL";
         }
 
         //
-        public partial class USER_PERMISSIONS
+        public static class Permissions
         {
-            public static string Member = "Member";
-            public static string User = "User";
-            public static string Administrator = "Administrator";
+            public static readonly string[] Order = { User, Administrator };
+            public const string Administrator = "Administrator";
+            public const string User = "User";
         }
 
-        public partial class ANSWER_RESPONSES
+        public static class AnswerResponses
         {
-            public static readonly string Corect = "Corect";
-            public static readonly string Gresit = "Gresit";
+            public const string Corect = "Corect";
+            public const string Gresit = "Gresit";
         }
-        public static readonly string [] ANSWER_STATUSES = {"Corect","Gresit"};
-
     }
 }

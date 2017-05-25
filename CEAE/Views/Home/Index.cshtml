@@ -1,15 +1,10 @@
-﻿
-<head>
-    <link href="@Url.Content("~/Content/Style.css")"
-          rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/Site.css")"
-          rel="stylesheet" type="text/css" />
-    <link href="~/Content/Index_style.css" rel="stylesheet" />
-    <link href='//fonts.googleapis.com/css?family=Luckiest Guy' rel='stylesheet'>
-</head>
-@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
+<link href="@Url.Content("~/Content/Style.css")" rel="stylesheet" type="text/css"/>
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css"/>
+<link href="~/Content/Index_style.css" rel="stylesheet"/>
+<link href="//fonts.googleapis.com/css?family=Luckiest Guy" rel="stylesheet">
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
@@ -17,10 +12,10 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img src="~/Content/Images/back.jpg" style="height:500px;width:100%">
+            <img src="~/Content/Images/back.jpg" style="height: 500px; width: 100%" alt="Bald guy thinking">
         </div>
         <div class="item">
-            <img src="~/Content/Images/back2.jpg" style="height:500px;width:100%">
+            <img src="~/Content/Images/back2.jpg" style="height: 500px; width: 100%" alt="Haired guy thinking harder">
         </div>
 
     </div>
@@ -37,8 +32,7 @@
 </div>
 
 
-<div class="text-center" width:100%">
-    <h1> AFLA CUM GANDESTI</h1>
-        <!--<button type="button" class="btn btn-start btn-lg" style="border:5px double"> Incepe testul</button>-->
-        @Html.ActionLink("Take Test", "TakeTest", "Home",null, new { @class = "btn btn-start btn-lg custom-standard-button" })
+<div class="container text-center">
+    <h1> @Translations.TakeTest</h1>
+    @Html.ActionLink(Translations.StartTest, "TakeTest", "Home", null, new {@class = "btn btn-start btn-lg custom-standard-button"})
 </div>

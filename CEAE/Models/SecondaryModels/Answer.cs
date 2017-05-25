@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
 using Newtonsoft.Json;
 
 namespace CEAE.Models
@@ -15,7 +11,6 @@ namespace CEAE.Models
 
     public class AnswerMD
     {
-
         [JsonIgnore]
         public virtual ICollection<AnswersQuestion> AnswersQuestions { get; set; }
     }

@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 using CEAE.Models;
-using CEAE.Utils;
-using System.Collections;
 using System.Collections.Generic;
+using CEAE.Utils;
 using Newtonsoft.Json;
 
 namespace CEAE.Controllers
@@ -19,55 +11,43 @@ namespace CEAE.Controllers
     public class QuestionnaireController : Controller
     {
 
-        private CEAEDBEntities db = new CEAEDBEntities();
-
-        // GET: Questionnaire
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        #region Questionnaire
+        private readonly CEAEDBEntities _db = new CEAEDBEntities();
 
         public ActionResult GetQuestions()
         {
-            string jsonResponseText = "";
-            List<Question> questions = db.Questions.ToList();
-            if (questions != null)
-            {
-
-                jsonResponseText = JsonConvert.SerializeObject(questions);
-
-            }
+            var questions = _db.Questions.ToList();
+            var jsonResponseText = JsonConvert.SerializeObject(questions);
             //var response = Request.CreateResponse(HttpStatusCode.OK);
             //response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
             //return response;
             return Content(jsonResponseText, "application/json");
         }
 
+
+
         //save the tasks added by the user
         [System.Web.Http.AcceptVerbs("POST")]
         [System.Web.Http.HttpPost]
-        public ActionResult SetAnswers( List<QuestionnaireAnswer> answerquestion)
+        public ActionResult SetAnswers(List<QuestionnaireAnswer> answerquestion)
         {
-            string jsonResponseText = "";
+            string jsonResponseText;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    int raspunsuriCorecte = 0;
-                    foreach (QuestionnaireAnswer a in answerquestion)
+                    var raspunsuriCorecte = 0;
+                    foreach (var a in answerquestion)
                     {
-                        AnswersQuestion ans = db.AnswersQuestions.Where(x => x.AnswerID == a.AnswerID && x.QuestionID == a.QuestionID).FirstOrDefault();
+                        var ans = _db.AnswersQuestions.FirstOrDefault(x => x.AnswerID == a.AnswerID && x.QuestionID == a.QuestionID);
                         if (ans != null &&
-                            ans.Status == CONST.ANSWER_RESPONSES.Corect)
+                            ans.Status == Constants.AnswerResponses.Corect)
                         {
                             raspunsuriCorecte++;
                         }
                     }
 
                     jsonResponseText = "{\"status\":1,\"raspusuriCorecte\":\"" + raspunsuriCorecte + "\",\"message\":\"Model is not valid\"}";
-                    
+
 
                 }
                 else
@@ -95,16 +75,16 @@ namespace CEAE.Controllers
         [System.Web.Http.HttpPost]
         public ActionResult SetEmail(string emailAddress)
         {
-            string jsonResponseText = "";
+            string jsonResponseText;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    bool isValid = Utils.Utils.IsValidEmail(emailAddress);
+                    var isValid = Utils.Utils.IsValidEmail(emailAddress);
                     if (isValid)
                     {
-                        Session[Utils.CONST.SESSION_VARS.DID_RECEIVED_EMAIL] = true;
-                        Session[Utils.CONST.SESSION_VARS.REGISTRED_EMAIL] = emailAddress;
+                        Session[Constants.Session.DidRegisterEmail] = true;
+                        Session[Constants.Session.RegisteredEmail] = emailAddress;
                         jsonResponseText = "{\"status\":1,\"message\":\"Email address saved successfully\"}";
                     }
                     else
@@ -135,7 +115,5 @@ namespace CEAE.Controllers
                 return Content(jsonResponseText, "application/json");
             }
         }
-
-        #endregion
     }
 }
