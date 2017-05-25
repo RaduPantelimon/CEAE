@@ -198,6 +198,12 @@
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="ImageRequired" xml:space="preserve">
+    <value>Image is required!</value>
+  </data>
   <data name="ImgPath" xml:space="preserve">
     <value>Avatar URL</value>
   </data>

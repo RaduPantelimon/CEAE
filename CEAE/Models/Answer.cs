@@ -11,8 +11,7 @@ namespace CEAE.Models
 {
     using System;
     using System.Collections.Generic;
-    using Newtonsoft.Json;
-
+    
     public partial class Answer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,8 +23,7 @@ namespace CEAE.Models
         public int AnswerID { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
-
-        [JsonIgnore]
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AnswersQuestion> AnswersQuestions { get; set; }
     }

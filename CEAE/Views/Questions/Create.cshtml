@@ -7,7 +7,7 @@
 <div class="container">
     <h2>@Translations.Create</h2>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Create", "Questions", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -24,10 +24,10 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Text, new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.Image, new {@class = "control-label col-md-2"})
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Text, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Text, "", new {@class = "text-danger"})
+                    @Html.TextBox("file", null, new { type = "file", accept = "image/*", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Image, "", new {@class = "text-danger"})
                 </div>
             </div>
 

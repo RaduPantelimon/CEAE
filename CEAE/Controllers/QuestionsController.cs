@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using CEAE.Models;
@@ -55,10 +56,12 @@ namespace CEAE.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Title,Text")] Models.DTO.Question question)
+        public ActionResult Create([Bind(Include = "Title,Image")] Models.DTO.Question question, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
                 return View(question);
+
+            question.ImageSave(file, Server);
 
             var realQuestion = Mapper.Map<Question>(question);
 
@@ -88,12 +91,18 @@ namespace CEAE.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "QuestionID,Title,Text")] Models.DTO.Question question)
+        public ActionResult Edit([Bind(Include = "QuestionID,Title")] Models.DTO.Question question, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
                 return View(question);
 
-            var realQuestion = Mapper.Map<Question>(question);
+            // add missing text field 
+            var realQuestion = _db.Questions.Find(question.QuestionID);
+
+            question.Text = realQuestion?.Text ?? question.Text;
+            question.ImageSave(file, Server);
+
+            Mapper.Map(question, realQuestion);
 
             _db.Entry(realQuestion).State = EntityState.Modified;
             _db.SaveChanges();
@@ -125,9 +134,15 @@ namespace CEAE.Controllers
         {
             var question = _db.Questions.Find(id);
 
+            var model = Mapper.Map<Models.DTO.Question>(question);
+
+            model.ImageDelete(model.ImagePath(Server));
+
             if (question == null)
                 return RedirectToAction("Index");
 
+            _db.AnswersQuestions.RemoveRange(question.AnswersQuestions);
+            
             _db.Questions.Remove(question);
             _db.SaveChanges();
 
