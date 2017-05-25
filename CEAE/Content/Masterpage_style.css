@@ -20,7 +20,7 @@ footer{
     padding:5px;
 }
 div.fb-like.fb_iframe_widget{
-    width:145px;
+    width:300px;
 }
 /*********************************************************************************************************************/
 .btn-ttest {
@@ -238,3 +238,5 @@ fieldset[disabled] .btn-sample.active {
   color: #037DFF; 
   background-color: #ffffff; 
 }
+
+
