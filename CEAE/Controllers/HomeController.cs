@@ -1,9 +1,13 @@
-﻿using System.Web.Mvc;
+﻿using CEAE.Models;
+using System;
+using System.Web.Mvc;
 
 namespace CEAE.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly CEAEDBEntities _db = new CEAEDBEntities();
+
         public ActionResult Index()
         {
             return View();
@@ -26,6 +30,27 @@ namespace CEAE.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult GenerateReport()
+        {
+            try
+            {
+                HttpContext.Response.Clear();
+                HttpContext.Response.ContentType = "application/ms-excel";
+                HttpContext.Response.AddHeader("Content-Disposition",
+                "attachment; filename=" + "Report.xlsx" + ";");
+                byte[] array = Utils.ExcelReportGenerator.GenerateExcelReportForContacts(_db);
+
+                HttpContext.Response.OutputStream.Write(array, 0, array.Length);
+                HttpContext.Response.End();
+            }
+            catch (Exception ex)
+            {
+                //error handling
+            }
 
             return View();
         }

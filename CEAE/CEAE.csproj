@@ -52,6 +52,10 @@
       <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=0.0.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.1\lib\net45\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.7\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -184,6 +188,7 @@
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Formatting">
@@ -290,6 +295,7 @@
     </Compile>
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\DisplayNameTAttribute.cs" />
+    <Compile Include="Utils\ExcelReportGenerator.cs" />
     <Compile Include="Utils\RequiredTAttribute.cs" />
     <Compile Include="Utils\UserPermissionsExtensions.cs" />
     <Compile Include="Utils\Utils.cs" />
