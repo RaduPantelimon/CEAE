@@ -217,12 +217,24 @@ function SendAnswers() {
                     console.log(result.raspusuriCorecte);
                     console.log(result);
 
+                    
+                   
                     if (result.raspusuriCorecte > 0) {
 
                         $(".quiz-status")
                             .html("Felicitari, ai avut " + result.raspusuriCorecte + " raspunsuri corecte!");
                     }
+
+                    else {
+                        $(".quiz-status")
+                           .html("Nu ai avut niciun raspuns corect!");
+                    }
+
                     $(".question-container").hide();
+                    $("#subm-button").hide();
+                    $("#prev-button").hide();
+
+
                     $(".quiz-status").append("</br><img src='/Content/Images/40.jpg' " +
                         " style='height='600' width='600' />");
                     $(".quiz-status")
@@ -230,6 +242,7 @@ function SendAnswers() {
                             "<br> <p> Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!</p>");
 
                     $(".quiz-status").parent().show();
+                    
 
 
                 }
