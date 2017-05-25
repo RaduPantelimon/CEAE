@@ -83,8 +83,16 @@ namespace CEAE.Controllers
                     var isValid = Utils.Utils.IsValidEmail(emailAddress);
                     if (isValid)
                     {
+                        Contact contact = new Contact();
+                        contact.Email = emailAddress;
+                        contact.SignInDate = DateTime.Now;
+                        _db.Contacts.Add(contact);
+                        _db.SaveChanges();
+
+
                         Session[Constants.Session.DidRegisterEmail] = true;
                         Session[Constants.Session.RegisteredEmail] = emailAddress;
+                        Session[Constants.Session.RegisteredID] = contact.ContactID;
                         jsonResponseText = "{\"status\":1,\"message\":\"Email address saved successfully\"}";
                     }
                     else
