@@ -19,11 +19,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Text)
+            @Html.DisplayNameFor(model => model.Image)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Text)
+            <img src="@Model.ImageUrl" alt="Image" class="img-thumbnail" />
         </dd>
     </dl>
 

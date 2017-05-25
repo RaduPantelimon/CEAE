@@ -11,8 +11,7 @@ namespace CEAE.Models
 {
     using System;
     using System.Collections.Generic;
-    using Newtonsoft.Json;
-
+    
     public partial class AnswersQuestion
     {
         public int AnswerID { get; set; }
@@ -21,7 +20,6 @@ namespace CEAE.Models
         public string Status { get; set; }
     
         public virtual Answer Answer { get; set; }
-        [JsonIgnore]
         public virtual Question Question { get; set; }
     }
 }

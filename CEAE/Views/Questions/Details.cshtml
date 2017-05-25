@@ -14,7 +14,7 @@
             <thead>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Title)</th>
-                    <th>@Html.DisplayNameFor(model => model.Text)</th>
+                    <th>@Html.DisplayNameFor(model => model.Image)</th>
 
                 </tr>
             </thead>
@@ -23,7 +23,7 @@
                     @Html.DisplayFor(model => model.Title)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.Text)
+                    <img src="@Model.ImageUrl" alt="Image" class="img-thumbnail" />
                 </td>
             </tr>
         </table>

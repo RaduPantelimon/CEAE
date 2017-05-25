@@ -5,10 +5,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CEAEDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self"
-              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
-              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
-              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CEAEDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="AnswerID" />
@@ -51,8 +48,8 @@
             <PropertyRef Name="QuestionID" />
           </Key>
           <Property Name="QuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="varchar" MaxLength="50" />
-          <Property Name="Text" Type="varchar(max)" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Text" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="TestResults">
           <Key>
@@ -74,10 +71,10 @@
           <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="ImgPath" Type="varchar" MaxLength="250" />
           <Property Name="Email" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
           <Property Name="Administrator" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ImgPath" Type="varchar" MaxLength="250" />
         </EntityType>
         <Association Name="FK_AnswerID">
           <End Role="Answers" Type="Self.Answers" Multiplicity="1" />
@@ -152,8 +149,7 @@
             <End Role="TestResults" EntitySet="TestResults" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CEAEDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false"
@@ -199,8 +195,8 @@
             <PropertyRef Name="QuestionID" />
           </Key>
           <Property Name="QuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AnswersQuestions" Relationship="Self.FK_QuestionID" FromRole="Questions"
                               ToRole="AnswersQuestions" />
         </EntityType>
