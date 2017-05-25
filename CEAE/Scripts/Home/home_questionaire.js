@@ -114,6 +114,13 @@ function NextQuestion() {
 
 
 }
+
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+
 function SubmitEmail() {
     
     var emailAddress = $(".email-input").val();
@@ -121,11 +128,12 @@ function SubmitEmail() {
     dataToSend.emailAddress = emailAddress;
     var jsonString = JSON.stringify(dataToSend);
 
-    //to do add validare regex pentru adresa de email
-    if (!emailAddress)
+    $("#result").text("");
+ 
+    if (!validateEmail(emailAddress))
     {
-        //to do add mesaj de eroare
-        return;
+        $("#result").text("Email address is not valid ");
+        $("#result").css("color", "red");
     }
 
     $.ajax({
