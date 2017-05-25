@@ -75,7 +75,7 @@ namespace CEAE.Utils
                     
                 CreateContactsSheet(document, workbookpart, sheets, db, sheetID);
                 sheetID++;
-                CreateContactsSheet(document, workbookpart, sheets, db, sheetID);
+                CreateUsersSheet(document, workbookpart, sheets, db, sheetID);
 
                 //save data
 
@@ -120,13 +120,6 @@ namespace CEAE.Utils
             Row projectRow = CreateHeaderRow(1);
             sheetData.AppendChild(projectRow);
 
-            //Merging cells
-            /*MergeCells mergeCells = new MergeCells();
-            for (int i = 0; i < MergeableRows.Count; i += 2)
-            {
-                mergeCells.Append(new MergeCell() { Reference = new StringValue(MergeableRows[i] + ":" + MergeableRows[i + 1]) });
-            }*/
-
             //creating content rows
             int colIndex = 2;
 
@@ -144,18 +137,70 @@ namespace CEAE.Utils
 
             //set col width
             Columns columns = new Columns();
-            columns.Append(new Column() { Min = 1, Max = 1, Width = 20, CustomWidth = true });
-            columns.Append(new Column() { Min = 2, Max = 100, Width = 12, CustomWidth = true });
+            columns.Append(new Column() { Min = 1, Max = 250, Width = 20, CustomWidth = true });
+            columns.Append(new Column() { Min = 2, Max = 250, Width = 12, CustomWidth = true });
             newWorksheetPart.Worksheet.Append(columns);
-
-            //merging cells
-            //newWorksheetPart.Worksheet.InsertAfter(mergeCells, newWorksheetPart.Worksheet.Elements<SheetData>().First());
 
             newWorksheetPart.Worksheet.Save();
             return sheet;
         }
 
-      
+        private static Sheet CreateUsersSheet(SpreadsheetDocument document,
+    WorkbookPart workbookpart,
+    Sheets sheets,
+    CEAEDBEntities db,
+    uint sheetID = 1)
+        {
+
+            WorksheetPart newWorksheetPart = document.WorkbookPart.AddNewPart<WorksheetPart>();
+
+            string relationshipId = document.WorkbookPart.GetIdOfPart(newWorksheetPart);
+            var sheet = new Sheet()
+            {
+                Id = relationshipId,
+                SheetId = sheetID,
+                Name = "Registered Users Contacts"
+            };
+            sheets.AppendChild(sheet);
+
+            var sheetData = new SheetData();
+
+
+
+            newWorksheetPart.Worksheet = new Worksheet(sheetData);
+
+            //create header rows
+
+            List<string> MergeableRows = new List<string>();
+
+            Row projectRow = CreateUserHeaderRow(1);
+            sheetData.AppendChild(projectRow);
+
+            //creating content rows
+            int colIndex = 2;
+
+            List<User> users = db.Users.ToList();
+
+            foreach (User user in users)
+            {
+                //creating row for this user
+                Row row = CreateUserRow(colIndex, user);
+                sheetData.AppendChild(row);
+
+                colIndex++;
+            }
+
+
+            //set col width
+            Columns columns = new Columns();
+            columns.Append(new Column() { Min = 1, Max = 250, Width = 20, CustomWidth = true });
+            columns.Append(new Column() { Min = 2, Max = 250, Width = 12, CustomWidth = true });
+            newWorksheetPart.Worksheet.Append(columns);
+
+            newWorksheetPart.Worksheet.Save();
+            return sheet;
+        }
+
         private static Row CreateHeaderRow( int rowIndex)
         {
             int index = -1;
@@ -172,29 +217,25 @@ namespace CEAE.Utils
             return headerRow;
         }
 
-        private static Row CreateDatesRow(DateTime firstDayOfMonth, DateTime lastDayOfMonth, int rowIndex)
+        private static Row CreateUserHeaderRow(int rowIndex)
         {
             int index = -1;
             Row headerRow = new Row();
             headerRow.RowIndex = (UInt32)rowIndex;
-            DateTime dt = firstDayOfMonth;
 
-            Cell firstcell = CreateCell("", ref index, rowIndex, 2);
+            Cell firstcell = CreateCell("Account", ref index, rowIndex, 3);
             headerRow.AppendChild(firstcell);
 
-            while (dt.Date <= lastDayOfMonth.Date)
-            {
-
-                Cell newcell = CreateCell(dt.ToString("dd/MM/yyyy"), ref index, rowIndex, 2);
-
-                dt = dt.AddDays(1);
-                headerRow.AppendChild(newcell);
-            }
-            Cell totalcell = CreateCell("Total", ref index, rowIndex, 2);
+            Cell totalcell = CreateCell("Email Address", ref index, rowIndex, 3);
             headerRow.AppendChild(totalcell);
+
+            Cell phoneNumber = CreateCell("Phone Number", ref index, rowIndex, 3);
+            headerRow.AppendChild(phoneNumber);
 
             return headerRow;
         }
+
+        
 
         private static Row CreateContactRow(int colIndex,Contact contact)
         {
@@ -204,16 +245,45 @@ namespace CEAE.Utils
             int total = 0, rowIndex = -1;
            
 
-            Cell titleCell = CreateCell(contact.Email, ref rowIndex, colIndex, 2);
+            Cell titleCell = CreateCell(contact.Email, ref rowIndex, colIndex, 0);
             row.AppendChild(titleCell);
 
-            Cell dateCell = CreateCell(String.Format("{0:d/M/yyyy HH:mm:ss}", contact.SignInDate), ref rowIndex, colIndex, 2);
+            Cell dateCell = CreateCell(String.Format("{0:d/M/yyyy HH:mm:ss}", contact.SignInDate), ref rowIndex, colIndex, 0);
             row.AppendChild(dateCell);
 
             //preparing the formula
             string start = ColumnLetter(1) + colIndex;
 
            
+            string finish = ColumnLetter(rowIndex) + colIndex;
+
+            return row;
+        }
+
+        private static Row CreateUserRow(int colIndex, User user)
+        {
+            // New Row
+            Row row = new Row();
+            row.RowIndex = (UInt32)colIndex;
+            int total = 0, rowIndex = -1;
+
+
+
+
+            Cell userNameCell = CreateCell( user.Account, ref rowIndex, colIndex, 0);
+            row.AppendChild(userNameCell);
+
+            Cell titleCell = CreateCell(user.Email, ref rowIndex, colIndex, 0);
+            row.AppendChild(titleCell);
+
+            Cell phoneNumberCell = CreateCell( user.PhoneNumber, ref rowIndex, colIndex, 0);
+            row.AppendChild(phoneNumberCell);
+
+
+            //preparing the formula
+            string start = ColumnLetter(1) + colIndex;
+
+
             string finish = ColumnLetter(rowIndex) + colIndex;
 
             return row;
