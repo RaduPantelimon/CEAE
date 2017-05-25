@@ -14,6 +14,7 @@
             public const string UserAccessLevel = "USER_ACCESS_LEVEL";
             public const string DidRegisterEmail = "DID_REGISTER_EMAIL";
             public const string RegisteredEmail = "REGISTERED_EMAIL";
+            public const string RegisteredID = "REGISTERED_ID";
         }
 
         //
