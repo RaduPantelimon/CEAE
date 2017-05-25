@@ -45,7 +45,9 @@ function SetQuestions(data) {
             data[i].QuestionID +
             "' style='display:none;' class='question'><h2 class='sec-title-large'>" +
             data[i].Title +
-            "</h2><hr class='sec-hr' /></div>");
+            "</h2><hr class='sec-hr' /></div>"
+             +  "</br><img src='/Content/Images/" +  data[i].Text +  "'" + " style='height='300px'/>"
+          );
         SetAnswers(data[i]);
     }
 
