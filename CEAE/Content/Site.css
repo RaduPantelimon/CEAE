@@ -1,16 +1,4 @@
-﻿body {
-    padding-bottom: 20px;
-    padding-top: 50px;
-}
-
-/* Set padding to keep content from hitting the edges */
-
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Override the default bootstrap behavior where horizontal description lists 
+﻿/* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
 
@@ -125,6 +113,9 @@ body { background-color: #f5f8fa; }
     color: #fff;
 }
 
+#myCarousel {
+    margin-top: -20px;
+}
 
 body > .container {
     margin-bottom: 100px;

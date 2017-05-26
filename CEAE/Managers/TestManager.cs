@@ -35,5 +35,16 @@ namespace CEAE.Managers
             var json = JsonConvert.SerializeObject(result);
             return json;
         }
+
+        public static bool IsContactRegistered(HttpSessionStateBase session)
+        {
+            return session[Constants.Session.DidRegisterEmail] is bool &&
+                   (bool) session[Constants.Session.DidRegisterEmail];
+        }
+
+        public static int ContactId(HttpSessionStateBase session)
+        {
+            return (int) session[Constants.Session.RegisteredID];
+        }
     }
 }

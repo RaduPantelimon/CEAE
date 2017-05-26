@@ -47,9 +47,6 @@ namespace CEAE.Controllers
                         }
                     }
 
-                    
-                    var contact = new Contact();
-                    var user = new User();
 
                     var test = new TestResult
                     {
@@ -57,25 +54,13 @@ namespace CEAE.Controllers
                         Status = $"{raspunsuriCorecte}/{_db.AnswersQuestions.Count()} {Translations.Questions}"
                     };
 
-                    Session[Constants.Session.RegisteredID] = contact.ContactID;
-                    Session[Constants.Session.UserId] = user.UserID;
-
-                    if (Session[Constants.Session.RegisteredID] != null)
-                    {
-                        test.ContactID = contact.ContactID;
-
-                    }
-
-                    else if (Session[Constants.Session.UserId] != null)
-                    {
-                        test.UserID = user.UserID;
-
-                    }
-
-                    //else nu are nici account nici nu si-a lasat email?
-
-                    //_db.TestResults.Add(test);
-                    //_db.SaveChanges();
+                    if (AuthenticationManager.IsUserAuthenticated(Session))
+                        test.UserID = AuthenticationManager.UserId(Session);
+                    if (TestManager.IsContactRegistered(Session))
+                        test.ContactID = TestManager.ContactId(Session);
+                    
+                    _db.TestResults.Add(test);
+                    _db.SaveChanges();
                     
                     jsonResponseText = TestManager.JsonMessage(false, new { raspunsuriCorecte });
 

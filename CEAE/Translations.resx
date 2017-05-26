@@ -222,6 +222,9 @@
   <data name="LastNameRequired" xml:space="preserve">
     <value>Last Name is required!</value>
   </data>
+  <data name="LoadingTest" xml:space="preserve">
+    <value>Loading the test...</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Log in</value>
   </data>
@@ -279,6 +282,9 @@
   </data>
   <data name="PleaseProvideEmailAddress" xml:space="preserve">
     <value>Please provide an email address to finish this quiz!</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>Please wait...</value>
   </data>
   <data name="PreviousQuestion" xml:space="preserve">
     <value>Previous Question</value>

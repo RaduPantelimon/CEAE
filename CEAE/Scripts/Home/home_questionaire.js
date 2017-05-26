@@ -88,7 +88,7 @@
 
         questions = data;
 
-        var $qc = $(".question-container");
+        var $qc = $("#question-container");
         var imageStr;
 
         for (var i = 0; i < data.length; i++) {
@@ -146,10 +146,17 @@
     }
 
     function checkUserStatus() {
+        var $p = $("#prev-button");
+        var $n = $("#next-button");
+        var $m = $(this);
+
+        handleButtonPrevNext($p, $n, false, false); 
+        $m.attr("disabled", true);
+
         if (isLoggedIn || registeredEmail) {
             sendAnswers();
         } else {
-            $(".question-section").hide();
+            $("#question-section").hide();
             $(".email-container").show();
 
             $("#subm-email-button").click(submitEmail);
@@ -223,7 +230,7 @@
 
                 if (result.status) {
                     // now user has a Contact model.
-                    $(".question-section").show();
+                    $("#question-section").show();
                     $(".email-container").hide();
                     window.registeredEmail = true;
                     sendAnswers();
@@ -280,76 +287,85 @@
 
     }
 
-    function sendAnswers() {
-        if (questions.length) {
-            var solutions = [];
-            for (var i = 0; i < questions.length; i++) {
-                var answerID = 0;
-                var $answer = $("input[name='answer-" + questions[i].QuestionID + "']:checked");
+    function getSolutions() {
+        var solutions = [];
+        for (var i = 0; i < questions.length; i++) {
+            var answerID = 0;
+            var $answer = $("input[name='answer-" + questions[i].QuestionID + "']:checked");
 
-                if ($answer && $answer.length > 0) {
-                    answerID = $answer.attr("data-AnswerID");
-                }
-
-                //procesam in partea de serverside, folosind Modelul QuestionnaireAnswer
-                //public int QuestionID;
-                //public int AnswerID;
-                var selectedResponse = {
-                    QuestionID: questions[i].QuestionID,
-                    AnswerID: answerID
-                };
-                solutions.push(selectedResponse);
-
-
+            if ($answer && $answer.length > 0) {
+                answerID = $answer.attr("data-AnswerID");
             }
 
-            var jsonString = JSON.stringify(solutions);
-            $.ajax({
-                url: "/Questionnaire/SetAnswers",
-                contentType: "application/json; charset=utf-8",
-                type: "POST",
-                dataType: "json",
-                data: jsonString,
-                success: function(result) {
-                    if (!result.error) {
-
-                        result = result.message;
-
-                        console.log(result);
-
-                        if (result.raspunsuriCorecte > 0) {
-                            var respunsuriString = result.raspunsuriCorecte === 1 ? "raspuns" : "raspunsuri";
-                            $(".quiz-status")
-                                .html("Felicitari, ai avut " + result.raspunsuriCorecte + " " + respunsuriString + " corecte!");
-                        } else {
-                            $(".quiz-status")
-                                .html("Nu ai avut niciun raspuns corect!");
-                        }
-
-                        $(".question-container").hide();
-                        $("#subm-button").hide();
-                        $("#prev-button").hide();
-
-
-                        $(".quiz-status").append("</br><img src='/Content/Images/40.jpg' " +
-                            " style='height:400px;width:600px' width='600' height='400' />");
-                        $(".quiz-status")
-                            .append(
-                                "<br> <p> Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!</p>");
-
-                        $(".quiz-status").parent().show();
-
-
-                    }
-                },
-                error: function(jqXhr, exception) {
-
-                    onFail(jqXhr, exception);
-                }
-            });
+            //procesam in partea de serverside, folosind Modelul QuestionnaireAnswer
+            //public int QuestionID;
+            //public int AnswerID;
+            var selectedResponse = {
+                QuestionID: questions[i].QuestionID,
+                AnswerID: answerID
+            };
+            solutions.push(selectedResponse);
 
 
         }
+
+        return solutions;
+    }
+
+    function sendAnswers() {
+        var $m = $("#subm-button");
+
+        if (!questions.length)
+            return;
+
+        var jsonString = JSON.stringify(getSolutions());
+
+        $.ajax({
+            url: "/Questionnaire/SetAnswers",
+            contentType: "application/json; charset=utf-8",
+            type: "POST",
+            dataType: "json",
+            data: jsonString,
+            success: function (result) {
+                $m.removeAttr("disabled");
+                    
+                if (!result.error) {
+
+                    result = result.message;
+
+                    console.log(result);
+
+                    if (result.raspunsuriCorecte > 0) {
+                        var respunsuriString = result.raspunsuriCorecte === 1 ? "raspuns" : "raspunsuri";
+                        $(".quiz-status")
+                            .html("Felicitari, ai avut " + result.raspunsuriCorecte + " " + respunsuriString + " corecte!");
+                    } else {
+                        $(".quiz-status")
+                            .html("Nu ai avut niciun raspuns corect!");
+                    }
+
+                    $("#question-container").hide();
+                    $("#subm-button").hide();
+                    $("#prev-button").hide();
+
+
+                    $(".quiz-status").append("</br><img src='/Content/Images/40.jpg' " +
+                        " style=\"height:400px;width:600px\" width=\"600\" height=\"400\" class=\"img-thumbnail\" />");
+                    $(".quiz-status")
+                        .append(
+                            "<br> <p> Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!</p>");
+
+                    $(".quiz-status").parent().show();
+
+
+                }
+            },
+            error: function(jqXhr, exception) {
+                $("#subm-button").removeAttr("disabled");
+                onFail(jqXhr, exception);
+            }
+        });
+
     }
 
     // CONSTRUCTOR
