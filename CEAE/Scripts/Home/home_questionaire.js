@@ -157,7 +157,7 @@
             sendAnswers();
         } else {
             $("#question-section").hide();
-            $(".email-container").show();
+            $("#email-container").show();
 
             $("#subm-email-button").click(submitEmail);
         }
@@ -231,7 +231,7 @@
                 if (result.status) {
                     // now user has a Contact model.
                     $("#question-section").show();
-                    $(".email-container").hide();
+                    $("#email-container").hide();
                     window.registeredEmail = true;
                     sendAnswers();
                 } else {

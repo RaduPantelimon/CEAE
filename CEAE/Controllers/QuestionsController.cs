@@ -203,5 +203,20 @@ namespace CEAE.Controllers
                 _db.Dispose();
             base.Dispose(disposing);
         }
+
+        public ActionResult DeletePicture(int id)
+        {
+            var question = _db.Questions.Find(id);
+
+            var model = Mapper.Map<Models.DTO.Question>(question);
+            model.ImageDelete(model.ImagePath(Server));
+
+            Mapper.Map(model, question);
+
+            _db.Entry(question).State = EntityState.Modified;
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }

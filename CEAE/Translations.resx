@@ -159,6 +159,9 @@
   <data name="BackToList" xml:space="preserve">
     <value>Back to List</value>
   </data>
+  <data name="Branding" xml:space="preserve">
+    <value>CEAE</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
@@ -177,6 +180,9 @@
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="DeletePicture" xml:space="preserve">
+    <value>Delete Picture</value>
   </data>
   <data name="Details" xml:space="preserve">
     <value>Details</value>
