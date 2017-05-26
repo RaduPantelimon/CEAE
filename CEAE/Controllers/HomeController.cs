@@ -14,6 +14,12 @@ namespace CEAE.Controllers
             return View();
         }
 
+        public ActionResult Test()
+        {
+            ViewData["hasLayout"] = false;
+            return PartialView("_Test");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

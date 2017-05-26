@@ -1,0 +1,69 @@
+﻿@using AuthenticationManager = CEAE.Managers.AuthenticationManager
+@if (ViewData["hasLayout"] is bool && !(bool) ViewData["hasLayout"])
+{
+    <link rel="stylesheet" href="~/Content/test.css" />
+}
+<fieldset id="email-container" class="form-horizontal" style="display: none;">
+    <legend>@Translations.PleaseProvideEmailAddress</legend>
+    <div class="form-group">
+        <label for="email-input" class="control-label col-sm-2">@Translations.Email</label>
+        <div class="col-md-6">
+            <input id="email-input" class="form-control" type="email" placeholder="@Translations.EmailRequired"/>
+            <p class="help-block text-danger" id="email-validation" style="display: none;">@Translations.EmailInvalid</p>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-info custom-standard-button" id="subm-email-button">@Translations.SubmitEmail</button>
+        </div>
+    </div>
+</fieldset>
+
+<p id="result"></p> 
+<div id="question-section">
+    <div id="question-container">
+        <div id="loading" class="jumbotron text-center">
+            <h1>@Translations.LoadingTest</h1>
+            <h2>@Translations.PleaseWait</h2>
+        </div>
+    </div>
+    <div class="hidden text-center">
+        <h2 id="quiz-status"></h2>
+        <p><img src="/Content/Images/40.jpg" style="height:400px;width:600px" width="600" height="400" class="img-thumbnail" alt="Struggling kid" /></p>
+        <h3>@Translations.DonationRequest</h3>
+        <a href="http://ceae.ro/cum-ne-poti-sprijini/pentru-persoane-fizice/" class="btn btn-start btn-lg custom-standard-button">@Translations.Donate</a>
+    </div>
+
+    <div class="clearfix">
+        <button id="prev-button" type="button" class="btn btn-info custom-standard-button btn-hide pull-left">@Translations.PreviousQuestion</button>
+        <button id="next-button" type="button" class="btn btn-info custom-standard-button btn-hide pull-right">@Translations.NextQuestion</button>
+
+        <button id="subm-button" type="button" class="btn btn-info custom-standard-button btn-hide" style="margin: 0 auto;">@Translations.Submit</button>
+        <button id="start-questionaire" type="button" class="btn btn-info custom-standard-button" disabled="disabled">@Translations.StartTest</button>
+    </div>
+</div>
+@if (ViewData["hasLayout"] is bool && !(bool)ViewData["hasLayout"])
+{
+    @*TODO: make this prettier*@
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+        (function() {
+            window.isLoggedIn = @(AuthenticationManager.IsUserAuthenticated(Session) ? "true" : "false");
+            window.registeredEmail = @(AuthenticationManager.UserEmail(Session) != null ? "true" : "false");
+        })();
+    </script>
+    
+    <script src="~/Scripts/Home/home_questionaire.js"></script>
+}
+
+@section Scripts
+{
+    <script>
+        (function() {
+            window.isLoggedIn = @(AuthenticationManager.IsUserAuthenticated(Session) ? "true" : "false");
+            window.registeredEmail = @(AuthenticationManager.UserEmail(Session) != null ? "true" : "false");
+        })();
+    </script>
+    <script src="~/Scripts/Home/home_questionaire.js"></script>
+}
