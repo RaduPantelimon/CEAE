@@ -46,6 +46,11 @@ namespace CEAE.Controllers
                         }
                     }
 
+                    /*TestResult testRes = new TestResult();
+
+                    _db.TestResults.Add(testRes);
+                    _db.SaveChanges();*/
+
                     jsonResponseText = "{\"status\":1,\"raspusuriCorecte\":\"" + raspunsuriCorecte + "\",\"message\":\"Model is not valid\"}";
 
 
@@ -83,6 +88,8 @@ namespace CEAE.Controllers
                     var isValid = Utils.Utils.IsValidEmail(emailAddress);
                     if (isValid)
                     {
+                       
+
                         Contact contact = new Contact();
                         contact.Email = emailAddress;
                         contact.SignInDate = DateTime.Now;
