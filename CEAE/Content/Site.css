@@ -411,3 +411,33 @@ fieldset[disabled] .btn-start.active {
     background-color: #5bc0de;
     border-color: #46b8da;
 }
+
+
+.orderable-questions{
+    margin-bottom:50px;
+}
+
+.ordered-question{
+   min-height: 35px;
+    padding: 5px;
+    font-size: 20px;
+    border:1px solid black;
+}
+
+.ordered-question:nth-child(2n+1){
+    background-color:white;
+    
+}
+
+.ordered-question:nth-child(2n){
+    background-color:#ddd;
+}
+.ordered-question:first-child{
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+}
+
+.ordered-question:last-child{
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+}

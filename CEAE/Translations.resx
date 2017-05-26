@@ -326,6 +326,9 @@
   <data name="Questions" xml:space="preserve">
     <value>Questions</value>
   </data>
+  <data name="QuestionsOrder" xml:space="preserve">
+    <value>Reset the order in which questions will appear during the quiz</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
