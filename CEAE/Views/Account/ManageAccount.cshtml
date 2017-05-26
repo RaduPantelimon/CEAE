@@ -8,8 +8,8 @@
 <div class="container">
     <h2>@Translations.ManageAccount</h2>
 
-    <h3>@Translations.Details</h3>
-    <hr />
+    <h3 class="section-header">@Translations.Details</h3>
+    <hr class="section-hr" />
     
     <dl class="dl-horizontal">
         <dt>@Translations.Account</dt>
@@ -28,11 +28,24 @@
         }
     </dl>
 
-    <h3>@Translations.Properties</h3>
-    <hr />
+    @if (AuthenticationManager.IsUserAdministrator(Session))
+    {
+        <h3 class="section-header">@Translations.Statistics</h3>
+        <hr class="section-hr" />
+        <div class="btn-group">
+            @Html.ActionLink(Translations.Statistics, "GenerateReport", "Home", null, new { @class = "btn btn-primary" })
+        </div>
+
+        <p>@ViewBag.totalResults</p>
+        <p>@ViewBag.unregisteredUsers</p>
+    }
+
+    <h3 class="section-header" >@Translations.Properties</h3>
+    <hr class="section-hr" />
     <div class="btn-group">
         @Html.ActionLink(Translations.Edit, "Edit", "Users", new { id = Session[Constants.Session.UserId]?.ToString() ?? "" }, new { @class = "btn btn-primary" })
         @Html.ActionLink(Translations.ResetPassword, "ResetPassword", "Account", null, new { @class = "btn btn-default" })
     </div>
+
 
 </div>

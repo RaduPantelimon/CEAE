@@ -310,6 +310,9 @@
   <data name="StartTest" xml:space="preserve">
     <value>Start Test</value>
   </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
   </data>
@@ -318,6 +321,9 @@
   </data>
   <data name="TakeTest" xml:space="preserve">
     <value>Find Out How You Think</value>
+  </data>
+  <data name="TestsTaken" xml:space="preserve">
+    <value>Overall, this test has been taken {0} times.</value>
   </data>
   <data name="Text" xml:space="preserve">
     <value>Text</value>
@@ -330,6 +336,9 @@
   </data>
   <data name="TitleRequired" xml:space="preserve">
     <value>Title is required!</value>
+  </data>
+  <data name="UnregisteredUsers" xml:space="preserve">
+    <value>In total, there have been {0} unregistered users that took this test</value>
   </data>
   <data name="UserIDRequired" xml:space="preserve">
     <value>User ID is required!</value>

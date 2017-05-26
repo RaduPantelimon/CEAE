@@ -637,6 +637,18 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Statistics.
+        /// </summary>
+        public static string Statistics {
+            get {
+                return ResourceManager.GetString("Statistics", resourceCulture);
+            }
+        }
+
+       
+
+
+        /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
         public static string Submit {
@@ -660,6 +672,15 @@ namespace CEAE {
         public static string TakeTest {
             get {
                 return ResourceManager.GetString("TakeTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overall, this test has been taken {0} times..
+        /// </summary>
+        public static string TestsTaken {
+            get {
+                return ResourceManager.GetString("TestsTaken", resourceCulture);
             }
         }
         
@@ -696,6 +717,15 @@ namespace CEAE {
         public static string TitleRequired {
             get {
                 return ResourceManager.GetString("TitleRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In total, there have been {0} unregistered users that took this test.
+        /// </summary>
+        public static string UnregisteredUsers {
+            get {
+                return ResourceManager.GetString("UnregisteredUsers", resourceCulture);
             }
         }
         

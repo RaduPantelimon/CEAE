@@ -34,6 +34,14 @@ namespace CEAE.Controllers
         [UserPermissionGreaterOrEqual(Constants.Permissions.User)]
         public ActionResult ManageAccount()
         {
+            if(AuthenticationManager.IsUserAdministrator(Session))
+            {
+                int testResults = _db.TestResults.Count();
+                int unregisteredUsers = _db.Contacts.Count();
+
+                ViewBag.totalResults = string.Format(Translations.TestsTaken, testResults);
+                ViewBag.unregisteredUsers = string.Format(Translations.UnregisteredUsers, testResults);
+            }
             return View();
         }
 
