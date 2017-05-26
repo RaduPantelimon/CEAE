@@ -187,6 +187,15 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CEAE.
+        /// </summary>
+        public static string Branding {
+            get {
+                return ResourceManager.GetString("Branding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Password.
         /// </summary>
         public static string ConfirmPassword {
