@@ -121,6 +121,7 @@ footer {
     position: fixed;
     right: 0;
     text-align: center;
+    z-index: 1000;
 }
 
 div.fb-like.fb_iframe_widget { width: 145px; }
@@ -350,7 +351,7 @@ ul.nav.navbar-nav li {
 ul, menu, dir {
     list-style:none;
 }
-/*
+/*  
 .buttons {
     display: block;
 }

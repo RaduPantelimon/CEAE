@@ -46,11 +46,36 @@ namespace CEAE.Controllers
                         }
                     }
 
-                    /*TestResult testRes = new TestResult();
+                    
+                    var contact = new Contact();
+                    var user = new User();
 
-                    _db.TestResults.Add(testRes);
-                    _db.SaveChanges();*/
+                    var test = new TestResult
+                    {
+                        Date = DateTime.Now,
+                        Status = $"{raspunsuriCorecte}/{_db.AnswersQuestions.Count()} {Translations.Questions}"
+                    };
 
+                    Session[Constants.Session.RegisteredID] = contact.ContactID;
+                    Session[Constants.Session.UserId] = user.UserID;
+
+                    if (Session[Constants.Session.RegisteredID] != null)
+                    {
+                        test.ContactID = contact.ContactID;
+
+                    }
+
+                    else if (Session[Constants.Session.UserId] != null)
+                    {
+                        test.UserID = user.UserID;
+
+                    }
+
+                    //else nu are nici account nici nu si-a lasat email?
+
+                    //_db.TestResults.Add(test);
+                    //_db.SaveChanges();
+                    
                     jsonResponseText = "{\"status\":1,\"raspusuriCorecte\":\"" + raspunsuriCorecte + "\",\"message\":\"Model is not valid\"}";
 
 
@@ -88,9 +113,7 @@ namespace CEAE.Controllers
                     var isValid = Utils.Utils.IsValidEmail(emailAddress);
                     if (isValid)
                     {
-                       
-
-                        Contact contact = new Contact();
+                        var contact = new Contact();
                         contact.Email = emailAddress;
                         contact.SignInDate = DateTime.Now;
                         _db.Contacts.Add(contact);
