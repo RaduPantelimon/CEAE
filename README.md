@@ -4,6 +4,7 @@
 
 * Bonea Ioana
 * Bucur Radu
+* Bulete Vlad 
 * Bursucanu Cornelia
 * Neagu Rares
 
