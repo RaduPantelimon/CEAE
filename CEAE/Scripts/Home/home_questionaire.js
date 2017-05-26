@@ -93,7 +93,7 @@
 
         for (var i = 0; i < data.length; i++) {
             imageStr = data[i].Text
-                ? "<img src='/Content/Images/" + data[i].Text + "'" + " style='height='300px'/>"
+                ? "<img src='/Content/Images/" + data[i].Text + "'" + " style='height: 300px'/>"
                 : "";
             $qc.append("<div id='question-" +
                 data[i].QuestionID +
@@ -101,8 +101,7 @@
                 data[i].Title +
                 "</h2><hr class='sec-hr' />" +
                 imageStr +
-                "</div>" +
-                "</br>"
+                "</div>"
             );
             setAnswers(data[i]);
         }

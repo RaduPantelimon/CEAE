@@ -314,6 +314,7 @@
     <Content Include="Content\Images\ms.jpg" />
     <Content Include="Content\Index_style.css" />
     <Content Include="Content\Style.css" />
+    <Content Include="Content\test.css" />
     <Content Include="Content\_bootstrap.css">
       <DependentUpon>_bootstrap.scss</DependentUpon>
     </Content>
@@ -446,26 +447,24 @@
     <Content Include="Scripts\bootstrap\tooltip.js" />
     <Content Include="Scripts\bootstrap\transition.js" />
     <Content Include="Scripts\Home\home_questionaire.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jqueryUI\AUTHORS.txt" />
-    <Content Include="Scripts\jqueryUI\index.html" />
-    <Content Include="Scripts\jqueryUI\jquery-ui.css" />
-    <Content Include="Scripts\jqueryUI\jquery-ui.js" />
-    <Content Include="Scripts\jqueryUI\jquery-ui.min.css" />
-    <Content Include="Scripts\jqueryUI\jquery-ui.min.js" />
-    <Content Include="Scripts\jqueryUI\jquery-ui.structure.css" />
-    <Content Include="Scripts\jqueryUI\jquery-ui.structure.min.css" />
-    <Content Include="Scripts\jqueryUI\jquery-ui.theme.css" />
-    <Content Include="Scripts\jqueryUI\jquery-ui.theme.min.css" />
-    <Content Include="Scripts\jqueryUI\LICENSE.txt" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\QuestionScripts\question_viewDetails.js" />
     <Content Include="Scripts\QuestionScripts\reorderQuestions.js" />
     <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -524,6 +523,7 @@
     <Content Include="Views\Home\TakeTest.cshtml" />
     <Content Include="Views\Questions\ReorderQuestion.cshtml" />
     <Content Include="Scripts\jqueryUI\package.json" />
+    <Content Include="Views\Home\_Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
