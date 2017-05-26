@@ -76,7 +76,8 @@ namespace CEAE.Utils
                 CreateContactsSheet(document, workbookpart, sheets, db, sheetID);
                 sheetID++;
                 CreateUsersSheet(document, workbookpart, sheets, db, sheetID);
-
+                sheetID++;
+                CreateTestResultSheet(document, workbookpart, sheets, db, sheetID);
                 //save data
 
                 document.Close();
@@ -144,6 +145,66 @@ namespace CEAE.Utils
             newWorksheetPart.Worksheet.Save();
             return sheet;
         }
+
+        private static Sheet CreateTestResultSheet(SpreadsheetDocument document,
+          WorkbookPart workbookpart,
+          Sheets sheets,
+          CEAEDBEntities db,
+          uint sheetID = 1)
+        {
+
+            WorksheetPart newWorksheetPart = document.WorkbookPart.AddNewPart<WorksheetPart>();
+
+            string relationshipId = document.WorkbookPart.GetIdOfPart(newWorksheetPart);
+            var sheet = new Sheet()
+            {
+                Id = relationshipId,
+                SheetId = sheetID,
+                Name = "Test Results Statistics"
+            };
+            sheets.AppendChild(sheet);
+
+            var sheetData = new SheetData();
+
+
+
+            newWorksheetPart.Worksheet = new Worksheet(sheetData);
+
+            //create header rows
+
+            List<string> MergeableRows = new List<string>();
+
+            Row projectRow = CreateResultsHeaderRow(1);
+            sheetData.AppendChild(projectRow);
+
+            //creating content rows
+            int colIndex = 2;
+
+            List<TestResult> testresults = db.TestResults.ToList();
+
+            foreach (TestResult tst in testresults)
+            {
+                //creating row for this user
+                Row row = CreateTestResultRow(colIndex, tst);
+                sheetData.AppendChild(row);
+
+                colIndex++;
+            }
+
+
+            //set col width
+            Columns columns = new Columns();
+            columns.Append(new Column() { Min = 1, Max = 250, Width = 20, CustomWidth = true });
+            columns.Append(new Column() { Min = 1, Max = 250, Width = 20, CustomWidth = true });
+            columns.Append(new Column() { Min = 1, Max = 175, Width = 20, CustomWidth = true });
+            columns.Append(new Column() { Min = 1, Max = 250, Width = 20, CustomWidth = true });
+
+            newWorksheetPart.Worksheet.Append(columns);
+
+            newWorksheetPart.Worksheet.Save();
+            return sheet;
+        }
+
 
         private static Sheet CreateUsersSheet(SpreadsheetDocument document,
     WorkbookPart workbookpart,
@@ -217,6 +278,27 @@ namespace CEAE.Utils
             return headerRow;
         }
 
+        private static Row CreateResultsHeaderRow(int rowIndex)
+        {
+            int index = -1;
+            Row headerRow = new Row();
+            headerRow.RowIndex = (UInt32)rowIndex;
+
+            Cell firstcell = CreateCell("Email Address", ref index, rowIndex, 2);
+            headerRow.AppendChild(firstcell);
+
+            Cell secondCell = CreateCell("Authenticated?", ref index, rowIndex, 2);
+            headerRow.AppendChild(secondCell);
+
+            Cell thirdCell = CreateCell("Correct Answers", ref index, rowIndex, 2);
+            headerRow.AppendChild(thirdCell);
+
+            Cell lastCell = CreateCell("Date", ref index, rowIndex, 2);
+            headerRow.AppendChild(lastCell);
+
+            return headerRow;
+        }
+
         private static Row CreateUserHeaderRow(int rowIndex)
         {
             int index = -1;
@@ -235,20 +317,60 @@ namespace CEAE.Utils
             return headerRow;
         }
 
-        
-
-        private static Row CreateContactRow(int colIndex,Contact contact)
+        private static Row CreateContactRow(int colIndex, Contact contact)
         {
             // New Row
             Row row = new Row();
             row.RowIndex = (UInt32)colIndex;
             int total = 0, rowIndex = -1;
-           
+
 
             Cell titleCell = CreateCell(contact.Email, ref rowIndex, colIndex, 0);
             row.AppendChild(titleCell);
 
-            Cell dateCell = CreateCell(String.Format("{0:d/M/yyyy HH:mm:ss}", contact.SignInDate), ref rowIndex, colIndex, 0);
+            Cell dateCell = CreateCell(String.Format("{0:d/M/yyyy}", contact.SignInDate), ref rowIndex, colIndex, 0);
+            row.AppendChild(dateCell);
+
+            //preparing the formula
+            string start = ColumnLetter(1) + colIndex;
+
+
+            string finish = ColumnLetter(rowIndex) + colIndex;
+
+            return row;
+        }
+
+        private static Row CreateTestResultRow(int colIndex,TestResult tst)
+        {
+            // New Row
+            Row row = new Row();
+            row.RowIndex = (UInt32)colIndex;
+            int total = 0, rowIndex = -1;
+
+
+            string participantName = "(no name)";
+            string authenticated = "No";
+            if(tst.User != null && !String.IsNullOrEmpty(tst.User.Email))
+            {
+                participantName = tst.User.Email;
+                authenticated = "Yes";
+            }
+            else if(tst.Contact != null && !String.IsNullOrEmpty(tst.Contact.Email))
+            {
+                participantName = tst.Contact.Email;
+            }
+
+
+            Cell titleCell = CreateCell(participantName, ref rowIndex, colIndex, 0);
+            row.AppendChild(titleCell);
+
+            Cell authenticatedCell = CreateCell(authenticated, ref rowIndex, colIndex, 0);
+            row.AppendChild(authenticatedCell);
+
+            Cell statusCell = CreateCell(tst.Status, ref rowIndex, colIndex, 0);
+            row.AppendChild(statusCell);
+
+            Cell dateCell = CreateCell(String.Format("{0:d/M/yyyy}", tst.Date), ref rowIndex, colIndex, 0);
             row.AppendChild(dateCell);
 
             //preparing the formula

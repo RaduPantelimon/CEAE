@@ -40,7 +40,7 @@ namespace CEAE.Controllers
                 int unregisteredUsers = _db.Contacts.Count();
 
                 ViewBag.totalResults = string.Format(Translations.TestsTaken, testResults);
-                ViewBag.unregisteredUsers = string.Format(Translations.UnregisteredUsers, testResults);
+                ViewBag.unregisteredUsers = string.Format(Translations.UnregisteredUsers, unregisteredUsers);
             }
             return View();
         }
