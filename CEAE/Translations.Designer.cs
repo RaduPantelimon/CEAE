@@ -205,6 +205,15 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Congratulations, you had {0} correct answer(s)!.
+        /// </summary>
+        public static string CongratulationsYouHadXResponsesCorrect {
+            get {
+                return ResourceManager.GetString("CongratulationsYouHadXResponsesCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create.
         /// </summary>
         public static string Create {
@@ -237,6 +246,24 @@ namespace CEAE {
         public static string Details {
             get {
                 return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Donate.
+        /// </summary>
+        public static string Donate {
+            get {
+                return ResourceManager.GetString("Donate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Did you know that you should donate to CEAE?.
+        /// </summary>
+        public static string DonationRequest {
+            get {
+                return ResourceManager.GetString("DonationRequest", resourceCulture);
             }
         }
         
@@ -309,6 +336,15 @@ namespace CEAE {
         public static string FirstNameRequired {
             get {
                 return ResourceManager.GetString("FirstNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello, {0}.
+        /// </summary>
+        public static string HelloUser {
+            get {
+                return ResourceManager.GetString("HelloUser", resourceCulture);
             }
         }
         
@@ -462,6 +498,15 @@ namespace CEAE {
         public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You answer any question right!.
+        /// </summary>
+        public static string NoResponsesCorrect {
+            get {
+                return ResourceManager.GetString("NoResponsesCorrect", resourceCulture);
             }
         }
         
@@ -662,10 +707,7 @@ namespace CEAE {
                 return ResourceManager.GetString("Statistics", resourceCulture);
             }
         }
-
-       
-
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>

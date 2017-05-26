@@ -61,8 +61,14 @@ namespace CEAE.Controllers
                     
                     _db.TestResults.Add(test);
                     _db.SaveChanges();
-                    
-                    jsonResponseText = TestManager.JsonMessage(false, new { raspunsuriCorecte });
+
+                    var correct = string.Format(Translations.CongratulationsYouHadXResponsesCorrect, raspunsuriCorecte);
+                    var incorrect = Translations.NoResponsesCorrect;
+                    jsonResponseText = TestManager.JsonMessage(false, new
+                    {
+                        raspunsuriCorecte,
+                        header = raspunsuriCorecte > 0 ? correct : incorrect
+                    });
 
                 }
                 else
@@ -70,18 +76,14 @@ namespace CEAE.Controllers
                     jsonResponseText = TestManager.JsonMessage(false, Translations.ModelInvalid);
 
                 }
-                //var response = Request.CreateResponse(HttpStatusCode.OK);
-                //response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
-                //return response;
+
                 return Content(jsonResponseText, "application/json");
 
             }
             catch (Exception ex)
             {
                 jsonResponseText = TestManager.JsonMessage(false, ex.Message);
-                //var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
-                //response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
-                // return response;
+
                 return Content(jsonResponseText, "application/json");
             }
         }

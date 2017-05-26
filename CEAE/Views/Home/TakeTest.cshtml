@@ -5,6 +5,7 @@
     ViewBag.Title = Translations.TakeTest;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="//fonts.googleapis.com/css?family=Luckiest Guy" rel="stylesheet">
 
 <div class="container">
     <h1>@Translations.TakeTest</h1>
@@ -36,16 +37,14 @@
                 <h2>@Translations.PleaseWait</h2>
             </div>
         </div>
-        <div style="display: none;">
+        <div class="hidden text-center">
             <h2 class="quiz-status"></h2>
-
+            <p><img src="/Content/Images/40.jpg" style="height:400px;width:600px" width="600" height="400" class="img-thumbnail" alt="Struggling kid" /></p>
+            <h3>@Translations.DonationRequest</h3>
+            <a href="http://ceae.ro/cum-ne-poti-sprijini/pentru-persoane-fizice/" class="btn btn-start btn-lg custom-standard-button">@Translations.Donate</a>
         </div>
 
-        <div style="display: none;">
-            <h4 class="mesaj-st"></h4>
-        </div>
-        
-        <div class="buttons clearfix">
+        <div class="clearfix">
             <button id="prev-button" type="button" class="btn btn-info custom-standard-button btn-hide pull-left">@Translations.PreviousQuestion</button>
             <button id="next-button" type="button" class="btn btn-info custom-standard-button btn-hide pull-right">@Translations.NextQuestion</button>
 

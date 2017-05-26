@@ -4,7 +4,7 @@
 {
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink($"Hello, {AuthenticationManager.UserAccount(Session)}!", "ManageAccount", "Account", null, new {title = "Manage"})
+            @Html.ActionLink(string.Format(Translations.HelloUser, AuthenticationManager.UserAccount(Session)), "ManageAccount", "Account", null, new {title = "Manage"})
         </li>
         
         <li>

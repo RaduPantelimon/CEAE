@@ -335,27 +335,14 @@
 
                     console.log(result);
 
-                    if (result.raspunsuriCorecte > 0) {
-                        var respunsuriString = result.raspunsuriCorecte === 1 ? "raspuns" : "raspunsuri";
-                        $(".quiz-status")
-                            .html("Felicitari, ai avut " + result.raspunsuriCorecte + " " + respunsuriString + " corecte!");
-                    } else {
-                        $(".quiz-status")
-                            .html("Nu ai avut niciun raspuns corect!");
-                    }
+                    $(".quiz-status").html(result.header);
 
                     $("#question-container").hide();
                     $("#subm-button").hide();
                     $("#prev-button").hide();
+                    $("#next-button").hide();
 
-
-                    $(".quiz-status").append("</br><img src='/Content/Images/40.jpg' " +
-                        " style=\"height:400px;width:600px\" width=\"600\" height=\"400\" class=\"img-thumbnail\" />");
-                    $(".quiz-status")
-                        .append(
-                            "<br> <p> Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!</p>");
-
-                    $(".quiz-status").parent().show();
+                    $(".quiz-status").parent().removeClass("hidden");
 
 
                 }
