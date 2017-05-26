@@ -28,10 +28,14 @@
            
         </ul>
     </div>
-
-    <div class="btn-group">
-        <button type="button" class="btn btn-success submit-values">Save</button>
-        @Html.ActionLink("Cancel", "Index", "Questions", null, new { @class = "btn btn-default" })
+    <div>
+        <span class="loader-container">
+            <img class='LoaderImage' src='/Content/Images/ajax-loader.gif' style='display:none;' height='20' width='20' />
+        </span>
+        <div class="btn-group">
+            <button type="button" class="btn btn-success submit-values">Save</button>
+            @Html.ActionLink("Cancel", "Index", "Questions", null, new { @class = "btn btn-default" })
+        </div>
     </div>
 </div>
 

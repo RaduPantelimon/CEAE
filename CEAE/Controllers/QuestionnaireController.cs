@@ -16,7 +16,7 @@ namespace CEAE.Controllers
 
         public ActionResult GetQuestions()
         {
-            var questions = _db.Questions.ToList();
+            var questions = _db.Questions.OrderBy(x => x.QuestionOrder).ToList();
             var jsonResponseText = JsonConvert.SerializeObject(questions);
             //var response = Request.CreateResponse(HttpStatusCode.OK);
             //response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");

@@ -422,6 +422,7 @@ fieldset[disabled] .btn-start.active {
     padding: 5px;
     font-size: 20px;
     border:1px solid black;
+    box-shadow: 2px 2px 1px #888888;
 }
 
 .ordered-question:nth-child(2n+1){
@@ -440,4 +441,9 @@ fieldset[disabled] .btn-start.active {
 .ordered-question:last-child{
     border-bottom-left-radius:5px;
     border-bottom-right-radius:5px;
+}
+
+.loader-container{
+    display:inline-block; 
+    width:22px;
 }
