@@ -376,6 +376,15 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading the test....
+        /// </summary>
+        public static string LoadingTest {
+            get {
+                return ResourceManager.GetString("LoadingTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log in.
         /// </summary>
         public static string Login {
@@ -543,6 +552,15 @@ namespace CEAE {
         public static string PleaseProvideEmailAddress {
             get {
                 return ResourceManager.GetString("PleaseProvideEmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please wait....
+        /// </summary>
+        public static string PleaseWait {
+            get {
+                return ResourceManager.GetString("PleaseWait", resourceCulture);
             }
         }
         
