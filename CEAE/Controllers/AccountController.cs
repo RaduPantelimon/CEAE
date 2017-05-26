@@ -12,7 +12,6 @@ namespace CEAE.Controllers
     {
         private readonly CEAEDBEntities _db = new CEAEDBEntities();
 
-
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -34,14 +33,14 @@ namespace CEAE.Controllers
         [UserPermissionGreaterOrEqual(Constants.Permissions.User)]
         public ActionResult ManageAccount()
         {
-            if(AuthenticationManager.IsUserAdministrator(Session))
-            {
-                int testResults = _db.TestResults.Count();
-                int unregisteredUsers = _db.Contacts.Count();
+            if (!AuthenticationManager.IsUserAdministrator(Session))
+                return View();
 
-                ViewBag.totalResults = testResults;
-                ViewBag.unregisteredUsers = unregisteredUsers;
-            }
+            var testResults = _db.TestResults.Count();
+            var unregisteredUsers = _db.Contacts.Count();
+
+            ViewBag.totalResults = testResults;
+            ViewBag.unregisteredUsers = unregisteredUsers;
             return View();
         }
 

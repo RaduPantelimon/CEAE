@@ -8,8 +8,6 @@
 
 /*input, select, textarea { max-width: 280px; }*/
 
-body { background-color: #f5f8fa; }
-
 /*li { list-style-type: none; }*/
 .btn.btn-hide {
     display: none;
@@ -110,7 +108,6 @@ body > .container {
 }
 
 footer {
-    background-color: #222222;
     bottom: 0;
     color: white;
     font-weight: bold;
