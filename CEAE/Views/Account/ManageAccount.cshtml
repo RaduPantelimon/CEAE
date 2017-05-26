@@ -30,14 +30,19 @@
 
     @if (AuthenticationManager.IsUserAdministrator(Session))
     {
+        ViewBag.totalResults = "<span class='label label-info'>" + ViewBag.totalResults.ToString() + "</span>";
+        ViewBag.unregisteredUsers = "<span class='label label-success'>" + ViewBag.unregisteredUsers.ToString() + "</span>";
+
         <h3 class="section-header">@Translations.Statistics</h3>
         <hr class="section-hr" />
         <div class="btn-group">
-            @Html.ActionLink(Translations.Statistics, "GenerateReport", "Home", null, new { @class = "btn btn-primary" })
+            <p>
+                @Html.ActionLink(Translations.Statistics, "GenerateReport", "Home", null, new {@class = "btn btn-primary"})
+            </p>
         </div>
 
-        <p>@ViewBag.totalResults</p>
-        <p>@ViewBag.unregisteredUsers</p>
+        <p>@Html.Raw(string.Format(Translations.TestsTaken, ViewBag.totalResults))</p>
+        <p>@Html.Raw(string.Format(Translations.UnregisteredUsers, ViewBag.unregisteredUsers))</p>
     }
 
     <h3 class="section-header" >@Translations.Properties</h3>

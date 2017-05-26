@@ -39,8 +39,8 @@ namespace CEAE.Controllers
                 int testResults = _db.TestResults.Count();
                 int unregisteredUsers = _db.Contacts.Count();
 
-                ViewBag.totalResults = string.Format(Translations.TestsTaken, testResults);
-                ViewBag.unregisteredUsers = string.Format(Translations.UnregisteredUsers, unregisteredUsers);
+                ViewBag.totalResults = testResults;
+                ViewBag.unregisteredUsers = unregisteredUsers;
             }
             return View();
         }
