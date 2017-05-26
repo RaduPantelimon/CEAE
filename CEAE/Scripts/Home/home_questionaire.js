@@ -1,268 +1,358 @@
-﻿$(document).ready(InitializePage);
+﻿$(function () {
 
-var questions = [];
-var currentquestion;
-var rezultat;
+    var isLoggedIn = window["isLoggedIn"] || false;
+    var registeredEmail = window["registeredEmail"] || false;
 
-function InitializePage() {
+    var disabledCallback = {};
+    var questions = [];
+    var currentquestion;
 
-    getQuestions();
-
-
-}
-
-function getQuestions() {
-    $.ajax({
-        url: "/Questionnaire/GetQuestions",
-        contentType: "application/json; charset=utf-8",
-        type: "GET",
-        dataType: "json",
-        success: SetData,
-        error: OnFail
-    });
-}
-
-function SetData(data) {
-    //set start event
-    SetQuestions(data);
-    $("#start-questionaire").click(StartTest);
-    $("#next-button").click(NextQuestion);
-    $("#prev-button").click(PrevQuestion);
-
-
-}
-
-function OnFail(jqXHR, exception) {
-    console.log("Error while performing Ajax Call" + jqXHR + " " + exception);
-}
-
-function SetQuestions(data) {
-    //question-container
-    //console.log(data);
-    questions = data;
-    for (var i = 0; i < data.length; i++) {
-        $(".question-container").append("<div id='question-" +
-            data[i].QuestionID +
-            "' style='display:none;' class='question'><h2 class='sec-title-large'>" +
-            data[i].Title +
-            "</h2><hr class='sec-hr' /></div>"
-             +  "</br><img src='/Content/Images/" +  data[i].Text +  "'" + " style='height='300px'/>"
-          );
-        SetAnswers(data[i]);
+    function buttonHide($button) {
+        $button.attr("disabled", true);
+        disabledCallback[$button.attr("id")] = true;
     }
 
-
-    //$('#question-1').show();
-}
-
-function SetAnswers(question) {
-    //question-container
-    //console.log(data);
-
-    $("#question-" + question.QuestionID).append("<ul class='list row' ></ul>");
-    var answersCntainer = $("#question-" + question.QuestionID + " ul");
-    for (var i = 0; i < question.AnswersQuestions.length; i++) {
-        answersCntainer.append("<li  id='answer-" +
-            question.AnswersQuestions[i].Answer.AnswerID +
-            "' class='answer sec-title-large col-lg-5 col-md-5 col-sm-12 col-xs-12'>" +
-            "<input class=''  data-AnswerID='" +
-            question.AnswersQuestions[i].Answer.AnswerID +
-            "'  name='answer-" +
-            question.QuestionID +
-            "' type='radio'>" +
-            question.AnswersQuestions[i].Answer.Text +
-            "</li>");
-    }
-}
-
-
-function StartTest() {
-    NextQuestion();
-    $("#start-questionaire").hide();
-    $("#subm-button").click(CheckUserStatus);
-    $("#prev-button").hide();
-    $("#next-button").show();
-
-}
-function CheckUserStatus()
-{
-    if (isLoggedIn == "True" || registeredEmail == "True")
-    {
-        SendAnswers();
-    }
-    else {
-        $(".question-section").hide();
-        $(".email-container").show();
-
-
-        $(".email-button").click(SubmitEmail);
-    }
-   
-}
-function NextQuestion() {
-    if (!currentquestion && currentquestion !== 0) {
-        currentquestion = 0;
-    } else if (currentquestion < questions.length - 1) {
-        currentquestion++;
-    }
-    if (questions.length && questions.length >= currentquestion) {
-        $(".question").hide();
-        $("#question-" + questions[currentquestion].QuestionID).show();
-
-        //     for (var i = 0; questions[currentquestion].AnswersQuestions.length ; i++)
-        //         $('#answer-' + questions[currentquestion].AnswersQuestions[i].Answer.Text).show();
-    }
-    ResolveButtonState();
-
-
-}
-
-function validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
-
-
-function SubmitEmail() {
-    
-    var emailAddress = $(".email-input").val();
-    var dataToSend = {};
-    dataToSend.emailAddress = emailAddress;
-    var jsonString = JSON.stringify(dataToSend);
-
-    $("#result").text("");
- 
-    if (!validateEmail(emailAddress))
-    {
-        $("#result").text("Email address is not valid ");
-        $("#result").css("color", "red");
+    function buttonShow($button) {
+        $button.removeAttr("disabled");
+        disabledCallback[$button.attr("id")] = false;
     }
 
-    $.ajax({
-        url: "/Questionnaire/SetEmail",
-        contentType: "application/json; charset=utf-8",
-        type: "POST",
-        dataType: "json",
-        data: jsonString,
-        success: function (result) {
-            if (result.status == 1) {
-                //the item was just added // modified\
-                $(".question-section").show();
-                $(".email-container").hide();
-                registeredEmail = "True";
-                SendAnswers();
-            }
-            else {
-                //to do mesaj de eroare
-            }
-        },
-        error: function (jqXHR, exception) {
-
-            OnFail(jqXHR, exception);
-        }
-    });
-}
-function PrevQuestion() {
-    if (!currentquestion && currentquestion !== 0) {
-        currentquestion = 0;
-    } else {
-        currentquestion--;
-    }
-    if (questions.length && currentquestion >= 0) {
-        $(".question").hide();
-        $("#question-" + questions[currentquestion].QuestionID).show();
-    }
-    ResolveButtonState();
-}
-
-function ResolveButtonState() {
-
-    if (currentquestion == questions.length - 1) {
-        $("#subm-button").show();
-        $("#prev-button").show();
-        $("#next-button").attr('disabled', true);
-    } else if (currentquestion == 0) {
-        $("#subm-button").hide();
-        $("#prev-button").attr('disabled', true);
-        $("#next-button").show();
-    } else {
-        $("#subm-button").hide();
-        $("#prev-button").show();
-        $("#next-button").show();
-    }
-}
-
-function SendAnswers() {
-    if (questions.length) {
-        var solutions = [];
-        for (var i = 0; i < questions.length; i++) {
-            var answerID = 0;
-            var selectedAnswer = $("input[name='answer-" + questions[i].QuestionID + "']:checked");
-            if (selectedAnswer && selectedAnswer.length > 0) {
-                answerID = selectedAnswer.attr("data-AnswerID");
-            }
-
-            //procesam in partea de serverside, folosind Modelul QuestionnaireAnswer
-            //public int QuestionID;
-            //public int AnswerID;
-            var selectedResponse = {};
-            selectedResponse.QuestionID = questions[i].QuestionID;
-            selectedResponse.AnswerID = answerID;
-            solutions.push(selectedResponse);
-
-
+    function handleButtonPrevNext($prev, $next, hasPrev, hasNext) {
+        if (hasPrev) {
+            buttonShow($prev);
+        } else {
+            buttonHide($prev);
         }
 
-        var jsonString = JSON.stringify(solutions);
+        if (hasNext) {
+            buttonShow($next);
+        } else {
+            buttonHide($next);
+        }
+    }
+
+    function buttonHandleClick($button, trueCallback) {
+        $button.click(function () {
+            if (disabledCallback[$button.attr("id")])
+                return;
+            trueCallback();
+        });
+    }
+
+    function getJson(url, success, error) {
         $.ajax({
-            url: "/Questionnaire/SetAnswers",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            type: "GET",
+            dataType: "json",
+            success: success,
+            error: error
+        });
+    }
+
+    function getQuestions() {
+        getJson("/Questionnaire/GetQuestions", setData, onFail);
+    }
+
+    function setData(data) {
+        var $sq = $("#start-questionaire");
+        var $p = $("#prev-button");
+        var $n = $("#next-button");
+        var $l = $("#loading");
+
+        // hide loading screen
+        $l.hide(233);
+
+        //set start event
+        setQuestions(data);
+
+        $sq.click(startTest);
+        $sq.removeAttr("disabled");
+
+        // hide all elements first
+        
+        $p.hide();
+        $n.hide();
+
+        buttonHandleClick($n, nextQuestion);
+        buttonHandleClick($p, prevQuestion);
+    }
+
+    function onFail(jqXhr, exception) {
+        console.error("Ajax call fail:", jqXhr, exception);
+    }
+
+    function setQuestions(data) {
+        // #question-container
+        console.log("SetQuestions", data);
+
+        questions = data;
+
+        var $qc = $(".question-container");
+        var imageStr;
+
+        for (var i = 0; i < data.length; i++) {
+            imageStr = data[i].Text
+                ? "<img src='/Content/Images/" + data[i].Text + "'" + " style='height='300px'/>"
+                : "";
+            $qc.append("<div id='question-" +
+                data[i].QuestionID +
+                "' style='display:none;' class='question'><h2 class='sec-title-large'>" +
+                data[i].Title +
+                "</h2><hr class='sec-hr' />" +
+                imageStr +
+                "</div>" +
+                "</br>"
+            );
+            setAnswers(data[i]);
+        }
+
+
+        //$('#question-1').show();
+    }
+
+    function setAnswers(question) {
+        //question-container
+        console.log("SetAnswers", question);
+
+        $("#question-" + question.QuestionID).append("<ul class='list row' ></ul>");
+        var answersCntainer = $("#question-" + question.QuestionID + " ul");
+        for (var i = 0; i < question.AnswersQuestions.length; i++) {
+            answersCntainer.append("<li  id='answer-" +
+                question.AnswersQuestions[i].Answer.AnswerID +
+                "' class='answer sec-title-large col-lg-5 col-md-5 col-sm-12 col-xs-12'>" +
+                "<input class=''  data-AnswerID='" +
+                question.AnswersQuestions[i].Answer.AnswerID +
+                "'  name='answer-" +
+                question.QuestionID +
+                "' type='radio'>" +
+                question.AnswersQuestions[i].Answer.Text +
+                "</li>");
+        }
+    }
+
+
+    function startTest() {
+        nextQuestion();
+        $("#start-questionaire").hide();
+        $("#subm-button").click(checkUserStatus);
+
+        var $p = $("#prev-button");
+        var $n = $("#next-button");
+
+        $p.show();
+        $n.show();
+        handleButtonPrevNext($p, $n, false, true);
+    }
+
+    function checkUserStatus() {
+        if (isLoggedIn || registeredEmail) {
+            sendAnswers();
+        } else {
+            $(".question-section").hide();
+            $(".email-container").show();
+
+            $("#subm-email-button").click(submitEmail);
+        }
+
+    }
+
+    function nextQuestion() {
+        if (!currentquestion && currentquestion !== 0) {
+            currentquestion = 0;
+        } else if (currentquestion < questions.length - 1) {
+            currentquestion++;
+        }
+        if (questions.length && questions.length >= currentquestion) {
+            $(".question").hide();
+            $("#question-" + questions[currentquestion].QuestionID).show();
+
+            //     for (var i = 0; questions[currentquestion].AnswersQuestions.length ; i++)
+            //         $('#answer-' + questions[currentquestion].AnswersQuestions[i].Answer.Text).show();
+        }
+        resolveButtonState();
+
+
+    }
+
+    function validateEmail(email) {
+        return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            .test(email);
+    }
+
+
+    function setErrorEmail(hasError) {
+        var $errorLabel = $("#email-validation");
+        var $formGroup = $errorLabel.closest(".form-group");
+        if (hasError) {
+            $errorLabel.show();
+            $formGroup.addClass("has-error");
+        } else {
+            $errorLabel.hide();
+            $formGroup.removeClass("has-error");
+        }
+    }
+
+    function submitEmail() {
+        var $btn = $(this);
+        $btn.attr("disabled", true);
+        console.log("submit email", this);
+        var emailAddress = $("#email-input").val();
+        var dataToSend = {};
+        dataToSend.emailAddress = emailAddress;
+        var jsonString = JSON.stringify(dataToSend);
+
+        var hasError = !validateEmail(emailAddress);
+        console.log("has error submitting email?: ", hasError);
+        setErrorEmail(hasError);
+
+
+        if (hasError) {
+            $btn.removeAttr("disabled");
+            return;
+        }
+
+        $.ajax({
+            url: "/Questionnaire/SetEmail",
             contentType: "application/json; charset=utf-8",
             type: "POST",
             dataType: "json",
             data: jsonString,
-            success: function(result) {
-                if (!result.error) {
-                    //the item was just added // modified\
+            success: function (result) {
+                $btn.removeAttr("disabled");
 
-                    console.log(result.raspusuriCorecte);
-                    console.log(result);
-
-                    
-                   
-                    if (result.raspusuriCorecte > 0) {
-
-                        $(".quiz-status")
-                            .html("Felicitari, ai avut " + result.raspusuriCorecte + " raspunsuri corecte!");
-                    }
-
-                    else {
-                        $(".quiz-status")
-                           .html("Nu ai avut niciun raspuns corect!");
-                    }
-
-                    $(".question-container").hide();
-                    $("#subm-button").hide();
-                    $("#prev-button").hide();
-
-
-                    $(".quiz-status").append("</br><img src='/Content/Images/40.jpg' " +
-                        " style='height='600' width='600' />");
-                    $(".quiz-status")
-                        .append(
-                            "<br> <p> Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!</p>");
-
-                    $(".quiz-status").parent().show();
-                    
-
-
+                if (result.status) {
+                    // now user has a Contact model.
+                    $(".question-section").show();
+                    $(".email-container").hide();
+                    window.registeredEmail = true;
+                    sendAnswers();
+                } else {
+                    console.log("received error", result);
+                    //to do mesaj de eroare
                 }
             },
-            error: function(jqXHR, exception) {
-
-                OnFail(jqXHR, exception);
+            error: function (jqXhr, exception) {
+                $btn.removeAttr("disabled");
+                onFail(jqXhr, exception);
             }
         });
+    }
 
+    function prevQuestion() {
+        if (!currentquestion && currentquestion !== 0) {
+            currentquestion = 0;
+        } else {
+            currentquestion--;
+        }
+        if (questions.length && currentquestion >= 0) {
+            $(".question").hide();
+            $("#question-" + questions[currentquestion].QuestionID).show();
+        }
+        resolveButtonState();
+    }
+
+    function resolveButtonState() {
+        var showPrev, showNext, showSubmit = false;
+
+        var $p = $("#prev-button");
+        var $n = $("#next-button");
+
+        if (currentquestion === questions.length - 1) {
+            showSubmit = true;
+            showPrev = true;
+            showNext = false;
+        } else if (currentquestion === 0) {
+            showPrev = false;
+            showNext = true;
+        } else {
+            showPrev = true;
+            showNext = true;
+        }
+
+        handleButtonPrevNext($p, $n, showPrev, showNext);
+
+        if (showSubmit) {
+            $("#subm-button").css("display", "block");
+        } else {
+            $("#subm-button").hide();
+        }
 
     }
-}
+
+    function sendAnswers() {
+        if (questions.length) {
+            var solutions = [];
+            for (var i = 0; i < questions.length; i++) {
+                var answerID = 0;
+                var $answer = $("input[name='answer-" + questions[i].QuestionID + "']:checked");
+
+                if ($answer && $answer.length > 0) {
+                    answerID = $answer.attr("data-AnswerID");
+                }
+
+                //procesam in partea de serverside, folosind Modelul QuestionnaireAnswer
+                //public int QuestionID;
+                //public int AnswerID;
+                var selectedResponse = {
+                    QuestionID: questions[i].QuestionID,
+                    AnswerID: answerID
+                };
+                solutions.push(selectedResponse);
+
+
+            }
+
+            var jsonString = JSON.stringify(solutions);
+            $.ajax({
+                url: "/Questionnaire/SetAnswers",
+                contentType: "application/json; charset=utf-8",
+                type: "POST",
+                dataType: "json",
+                data: jsonString,
+                success: function(result) {
+                    if (!result.error) {
+
+                        result = result.message;
+
+                        console.log(result);
+
+                        if (result.raspunsuriCorecte > 0) {
+                            var respunsuriString = result.raspunsuriCorecte === 1 ? "raspuns" : "raspunsuri";
+                            $(".quiz-status")
+                                .html("Felicitari, ai avut " + result.raspunsuriCorecte + " " + respunsuriString + " corecte!");
+                        } else {
+                            $(".quiz-status")
+                                .html("Nu ai avut niciun raspuns corect!");
+                        }
+
+                        $(".question-container").hide();
+                        $("#subm-button").hide();
+                        $("#prev-button").hide();
+
+
+                        $(".quiz-status").append("</br><img src='/Content/Images/40.jpg' " +
+                            " style='height:400px;width:600px' width='600' height='400' />");
+                        $(".quiz-status")
+                            .append(
+                                "<br> <p> Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!</p>");
+
+                        $(".quiz-status").parent().show();
+
+
+                    }
+                },
+                error: function(jqXhr, exception) {
+
+                    onFail(jqXhr, exception);
+                }
+            });
+
+
+        }
+    }
+
+    // CONSTRUCTOR
+
+    getQuestions();
+});

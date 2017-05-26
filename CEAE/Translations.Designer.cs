@@ -259,6 +259,24 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email address saved successfully.
+        /// </summary>
+        public static string EmailAddressSavedSuccessfully {
+            get {
+                return ResourceManager.GetString("EmailAddressSavedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email address is invalid!.
+        /// </summary>
+        public static string EmailInvalid {
+            get {
+                return ResourceManager.GetString("EmailInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email address is required!.
         /// </summary>
         public static string EmailRequired {
@@ -385,6 +403,15 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Model is invalid!.
+        /// </summary>
+        public static string ModelInvalid {
+            get {
+                return ResourceManager.GetString("ModelInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mr..
         /// </summary>
         public static string Mr {
@@ -507,6 +534,15 @@ namespace CEAE {
         public static string PhoneNumberRequired {
             get {
                 return ResourceManager.GetString("PhoneNumberRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide an email address to finish this quiz!.
+        /// </summary>
+        public static string PleaseProvideEmailAddress {
+            get {
+                return ResourceManager.GetString("PleaseProvideEmailAddress", resourceCulture);
             }
         }
         

@@ -240,6 +240,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Managers\TestManager.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs">
       <DependentUpon>CEAEModel.tt</DependentUpon>
@@ -298,7 +299,6 @@
     <Compile Include="Utils\ExcelReportGenerator.cs" />
     <Compile Include="Utils\RequiredTAttribute.cs" />
     <Compile Include="Utils\UserPermissionsExtensions.cs" />
-    <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -350,7 +350,6 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\Home\home_index.js" />
     <Content Include="Scripts\Home\home_questionaire.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />

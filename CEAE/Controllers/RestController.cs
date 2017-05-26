@@ -263,41 +263,6 @@ namespace CEAE.Controllers
             }
         }
 
-        //save the tasks added by the user
-        [AcceptVerbs("POST")]
-        [HttpPost]
-        public HttpResponseMessage SetEmail([FromBody] string emailAddress)
-        {
-            string jsonResponseText;
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    var isValid = Utils.Utils.IsValidEmail(emailAddress);
-                    jsonResponseText = isValid ? 
-                        "{\"status\":1,\"message\":\"Email address saved successfully\"}" : 
-                        "{\"status\":0,\"message\":\"Email Address is not valid\"}";
-                }
-                else
-                {
-                    jsonResponseText =
-                        "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
-                }
-                var response = Request.CreateResponse(HttpStatusCode.OK);
-                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
-                return response;
-            }
-            catch (Exception ex)
-            {
-                jsonResponseText =
-                    "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" +
-                    ex.Message + "\"}";
-                var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
-                response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
-                return response;
-            }
-        }
-
         #endregion
     }
 }

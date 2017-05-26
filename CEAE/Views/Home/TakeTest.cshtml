@@ -1,4 +1,4 @@
-﻿@using CEAE.Utils;
+﻿@using AuthenticationManager = CEAE.Managers.AuthenticationManager
 
 
 @{
@@ -6,32 +6,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script>
-
-    var registeredEmail = "@Session[Constants.Session.DidRegisterEmail]";
-    var isLoggedIn = "@Session[Constants.Session.UserIsAuthenticated]";
-    
-</script>
 <div class="container">
     <h1>@Translations.TakeTest</h1>
     <hr/>
 
+   
+    <fieldset class="email-container form-horizontal">
+        <legend>@Translations.PleaseProvideEmailAddress</legend>
+        <div class="form-group">
+            <label for="email-input" class="control-label col-sm-2">@Translations.Email</label>
+            <div class="col-md-6">
+                <input id="email-input" class="form-control" type="email" placeholder="@Translations.EmailRequired"/>
+                <p class="help-block text-danger" id="email-validation" style="display: none;">@Translations.EmailInvalid</p>
+            </div>
 
-    <div class="email-container" style="display:none">
-        <span class="email-label"> Please provide us with a valid email adress</span>
-        <div class="email-input-section">
-            <input class="form-control email-input" value="" />
-
-            <button type="button" class="btn btn-info custom-standard-button email-button"> Submit Email</button>
         </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-info custom-standard-button" id="subm-email-button">@Translations.SubmitEmail</button>
+            </div>
+        </div>
+    </fieldset>
 
-    </div>
-
-    <p id='result' > </p> 
+    <p id="result"></p> 
 
     <div class="question-section">
         <div class="question-container">
-
+            <div id="loading" class="jumbotron text-center">
+                <h1>Loading the test...</h1>
+                <h2>Please wait...</h2>
+            </div>
 
         </div>
         <div style="display: none;">
@@ -46,21 +50,24 @@
         </div>
 
 
-        <div class="buttons">
-            <button id="prev-button" type="button" class="btn btn-info custom-standard-button btn-hide">@Translations.PreviousQuestion</button>
-            <button id="next-button" type="button" class="btn btn-info custom-standard-button btn-hide">@Translations.NextQuestion</button>
+        <div class="buttons clearfix">
+            <button id="prev-button" type="button" class="btn btn-info custom-standard-button btn-hide pull-left">@Translations.PreviousQuestion</button>
+            <button id="next-button" type="button" class="btn btn-info custom-standard-button btn-hide pull-right">@Translations.NextQuestion</button>
 
             <button id="subm-button" type="button" class="btn btn-info custom-standard-button btn-hide">@Translations.Submit</button>
-            <button id="start-questionaire" type="button" class="btn btn-info custom-standard-button">@Translations.StartTest</button>
+            <button id="start-questionaire" type="button" class="btn btn-info custom-standard-button" disabled="disabled">@Translations.StartTest</button>
         </div>
     </div>
-
-    <input type="hidden" name="email" id="email-input"/>
-    <span class="danger" id="email-validation"></span>
-    <button id="subm-email-button" type="button" class="btn btn-info custom-standard-button btn-hide">@Translations.SubmitEmail</button>
+    
 </div>
 
 @section Scripts
 {
+    <script>
+        (function() {
+            window.isLoggedIn = @(AuthenticationManager.IsUserAuthenticated(Session) ? "true" : "false");
+            window.registeredEmail = @(AuthenticationManager.UserEmail(Session) != null ? "true" : "false");
+        })();
+    </script>
     <script src="~/Scripts/Home/home_questionaire.js"></script>
 }

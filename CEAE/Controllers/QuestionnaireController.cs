@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using CEAE.Models;
 using System.Collections.Generic;
+using CEAE.Managers;
 using CEAE.Utils;
 using Newtonsoft.Json;
 
@@ -76,13 +77,12 @@ namespace CEAE.Controllers
                     //_db.TestResults.Add(test);
                     //_db.SaveChanges();
                     
-                    jsonResponseText = "{\"status\":1,\"raspusuriCorecte\":\"" + raspunsuriCorecte + "\",\"message\":\"Model is not valid\"}";
-
+                    jsonResponseText = TestManager.JsonMessage(false, new { raspunsuriCorecte });
 
                 }
                 else
                 {
-                    jsonResponseText = "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
+                    jsonResponseText = TestManager.JsonMessage(false, Translations.ModelInvalid);
 
                 }
                 //var response = Request.CreateResponse(HttpStatusCode.OK);
@@ -93,7 +93,7 @@ namespace CEAE.Controllers
             }
             catch (Exception ex)
             {
-                jsonResponseText = "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" + ex.Message + "\"}";
+                jsonResponseText = TestManager.JsonMessage(false, ex.Message);
                 //var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
                 //response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
                 // return response;
@@ -110,46 +110,37 @@ namespace CEAE.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var isValid = Utils.Utils.IsValidEmail(emailAddress);
+                    var isValid = TestManager.IsValidEmail(emailAddress);
                     if (isValid)
                     {
-                        var contact = new Contact();
-                        contact.Email = emailAddress;
-                        contact.SignInDate = DateTime.Now;
+                        var contact = new Contact
+                        {
+                            Email = emailAddress,
+                            SignInDate = DateTime.Now
+                        };
                         _db.Contacts.Add(contact);
                         _db.SaveChanges();
+                        
+                        TestManager.SetEmail(Session, emailAddress, contact.ContactID);
 
-
-                        Session[Constants.Session.DidRegisterEmail] = true;
-                        Session[Constants.Session.RegisteredEmail] = emailAddress;
-                        Session[Constants.Session.RegisteredID] = contact.ContactID;
-                        jsonResponseText = "{\"status\":1,\"message\":\"Email address saved successfully\"}";
+                        jsonResponseText = TestManager.JsonMessage(true, Translations.EmailAddressSavedSuccessfully);
                     }
                     else
                     {
-                        jsonResponseText = "{\"status\":0,\"message\":\"Email Address is not valid\"}";
-
+                        jsonResponseText = TestManager.JsonMessage(false, Translations.EmailInvalid);
                     }
 
                 }
                 else
                 {
-                    jsonResponseText = "{\"status\":0,\"error\":\"Model is not valid\",\"message\":\"Model is not valid\"}";
-
+                    jsonResponseText = TestManager.JsonMessage(false, Translations.ModelInvalid);
                 }
-                // var response = Request.CreateResponse(HttpStatusCode.OK);
-                //response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
-                //return response;
                 return Content(jsonResponseText, "application/json");
 
             }
             catch (Exception ex)
             {
-                jsonResponseText = "{\"status\":0,\"error\":\"Error trying to create the new answerQuestion\",\"message\":\"" + ex.Message + "\"}";
-                //var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
-                //response.Content = new StringContent(jsonResponseText, Encoding.UTF8, "application/json");
-                //return response;
-
+                jsonResponseText = TestManager.JsonMessage(false, ex.Message);
                 return Content(jsonResponseText, "application/json");
             }
         }

@@ -27,9 +27,9 @@ body { background-color: #f5f8fa; }
     display: none;
 }
 
-.answer {
+/* ========== TAKE TEST ========== */
 
-  
+.answer {
     font-size: 25px;
     margin: 2px;
     padding: 2px;
@@ -37,8 +37,6 @@ body { background-color: #f5f8fa; }
 
 
 .question {
-  
-  
     font-size: 30px;
     margin: 10px;
     padding: 10px;
@@ -47,8 +45,25 @@ body { background-color: #f5f8fa; }
 .question-container {
   
     border: 10px;
-    height: 300px;
+    min-height: 300px;
     margin-left: 100px;
+}
+
+.question > img {
+    margin: 0 auto;
+    display: block;
+}
+
+#subm-button {
+    margin: 0 auto;
+}
+
+#email-validation {
+    display: none;
+}
+
+.email-container {
+    display: none;
 }
 
 .radiobutt {
@@ -57,6 +72,7 @@ body { background-color: #f5f8fa; }
 }
 
 .custom-standard-button { border: 5px double; }
+
 .answerContainer { 
     padding: 5px 10px;
     padding-left: 20px;
@@ -103,9 +119,12 @@ body { background-color: #f5f8fa; }
 }
 
 
+/* ========== GENERAL ========== */
+
 .navbar-inverse .navbar-nav > li > a {
     color: #fff;
 }
+
 
 body > .container {
     margin-bottom: 100px;
@@ -334,14 +353,6 @@ fieldset[disabled] .btn-sample.active {
     color: #037DFF;
 }
 
-
-.email-input{
-    display:inline-block
-}
-.email-input-section{
-    display:block;
-    margin:5px;
-}
 .navbar-inverse .navbar-brand{
     font-size: 20px;
 }

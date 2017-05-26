@@ -183,6 +183,12 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EmailAddressSavedSuccessfully" xml:space="preserve">
+    <value>Email address saved successfully</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>Email address is invalid!</value>
+  </data>
   <data name="EmailRequired" xml:space="preserve">
     <value>Email address is required!</value>
   </data>
@@ -224,6 +230,9 @@
   </data>
   <data name="ManageAccount" xml:space="preserve">
     <value>Manage Account</value>
+  </data>
+  <data name="ModelInvalid" xml:space="preserve">
+    <value>Model is invalid!</value>
   </data>
   <data name="Mr" xml:space="preserve">
     <value>Mr.</value>
@@ -267,6 +276,9 @@
   </data>
   <data name="PhoneNumberRequired" xml:space="preserve">
     <value>Phone Number is required!</value>
+  </data>
+  <data name="PleaseProvideEmailAddress" xml:space="preserve">
+    <value>Please provide an email address to finish this quiz!</value>
   </data>
   <data name="PreviousQuestion" xml:space="preserve">
     <value>Previous Question</value>
