@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="DBScripts\migration_2.sql" />
     <Content Include="DBScripts\migration_1.sql" />
     <Content Include="DBScripts\CreationCEAE.sql" />
   </ItemGroup>

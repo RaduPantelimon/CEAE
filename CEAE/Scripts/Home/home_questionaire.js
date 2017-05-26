@@ -180,10 +180,10 @@ function ResolveButtonState() {
     if (currentquestion == questions.length - 1) {
         $("#subm-button").show();
         $("#prev-button").show();
-        $("#next-button").hide();
+        $("#next-button").attr('disabled', true);
     } else if (currentquestion == 0) {
         $("#subm-button").hide();
-        $("#prev-button").hide();
+        $("#prev-button").attr('disabled', true);
         $("#next-button").show();
     } else {
         $("#subm-button").hide();
