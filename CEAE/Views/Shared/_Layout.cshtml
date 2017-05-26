@@ -10,7 +10,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", false)
-    <meta name="description" content="CEAE - best thing ever" />
+    <meta name="description" content="CEAE - best thing ever"/>
 </head>
 <body>
 <div id="fb-root"></div>
@@ -35,8 +35,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("CEAE Quiz", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-             
+                @Html.ActionLink("CEAE Quiz", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+
             </div>
         </div>
         <div class="navbar-collapse collapse">
@@ -58,20 +58,19 @@
             {
                 <ul class="nav navbar-nav">
                     <li>
-                       <a href="@Url.Action("Questions", "Index", "Questions")">
-                          <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-                           @Translations.Questions
-                       </a>  
+                        <a href="@Url.Action("Index", "Questions")">
+                            <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                            @Translations.Questions
+                        </a>
                     </li>
-                   
-                     <li>
-                        <a href="@Url.Action("Answers", "Index", "Answers")">
-                          <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-                          @Translations.Answers
-                       </a>
+
+                    <li>
+                        <a href="@Url.Action("Index", "Answers")">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                            @Translations.Answers
+                        </a>
                     </li>
                 </ul>
-
             }
             @Html.Partial("_LoginPartial")
         </div>

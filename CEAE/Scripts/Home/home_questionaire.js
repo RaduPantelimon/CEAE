@@ -335,14 +335,14 @@
 
                     console.log(result);
 
-                    $(".quiz-status").html(result.header);
+                    $("#quiz-status").html(result.header);
 
                     $("#question-container").hide();
                     $("#subm-button").hide();
                     $("#prev-button").hide();
                     $("#next-button").hide();
 
-                    $(".quiz-status").parent().removeClass("hidden");
+                    $("#quiz-status").parent().removeClass("hidden");
 
 
                 }
