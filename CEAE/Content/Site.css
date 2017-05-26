@@ -42,14 +42,6 @@ body { background-color: #f5f8fa; }
     display: block;
 }
 
-#subm-button {
-    margin: 0 auto;
-}
-
-#email-validation, #email-container {
-    display: none;
-}
-
 .radiobutt {
     margin: 10px;
     padding: 10px;

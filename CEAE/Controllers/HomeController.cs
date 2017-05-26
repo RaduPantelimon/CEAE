@@ -1,5 +1,6 @@
 ﻿using CEAE.Models;
 using System;
+using System.Diagnostics;
 using System.Web.Mvc;
 
 namespace CEAE.Controllers
@@ -49,10 +50,14 @@ namespace CEAE.Controllers
             }
             catch (Exception ex)
             {
-                //error handling
+                if (!Debugger.IsAttached)
+                    return RedirectToAction("AccessDenied");
+
+                Debug.WriteLine(ex);
+                Debugger.Break();
             }
 
-            return View();
+            return RedirectToAction("AccessDenied");
         }
 
         public ActionResult AccessDenied()
