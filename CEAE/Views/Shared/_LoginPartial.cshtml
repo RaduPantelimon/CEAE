@@ -6,15 +6,34 @@
         <li>
             @Html.ActionLink($"Hello, {AuthenticationManager.UserAccount(Session)}!", "ManageAccount", "Account", null, new {title = "Manage"})
         </li>
+        
         <li>
-            @Html.ActionLink(Translations.Logout, "LogOut", "Account")
-        </li>
+          <a href ="@Url.Action( "LogOut", "Account")">
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+              @Translations.Logout
+        </a>
+       </li>
     </ul>
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink(Translations.Register, "Register", "Account", null, new {id = "registerLink"})</li>
-        <li>@Html.ActionLink(Translations.Login, "Login", "Account", null, new {id = "loginLink"})</li>
+       <li>
+        <a href="@Url.Action("Register", "Account", null)" id = "registerLink" >
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+
+        @Translations.Register
+        </a>
+      </li>
+
+        <li>
+            <a href="@Url.Action("Login", "Account", null)" id="loginLink">
+                <i class="fa fa-sign-in" aria-hidden="true"></i>
+
+
+                @Translations.Login
+            </a>
+        
+        </li>
     </ul>
 }
