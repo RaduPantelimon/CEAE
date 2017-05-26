@@ -36,6 +36,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("CEAE Quiz", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+             
             </div>
         </div>
         <div class="navbar-collapse collapse">
@@ -46,14 +47,31 @@
                         @Translations.Home
                     </a>
                 </li>
-                <li>@Html.ActionLink(@Translations.TakeTest, "TakeTest", "Home")</li>
+                <li>
+                    <a href="@Url.Action("TakeTest", "Home")">
+                        <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                        @Translations.TakeTest
+                    </a>
+                </li>
             </ul>
             @if (AuthenticationManager.IsUserAdministrator(Session))
             {
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Questions", "Index", "Questions")</li>
-                    <li>@Html.ActionLink("Answers", "Index", "Answers")</li>
+                    <li>
+                       <a href="@Url.Action("Questions", "Index", "Questions")">
+                          <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                           @Translations.Questions
+                       </a>  
+                    </li>
+                   
+                     <li>
+                        <a href="@Url.Action("Answers", "Index", "Answers")">
+                          <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                          @Translations.Answers
+                       </a>
+                    </li>
                 </ul>
+
             }
             @Html.Partial("_LoginPartial")
         </div>
