@@ -46,11 +46,7 @@ body { background-color: #f5f8fa; }
     margin: 0 auto;
 }
 
-#email-validation {
-    display: none;
-}
-
-.email-container {
+#email-validation, #email-container {
     display: none;
 }
 
@@ -77,7 +73,7 @@ body { background-color: #f5f8fa; }
 
 .sec-title-large {
     color: #555555;
-    font-size: 24px;
+    text-align: center;
     font-weight: 500;
 }
 

@@ -250,6 +250,15 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete Picture.
+        /// </summary>
+        public static string DeletePicture {
+            get {
+                return ResourceManager.GetString("DeletePicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         public static string Details {

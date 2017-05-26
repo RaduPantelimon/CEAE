@@ -181,6 +181,9 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="DeletePicture" xml:space="preserve">
+    <value>Delete Picture</value>
+  </data>
   <data name="Details" xml:space="preserve">
     <value>Details</value>
   </data>
