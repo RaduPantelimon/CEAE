@@ -357,8 +357,20 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jqueryUI\AUTHORS.txt" />
+    <Content Include="Scripts\jqueryUI\index.html" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.css" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.js" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.min.css" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.min.js" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.structure.css" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.structure.min.css" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.theme.css" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.theme.min.css" />
+    <Content Include="Scripts\jqueryUI\LICENSE.txt" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\QuestionScripts\question_viewDetails.js" />
+    <Content Include="Scripts\QuestionScripts\reorderQuestions.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -416,9 +428,14 @@
     <Content Include="Views\Questions\Edit.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
     <Content Include="Views\Home\TakeTest.cshtml" />
+    <Content Include="Views\Questions\ReorderQuestion.cshtml" />
+    <Content Include="Scripts\jqueryUI\package.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\jqueryUI\external\" />
+    <Folder Include="Scripts\jqueryUI\images\" />
+    <Folder Include="Scripts\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

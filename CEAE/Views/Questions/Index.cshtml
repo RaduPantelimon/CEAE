@@ -7,9 +7,10 @@
 <div class="container">
     <h2>@Translations.Questions</h2>
     <hr>
-    <p>
+    <div class="btn-group">
         @Html.ActionLink(Translations.Create, "Create", null, new {@class = "btn btn-success"})
-    </p>
+        @Html.ActionLink("Reorder Questions", "ReorderQuestion", "Questions", null, new { @class = "btn btn-default" })
+    </div>
     <table class="table">
         <thead>
             <tr>

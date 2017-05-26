@@ -50,6 +50,7 @@
           <Property Name="QuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar(max)" Nullable="false" />
           <Property Name="Text" Type="varchar(max)" />
+          <Property Name="QuestionOrder" Type="int" />
         </EntityType>
         <EntityType Name="TestResults">
           <Key>
@@ -71,10 +72,10 @@
           <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="50" />
-          <Property Name="ImgPath" Type="varchar" MaxLength="250" />
           <Property Name="Email" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
           <Property Name="Administrator" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImgPath" Type="varchar" MaxLength="250" />
         </EntityType>
         <Association Name="FK_AnswerID">
           <End Role="Answers" Type="Self.Answers" Multiplicity="1" />
@@ -199,6 +200,7 @@
           <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AnswersQuestions" Relationship="Self.FK_QuestionID" FromRole="Questions"
                               ToRole="AnswersQuestions" />
+          <Property Name="QuestionOrder" Type="Int32" />
         </EntityType>
         <EntityType Name="TestResult">
           <Key>
@@ -350,6 +352,7 @@
           <EntitySetMapping Name="Questions">
             <EntityTypeMapping TypeName="CEAEDBModel.Question">
               <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="QuestionOrder" ColumnName="QuestionOrder" />
                 <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Text" ColumnName="Text" />

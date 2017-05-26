@@ -30,6 +30,10 @@ namespace CEAE.Models.DTO
         [DataType(DataType.Text)]
         public string Text { get; set; }
 
+
+        [DisplayNameT]
+        public int QuestionOrder { get; set; }
+
         public string ImageUrl => Text != null ? ContentPathUrl : Placeholder;
 
         private string ContentPathUrl => ContentPath.Replace("~/", "/") + Text;

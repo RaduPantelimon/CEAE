@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CEAE.Models.DTO.Question>
+@using CEAE.Models.DTO
+
+@{
+    ViewBag.Title = Translations.Questions;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>@Translations.QuestionsOrder</h2>
+    <hr>
+
+    <div class="orderable-questions">
+        <ul id="sortable">
+
+            @foreach (Question question in Model)
+            {
+                <li class="ui-state-default ordered-question" 
+                    originalOrder="@question.QuestionOrder" 
+                    questionID="@question.QuestionID">
+                        
+                        <i class="fa fa-question-circle-o"></i>
+                        @question.Title
+                
+                </li>
+            }
+            
+           
+        </ul>
+    </div>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-success submit-values">Save</button>
+        @Html.ActionLink("Cancel", "Index", "Questions", null, new { @class = "btn btn-default" })
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/Scripts/jqueryUI/jquery-ui.min.css">
+<script src="~/Scripts/jqueryUI/jquery-ui.min.js"></script>
+
+<script src="~/Scripts/QuestionScripts/reorderQuestions.js" ></script>
+

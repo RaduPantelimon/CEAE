@@ -655,6 +655,15 @@ namespace CEAE {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset the order in which questions will appear during the quiz.
+        /// </summary>
+        public static string QuestionsOrder {
+            get {
+                return ResourceManager.GetString("QuestionsOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string Register {

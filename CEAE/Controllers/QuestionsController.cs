@@ -8,6 +8,8 @@ using AutoMapper;
 using CEAE.Models;
 using CEAE.Utils;
 using Newtonsoft.Json;
+using CEAE.Managers;
+using System;
 
 namespace CEAE.Controllers
 {
@@ -19,7 +21,7 @@ namespace CEAE.Controllers
         // GET: Questions
         public ActionResult Index()
         {
-            var questions = Mapper.Map<List<Models.DTO.Question>>(_db.Questions);
+            var questions = Mapper.Map<List<Models.DTO.Question>>(_db.Questions.OrderBy(x => x.QuestionOrder));
             return View(questions);
         }
 
@@ -38,7 +40,7 @@ namespace CEAE.Controllers
 
             foreach (var t in answers)
                 t.AnswersQuestions = null;
-            
+
             ViewBag.possibleAnswers = answers;
             ViewBag.serializedAnswers = JsonConvert.SerializeObject(answers);
 
@@ -67,7 +69,7 @@ namespace CEAE.Controllers
 
             _db.Questions.Add(realQuestion);
             _db.SaveChanges();
-            return RedirectToAction("Details", new {id = realQuestion.QuestionID});
+            return RedirectToAction("Details", new { id = realQuestion.QuestionID });
         }
 
         // GET: Questions/Edit/5
@@ -126,6 +128,49 @@ namespace CEAE.Controllers
             return View(model);
         }
 
+        public ActionResult ReorderQuestion()
+        {
+
+            List<Models.DTO.Question> questions = Mapper.Map<List<Models.DTO.Question>>(_db.Questions.OrderBy(x => x.QuestionOrder));
+            return View(questions);
+        }
+        // POST: Questions/Delete/5
+        [System.Web.Http.AcceptVerbs("POST")]
+        [System.Web.Http.HttpPost]
+        public ActionResult SaveOrder(List<Question> questions)
+        {
+            string jsonResponseText;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    foreach (Question qs in questions)
+                    {
+                        Question currentQS = _db.Questions.Where(x => x.QuestionID == qs.QuestionID).FirstOrDefault();
+
+                        currentQS.QuestionOrder = qs.QuestionOrder;
+                        _db.Entry(currentQS).Property(x => x.QuestionOrder).IsModified = true;
+                    }
+                    _db.SaveChanges();
+
+                    var correct = "New Questions Order Saved Successfully";
+                    jsonResponseText = TestManager.JsonMessage(true, correct);
+                 
+                }
+                else
+                {
+                    jsonResponseText = TestManager.JsonMessage(false, Translations.ModelInvalid);
+                }
+            }
+            catch(Exception ex)
+            {
+                //handle errors
+                jsonResponseText = TestManager.JsonMessage(false, Translations.ModelInvalid);
+            }
+            return Content(jsonResponseText, "application/json");
+        }
+
+
         // POST: Questions/Delete/5
         [HttpPost]
         [ActionName("Delete")]
@@ -148,6 +193,9 @@ namespace CEAE.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+
 
         protected override void Dispose(bool disposing)
         {
