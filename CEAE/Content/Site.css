@@ -420,6 +420,7 @@ fieldset[disabled] .btn-start.active {
     padding: 5px;
     font-size: 20px;
     border:1px solid black;
+    box-shadow: 2px 2px 1px #888888;
 }
 
 .ordered-question:nth-child(2n+1){
@@ -442,4 +443,9 @@ fieldset[disabled] .btn-start.active {
 
 * {
     transition: 233ms background-color, 233ms color, 233ms border-color, 233ms outline-color, 233ms box-shadow, 233ms text-shadow;
+}
+
+.loader-container {
+    display:inline-block; 
+    width:22px;
 }

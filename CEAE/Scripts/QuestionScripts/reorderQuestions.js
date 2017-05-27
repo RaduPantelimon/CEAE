@@ -44,6 +44,10 @@ function DataSubmission()
     if (updateSolution)
     {
         //we'll send the results
+
+        //dom changes while we're waiting for the data to be saved
+        startSubmitionProcess();
+
         $.ajax({
             url: "/Questions/SaveOrder",
             contentType: "application/json; charset=utf-8",
@@ -52,12 +56,9 @@ function DataSubmission()
             data: jsonString,
             success: function (result) {
                 if (!result.error) {
-                    //the item was just added // modified
-                    //we disable the answer addition
-                    $(newContainer).find(".AnswerID").attr("disabled", "true");
-
-                    //we deinitialize the Javascript Loader
-                    $(newContainer).find("img.LoaderImage").hide();
+                    
+                    endSubmitionProcess();
+                    //revert loading changes
                 }
             },
             error: function (jqXHR, exception) {
@@ -67,4 +68,18 @@ function DataSubmission()
         });
     }
 
+}
+
+function startSubmitionProcess() {
+
+    $(".submit-values").prop('disabled', false);
+    $(".LoaderImage").show();
+
+}
+
+function endSubmitionProcess() {
+
+    $(".submit-values").prop('disabled', false);
+    //hiding the img loader
+    setTimeout(function () { $("img.LoaderImage").hide(); }, 250);
 }
