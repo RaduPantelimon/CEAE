@@ -1,9 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using CEAE.Managers;
 using CEAE.Models;
 using CEAE.Utils;
+using DevOne.Security.Cryptography.BCrypt;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace CEAE.Controllers
@@ -128,7 +130,20 @@ namespace CEAE.Controllers
         {
             //validating the credentials
             var user = _db.Users.FirstOrDefault(x => x.Account == model.Email || x.Email == model.Email);
-            return AuthenticationManager.Authenticate(user, model.Password, Session);
+            var signInStatus = AuthenticationManager.Authenticate(user, model.Password, Session);
+            if (signInStatus != SignInStatus.Success)
+                return signInStatus;
+            
+            // check for old password
+            if (!model.Password.Equals(user?.Password, StringComparison.CurrentCulture))
+                return signInStatus;
+
+            // apply migration
+            AuthenticationManager.ResetPassword(user, model.Password);
+            _db.Entry(user).State = EntityState.Modified;
+            _db.SaveChanges();
+
+            return signInStatus;
         }
 
 

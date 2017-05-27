@@ -119,8 +119,6 @@ footer {
     z-index: 1000;
 }
 
-div.fb-like.fb_iframe_widget { width: 145px; }
-
 /*********************************************************************************************************************/
 
 .btn-ttest {
@@ -440,4 +438,8 @@ fieldset[disabled] .btn-start.active {
 .ordered-question:last-child{
     border-bottom-left-radius:5px;
     border-bottom-right-radius:5px;
+}
+
+* {
+    transition: 233ms background-color, 233ms color, 233ms border-color, 233ms outline-color, 233ms box-shadow, 233ms text-shadow;
 }
