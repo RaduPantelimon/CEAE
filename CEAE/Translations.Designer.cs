@@ -286,7 +286,7 @@ namespace CEAE {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Did you know that you should donate to CEAE?.
+        ///   Looks up a localized string similar to Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!.
         /// </summary>
         public static string DonationRequest {
             get {
@@ -529,7 +529,7 @@ namespace CEAE {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You answer any question right!.
+        ///   Looks up a localized string similar to You didn&apos;t answer any question right!.
         /// </summary>
         public static string NoResponsesCorrect {
             get {

@@ -194,7 +194,7 @@
     <value>Donate</value>
   </data>
   <data name="DonationRequest" xml:space="preserve">
-    <value>Did you know that you should donate to CEAE?</value>
+    <value>Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!</value>
     <comment>Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!</comment>
   </data>
   <data name="Edit" xml:space="preserve">
@@ -277,7 +277,7 @@
     <value>No</value>
   </data>
   <data name="NoResponsesCorrect" xml:space="preserve">
-    <value>You answer any question right!</value>
+    <value>You didn't answer any question right!</value>
     <comment>Nu ai avut niciun raspuns corect!</comment>
   </data>
   <data name="OldPassword" xml:space="preserve">

@@ -51,7 +51,7 @@ namespace CEAE.Controllers
                     var test = new TestResult
                     {
                         Date = DateTime.Now,
-                        Status = $"{raspunsuriCorecte}/{_db.AnswersQuestions.Count()} {Translations.Questions}"
+                        Status = $"{raspunsuriCorecte}/{_db.Questions.Count()} {Translations.Questions}"
                     };
 
                     if (AuthenticationManager.IsUserAuthenticated(Session))
