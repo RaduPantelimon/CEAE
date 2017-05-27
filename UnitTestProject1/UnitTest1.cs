@@ -75,11 +75,6 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void Login()
-        {
-        }
-
-        [TestMethod]
         public void ShouldNotAcceptInvalidUser()
         {
             var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
@@ -103,11 +98,42 @@ namespace UnitTestProject1
             // Assert
             Assert.AreEqual(0, controller.Session.Count);
             Assert.IsFalse(controller.ModelState.IsValid);
-
+    
             //Assert.That(result.ViewName, Is.EqualTo("Index"));
             //Assert.That(controller.ModelState[""],
             //            Is.EqualTo("The user name or password provided is incorrect."));
         }
-        
+
+        [TestMethod]
+        public void SignedInStatusSuccess()
+        {
+
+
+            // mocuiesc user si vad daca authmanager 
+            // creez un nou user care vine din models.user si vad daca cand trimit in auth manager cu parola "cutare" 
+            // authenticate -mock 
+            // public static SignInStatus Authenticate(User loggedInUser, string password, HttpSessionStateBase session) sa returneze success
+
+            // Arrange   
+            var LoginViewModel = new LoginViewModel();
+
+            var NewUser = new UsersController();
+
+            Authenticate(NewUser,password, HttpSessionStateBase session).Returnes(true);
+
+
+            var model = new LoginViewModel() { Email = "", Password = "" };
+            var controller = new AccountController(NewUser.Object, ceva.Object);
+            controller.ModelState.AddModelError("key", "error message");
+            // Act
+            var Acontroller = new AccountController();
+            var result = Acontroller.Login(model, "") as ViewResult;
+
+            // Assert
+            Ceva.Verify(f => f.SignIn(model.UserName, model.RememberMe));
+            Assert.That(result.ViewName, Is.EqualTo("Index"));
+            // 
+        }
     }
+
 }
