@@ -55,8 +55,19 @@ namespace CEAE.Managers
 
         private static bool PasswordsMatch(string encryptedPassword, string decryptedPassword)
         {
-            return encryptedPassword.Equals(decryptedPassword, StringComparison.CurrentCulture) ||
-                BCryptHelper.CheckPassword(decryptedPassword, encryptedPassword);
+            var decrypted = encryptedPassword.Equals(decryptedPassword, StringComparison.CurrentCulture);
+
+            if (decrypted)
+                return true;
+
+            try
+            {
+                return BCryptHelper.CheckPassword(decryptedPassword, encryptedPassword);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         private static string PasswordEncrypt(string password)

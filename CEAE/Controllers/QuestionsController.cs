@@ -162,7 +162,7 @@ namespace CEAE.Controllers
                     jsonResponseText = TestManager.JsonMessage(false, Translations.ModelInvalid);
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 //handle errors
                 jsonResponseText = TestManager.JsonMessage(false, Translations.ModelInvalid);
