@@ -184,6 +184,9 @@
   <data name="DeletePicture" xml:space="preserve">
     <value>Delete Picture</value>
   </data>
+  <data name="Demo" xml:space="preserve">
+    <value>Demo</value>
+  </data>
   <data name="Details" xml:space="preserve">
     <value>Details</value>
   </data>
@@ -340,6 +343,9 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="ShareWidget" xml:space="preserve">
+    <value>Share Widget</value>
   </data>
   <data name="StartTest" xml:space="preserve">
     <value>Start Test</value>

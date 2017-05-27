@@ -2,6 +2,7 @@ using System;
 using System.Web;
 using CEAE.Models;
 using CEAE.Utils;
+using DevOne.Security.Cryptography.BCrypt;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace CEAE.Managers
@@ -54,14 +55,13 @@ namespace CEAE.Managers
 
         private static bool PasswordsMatch(string encryptedPassword, string decryptedPassword)
         {
-            // TODO: Validate BCrypt password.
-            return encryptedPassword.Equals(decryptedPassword, StringComparison.CurrentCulture);
+            return encryptedPassword.Equals(decryptedPassword, StringComparison.CurrentCulture) ||
+                BCryptHelper.CheckPassword(decryptedPassword, encryptedPassword);
         }
 
         private static string PasswordEncrypt(string password)
         {
-            // TODO: BCrypt password.
-            return password;
+            return BCryptHelper.HashPassword(password, BCryptHelper.GenerateSalt());
         }
 
 

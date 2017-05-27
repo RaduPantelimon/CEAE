@@ -45,6 +45,14 @@
         <p>@Html.Raw(string.Format(Translations.UnregisteredUsers, ViewBag.unregisteredUsers))</p>
     }
 
+    <h3 class="section-header" >@Translations.ShareWidget</h3>
+    <hr class="section-hr" />
+    <p>
+        <a href="@Url.Action("Test", "Home")" class="btn btn-info" target="_blank">@Translations.Demo</a>
+    </p>
+    <p>
+        <textarea class="form-control" onclick="this.select();">&lt;iframe src="@Url.Action("Test", "Home", null, Request.Url?.Scheme)?tc=@AuthenticationManager.UserId(Session)" style="width: 800px; height: 600px;"&gt;&lt;/iframe&gt;</textarea>
+    </p>
     <h3 class="section-header" >@Translations.Properties</h3>
     <hr class="section-hr" />
     <div class="btn-group">

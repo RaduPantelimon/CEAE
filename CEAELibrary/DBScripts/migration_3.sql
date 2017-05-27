@@ -1,0 +1,3 @@
+USE CEAEDB;
+
+ALTER TABLE Users ALTER COLUMN [Password] varchar(64) NOT NULL;
