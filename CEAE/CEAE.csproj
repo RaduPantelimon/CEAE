@@ -441,6 +441,8 @@
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap\affix.js" />
     <Content Include="Scripts\bootstrap\alert.js" />
@@ -467,6 +469,24 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jqueryUI\AUTHORS.txt" />
+    <Content Include="Scripts\jqueryUI\external\jquery\jquery.js" />
+    <Content Include="Scripts\jqueryUI\images\ui-icons_444444_256x240.png" />
+    <Content Include="Scripts\jqueryUI\images\ui-icons_555555_256x240.png" />
+    <Content Include="Scripts\jqueryUI\images\ui-icons_777620_256x240.png" />
+    <Content Include="Scripts\jqueryUI\images\ui-icons_777777_256x240.png" />
+    <Content Include="Scripts\jqueryUI\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Scripts\jqueryUI\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\jqueryUI\index.html" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.css" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.js" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.min.css" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.min.js" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.structure.css" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.structure.min.css" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.theme.css" />
+    <Content Include="Scripts\jqueryUI\jquery-ui.theme.min.css" />
+    <Content Include="Scripts\jqueryUI\LICENSE.txt" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\QuestionScripts\question_viewDetails.js" />
     <Content Include="Scripts\QuestionScripts\reorderQuestions.js" />
@@ -535,9 +555,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\jqueryUI\external\" />
-    <Folder Include="Scripts\jqueryUI\images\" />
-    <Folder Include="Scripts\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
