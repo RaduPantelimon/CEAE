@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using CEAE.Managers;
 
 namespace CEAE
 {
@@ -7,6 +8,7 @@ namespace CEAE
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new TranslationsManager(), 0);
         }
     }
 }

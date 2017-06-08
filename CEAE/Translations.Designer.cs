@@ -286,11 +286,20 @@ namespace CEAE {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!.
+        ///   Looks up a localized string similar to Please consider donating! Children&apos;s education depends on you! Even $2.49 helps!.
         /// </summary>
         public static string DonationRequest {
             get {
                 return ResourceManager.GetString("DonationRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Report.
+        /// </summary>
+        public static string DownloadReport {
+            get {
+                return ResourceManager.GetString("DownloadReport", resourceCulture);
             }
         }
         
@@ -682,7 +691,7 @@ namespace CEAE {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset the order in which questions will appear during the quiz.
+        ///   Looks up a localized string similar to Reset questions&apos; order.
         /// </summary>
         public static string QuestionsOrder {
             get {

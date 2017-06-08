@@ -118,278 +118,278 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccessDenied" xml:space="preserve">
-    <value>Access Denied</value>
+    <value>Access interzis!</value>
   </data>
   <data name="Account" xml:space="preserve">
-    <value>Account</value>
+    <value>Username</value>
   </data>
   <data name="AccountNamePossible" xml:space="preserve">
-    <value>Use your username instead by registering!</value>
+    <value>Folosește un username în loc de email!</value>
   </data>
   <data name="AccountRequired" xml:space="preserve">
-    <value>Account is required!</value>
+    <value>Username-ul e obligatoriu!</value>
   </data>
   <data name="Actions" xml:space="preserve">
-    <value>Actions</value>
+    <value>Acțiuni</value>
   </data>
   <data name="AddNewAnswer" xml:space="preserve">
-    <value>Add New Answer</value>
+    <value>Adaugă nou răspuns</value>
   </data>
   <data name="Administrator" xml:space="preserve">
-    <value>User Role</value>
+    <value>Rol utilizator</value>
   </data>
   <data name="AdministratorRequired" xml:space="preserve">
-    <value>User Role required!</value>
+    <value>Rolul utilizatorului e obligatoriu!</value>
   </data>
   <data name="Answer" xml:space="preserve">
-    <value>Answer</value>
+    <value>Raspuns</value>
   </data>
   <data name="AnswerHasQuestionAssociatedCannotContinueRemoveAssociationAndRetry" xml:space="preserve">
-    <value>Answer has a question associated. Cannot Continue. Remove association and retry.</value>
+    <value>Raspunsul are cel puțin o întrebare asociată. Ștergeți asocierea mai întâi.</value>
   </data>
   <data name="AnswerIDRequired" xml:space="preserve">
-    <value>Answer ID is required!</value>
+    <value>ID-ul răspunsului e obligatoriu!</value>
   </data>
   <data name="Answers" xml:space="preserve">
-    <value>Answers</value>
+    <value>Răspunsuri</value>
   </data>
   <data name="AreYouSureYouWantToDeleteThis" xml:space="preserve">
-    <value>Are you sure you want to delete this?</value>
+    <value>Ești sigur că vrei să ștergi?</value>
   </data>
   <data name="BackToList" xml:space="preserve">
-    <value>Back to List</value>
+    <value>Înapoi la listă</value>
   </data>
   <data name="Branding" xml:space="preserve">
     <value>CEAE</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>Confirm Password</value>
+    <value>Confirmare parolă</value>
   </data>
   <data name="ConfirmPasswordRequired" xml:space="preserve">
-    <value>Confirmation Password is required!</value>
+    <value>Confirmarea parolei e obligatorie!</value>
   </data>
   <data name="CongratulationsYouHadXResponsesCorrect" xml:space="preserve">
-    <value>Congratulations, you had {0} correct answer(s)!</value>
+    <value>Felicitari, ai avut {0} raspuns(uri) corecte!</value>
     <comment>Felicitari, ai avut {0} raspuns(uri) corecte!</comment>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Create</value>
+    <value>Creează</value>
   </data>
   <data name="CreateUser" xml:space="preserve">
-    <value>Create user</value>
+    <value>Creează utilizator</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Șterge</value>
   </data>
   <data name="DeletePicture" xml:space="preserve">
-    <value>Delete Picture</value>
+    <value>Șterge poza</value>
   </data>
   <data name="Demo" xml:space="preserve">
     <value>Demo</value>
   </data>
   <data name="Details" xml:space="preserve">
-    <value>Details</value>
+    <value>Detalii</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Donează</value>
   </data>
   <data name="DonationRequest" xml:space="preserve">
-    <value>Please consider donating! Children's education depends on you! Even $2.49 helps!</value>
+    <value>Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!</value>
     <comment>Știai că în România, peste 40% din elevii de 15 ani nu pot răspunde la aceste întrebări? Susține proiectele educaționale CEAE. Cu 10 lei un copil va învăța să gândească critic!</comment>
   </data>
   <data name="DownloadReport" xml:space="preserve">
-    <value>Download Report</value>
+    <value>Descarcă raport</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Modifică</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="EmailAddressSavedSuccessfully" xml:space="preserve">
-    <value>Email address saved successfully</value>
+    <value>Email-ul a fost salvat cu success!</value>
   </data>
   <data name="EmailInvalid" xml:space="preserve">
-    <value>Email address is invalid!</value>
+    <value>Email-ul este invalid!</value>
   </data>
   <data name="EmailRequired" xml:space="preserve">
-    <value>Email address is required!</value>
+    <value>Email-ul este obligatoriu!</value>
   </data>
   <data name="EmailUndefined" xml:space="preserve">
-    <value>Email not set!</value>
+    <value>Email-ul nu este setat!</value>
   </data>
   <data name="FirstName" xml:space="preserve">
-    <value>First Name</value>
+    <value>Prenume</value>
   </data>
   <data name="FirstNameRequired" xml:space="preserve">
-    <value>First Name is required!</value>
+    <value>Prenumele e obligatoriu!</value>
   </data>
   <data name="HelloUser" xml:space="preserve">
-    <value>Hello, {0}</value>
+    <value>{0}</value>
     <comment>{0} = user's full name</comment>
   </data>
   <data name="Home" xml:space="preserve">
-    <value>Home</value>
+    <value>Acasă</value>
   </data>
   <data name="Image" xml:space="preserve">
-    <value>Image</value>
+    <value>Imagine</value>
   </data>
   <data name="ImageRequired" xml:space="preserve">
-    <value>Image is required!</value>
+    <value>Imaginea e obligatorie!</value>
   </data>
   <data name="ImgPath" xml:space="preserve">
-    <value>Avatar URL</value>
+    <value>URI poză</value>
   </data>
   <data name="InvalidLogin" xml:space="preserve">
-    <value>Invalid login attempt.</value>
+    <value>Nu v-am putut autentifica.</value>
   </data>
   <data name="LastName" xml:space="preserve">
-    <value>Last Name</value>
+    <value>Nume</value>
   </data>
   <data name="LastNameRequired" xml:space="preserve">
-    <value>Last Name is required!</value>
+    <value>Numele de familie e obligatoriu!</value>
   </data>
   <data name="LoadingTest" xml:space="preserve">
-    <value>Loading the test...</value>
+    <value>Se încarcă testul...</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Log in</value>
+    <value>Intră în cont</value>
   </data>
   <data name="Logout" xml:space="preserve">
-    <value>Log out</value>
+    <value>Delogare</value>
   </data>
   <data name="ManageAccount" xml:space="preserve">
-    <value>Manage Account</value>
+    <value>Administrare cont</value>
   </data>
   <data name="ModelInvalid" xml:space="preserve">
-    <value>Model is invalid!</value>
+    <value>Modelul este invalid!</value>
   </data>
   <data name="Mr" xml:space="preserve">
-    <value>Mr.</value>
+    <value>Dl</value>
   </data>
   <data name="Mrs" xml:space="preserve">
-    <value>Mrs.</value>
+    <value>Dra</value>
   </data>
   <data name="Ms" xml:space="preserve">
-    <value>Ms.</value>
+    <value>Dnei</value>
   </data>
   <data name="NextQuestion" xml:space="preserve">
-    <value>Next Question</value>
+    <value>Următoarea întrebare</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>Nu</value>
   </data>
   <data name="NoResponsesCorrect" xml:space="preserve">
-    <value>You didn't answer any question right!</value>
+    <value>Nu ai avut niciun raspuns corect!</value>
     <comment>Nu ai avut niciun raspuns corect!</comment>
   </data>
   <data name="OldPassword" xml:space="preserve">
-    <value>Old Password</value>
+    <value>Parola veche</value>
   </data>
   <data name="OldPasswordRequired" xml:space="preserve">
-    <value>Old Password is required!</value>
+    <value>Parola veche e obligatorie!</value>
   </data>
   <data name="OrOldPasswordError" xml:space="preserve">
-    <value>Or Old Password is not correct!</value>
+    <value>Sau parola veche nu e bună!</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Parolă</value>
   </data>
   <data name="PasswordLengthRequired" xml:space="preserve">
-    <value>The {0} must be at least {2} characters long.</value>
+    <value>{0} trebuie să fie mai lungă de {2} caractere.</value>
     <comment>{0} = Password, {2} = Password Length, apparently.</comment>
   </data>
   <data name="PasswordMismatch" xml:space="preserve">
-    <value>The password and confirmation password do not match.</value>
+    <value>Parola și confirmarea parolei nu sunt identice!</value>
   </data>
   <data name="PasswordRequired" xml:space="preserve">
-    <value>Password is required!</value>
+    <value>Parola e obligatorie!</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
-    <value>Phone #</value>
+    <value>Număr telefon</value>
   </data>
   <data name="PhoneNumberRequired" xml:space="preserve">
-    <value>Phone Number is required!</value>
+    <value>Numărul de telefon e obligatorie!</value>
   </data>
   <data name="PleaseProvideEmailAddress" xml:space="preserve">
-    <value>Please provide an email address to finish this quiz!</value>
+    <value>Vă rugăm să introduceți adresa de email pentru a finaliza chestionarul!</value>
   </data>
   <data name="PleaseWait" xml:space="preserve">
-    <value>Please wait...</value>
+    <value>Vă rugăm așteptați...</value>
   </data>
   <data name="PreviousQuestion" xml:space="preserve">
-    <value>Previous Question</value>
+    <value>Întrebarea precendentă</value>
   </data>
   <data name="Properties" xml:space="preserve">
-    <value>Properties</value>
+    <value>Setări</value>
   </data>
   <data name="Question" xml:space="preserve">
-    <value>Question</value>
+    <value>Întrebare</value>
   </data>
   <data name="QuestionIDRequired" xml:space="preserve">
-    <value>Question ID is required!</value>
+    <value>ID-ul întrebării e obligatoriu!</value>
   </data>
   <data name="Questions" xml:space="preserve">
-    <value>Questions</value>
+    <value>Întrebări</value>
   </data>
   <data name="QuestionsOrder" xml:space="preserve">
-    <value>Reset questions' order</value>
+    <value>Resetează ordinea întrebărilor</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>Register</value>
+    <value>Înregistrare</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
-    <value>Remember Me?</value>
+    <value>Ține-mă minte</value>
   </data>
   <data name="ResetPassword" xml:space="preserve">
-    <value>Reset Password</value>
+    <value>Resetează parolă</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Salvează</value>
   </data>
   <data name="ShareWidget" xml:space="preserve">
-    <value>Share Widget</value>
+    <value>Cod distribuire quiz</value>
   </data>
   <data name="StartTest" xml:space="preserve">
-    <value>Start Test</value>
+    <value>Începe testul</value>
   </data>
   <data name="Statistics" xml:space="preserve">
-    <value>Statistics</value>
+    <value>Statistici</value>
   </data>
   <data name="Submit" xml:space="preserve">
-    <value>Submit</value>
+    <value>Trimite</value>
   </data>
   <data name="SubmitEmail" xml:space="preserve">
-    <value>Submit Email</value>
+    <value>Trimite email-ul</value>
   </data>
   <data name="TakeTest" xml:space="preserve">
-    <value>Find Out How You Think</value>
+    <value>Începe testul</value>
   </data>
   <data name="TestsTaken" xml:space="preserve">
-    <value>Overall, this test has been taken {0} times.</value>
+    <value>În total, testul a fost parcurs de {0} ori.</value>
   </data>
   <data name="Text" xml:space="preserve">
     <value>Text</value>
   </data>
   <data name="TextRequired" xml:space="preserve">
-    <value>Text is required!</value>
+    <value>Text-ul e obligatoriu!</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Title</value>
+    <value>Titlu</value>
   </data>
   <data name="TitleRequired" xml:space="preserve">
-    <value>Title is required!</value>
+    <value>Titlul e obligatoriu!</value>
   </data>
   <data name="UnregisteredUsers" xml:space="preserve">
-    <value>In total, there have been {0} unregistered users that took this test</value>
+    <value>În total, au fost {0} useri fără cont ce au parcurs testul.</value>
   </data>
   <data name="UserIDRequired" xml:space="preserve">
-    <value>User ID is required!</value>
+    <value>ID-ul user-ului e obligatoriu!</value>
   </data>
   <data name="Users" xml:space="preserve">
-    <value>Users</value>
+    <value>Utilizatori</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Da</value>
   </data>
 </root>
